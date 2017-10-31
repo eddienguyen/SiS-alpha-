@@ -58,6 +58,7 @@ public class GameWindow extends Frame{
             @Override
             public void keyTyped(KeyEvent e) {}                 //unused method
 
+
             @Override
             public void keyPressed(KeyEvent e) {
                 inputManager.keyPressed(e);

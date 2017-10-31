@@ -15,13 +15,17 @@ public class Player extends GameObject {
     protected float force = 0;
     private BoxCollider boxCollider;
 
+    public GaugeBar gaugeBar;
+
     public Player() {
         super();
         this.renderer = ImageRenderer.create("assets/images/players/player_walk1.png");
 
         velocity = new Vector2D();
-        boxCollider = new BoxCollider(30,30);
+        boxCollider = new BoxCollider(36,45);
         this.children.add(boxCollider);
+        gaugeBar = GameObject.recycle(GaugeBar.class);
+        GameObject.add(gaugeBar);
     }
 
     @Override
@@ -33,6 +37,8 @@ public class Player extends GameObject {
 
         if (InputManager.instance.spacePressed){
             force += 0.05f;
+            gaugeBar.setValue(force);
+
         }
         if (InputManager.instance.spaceReleased){
             //when player is at platform(not in the air), enable jump, vice versa
@@ -41,11 +47,14 @@ public class Player extends GameObject {
                 velocity.y = -JUMPSPEED * force;
             }
             force = 0;
+
         }
 
         //Platform physics
         moveVertical();
 
+        //gaugebar update
+        gaugeBar.setPosition(this.position.x - 40, this.position.y - 40);
     }
 
     private void moveVertical() {
@@ -62,6 +71,7 @@ public class Player extends GameObject {
             while (moveContinue){
                 if (Physics.collideWith(this.boxCollider.shift(0,shiftDistance), Platform.class) != null){
                     moveContinue = false;
+
                 }else {
                     shiftDistance += Math.signum(velocity.y);
                     this.position.addUp(0,Math.signum(velocity.y));
