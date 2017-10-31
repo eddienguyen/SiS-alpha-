@@ -1,5 +1,9 @@
 package bases;
 
+import bases.actions.Action;
+import bases.physics.Physics;
+import bases.physics.PhysicsBody;
+import bases.pools.GameObjectPool;
 import bases.renderers.Renderer;
 
 import java.awt.*;
@@ -13,100 +17,133 @@ public class GameObject {
     protected Renderer renderer;
 
     protected ArrayList<GameObject> children;
-
-    public static Vector<GameObject> gameObjects = new Vector<>();
-    public static Vector<GameObject> newGameObjects = new Vector<>();
-
+    protected ArrayList<Action> actions;
+    protected ArrayList<Action> newActions;
     protected boolean isActive;
     protected boolean isRenewing;
 
-    public GameObject(){
-        children = new ArrayList<>();
-        isActive = true;
+    private static Vector<GameObject> gameObjects = new Vector<>();
+    private static Vector<GameObject> newGameObjects = new Vector<>();
 
-        position = new Vector2D();
-        screenPosition = new Vector2D();
-    }
+    public static void runAll() {
 
-    public static void add(GameObject object){
-        newGameObjects.add(object);
-    }
-
-    public static void runAll(){
-
-        for (GameObject gameObject : gameObjects){
-            if (gameObject.isActive){
-                gameObject.run(new Vector2D(0,0));
-            }
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject.isActive)
+                gameObject.run(new Vector2D(0, 0));
         }
 
-        for (GameObject newGameObject : newGameObjects){
-            //add PhysicsBody
+        for (GameObject newGameObject : newGameObjects) {
+            if (newGameObject instanceof PhysicsBody) {
+                Physics.add((PhysicsBody)newGameObject);
+            }
         }
 
         gameObjects.addAll(newGameObjects);
         newGameObjects.clear();
     }
 
-    public static void renderAll(Graphics2D g2d){
-        for (GameObject gameObject : gameObjects){
-            if (gameObject.isActive && !gameObject.isRenewing){
+    public static void renderAll(Graphics2D g2d) {
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject.isActive && !gameObject.isRenewing)
                 gameObject.render(g2d);
-            }
         }
     }
 
-    public static void clearAll(){
+    public static void clearAll() {
         gameObjects.clear();
         newGameObjects.clear();
+        Physics.clearAll();
+        GameObjectPool.clearAll();
     }
 
-    /*
-    each Object
-     */
-
-    public boolean isActive(){
-        return isActive;
+    public static void add(GameObject gameObject) {
+        newGameObjects.add(gameObject);
     }
 
-    public void setActive(boolean active){
-        this.isActive = active;
+    public GameObject() {
+        children = new ArrayList<>();
+        actions = new ArrayList<Action>();
+        newActions = new ArrayList<>();
+
+        position = new Vector2D();
+        screenPosition = new Vector2D();
+        isActive = true;
     }
 
-    public void run(Vector2D parentPosition){
+    public void run(Vector2D parentPosition) {
         screenPosition = parentPosition.add(position);
         isRenewing = false;
-        for (GameObject child : children){
-            if (child.isActive){
+        for (GameObject child: children) {
+            if (child.isActive)
                 child.run(screenPosition);
-            }
         }
     }
 
-    public Vector2D getPosition() {return position;}
-
-    public Vector2D getScreenPosition() {return screenPosition;}
-
-    public void setPosition(Vector2D position){
-        if (position != null){
-            this.position = position;
-        }
-    }
-
-    public void reset(){
-        this.isActive = true;
-        this.isRenewing = true;
-    }
-
-    public void render(Graphics2D g2d){
-        if (renderer != null){
+    public void render(Graphics2D g2d) {
+        if (renderer != null) {
             renderer.render(g2d, screenPosition);
         }
 
-        for (GameObject child : children){
-            if (child.isActive){
+        for (GameObject child: children) {
+            if (child.isActive)
                 child.render(g2d);
-            }
         }
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public Vector2D getPosition() {
+        return position;
+    }
+
+    public Vector2D getScreenPosition() {
+        return screenPosition;
+    }
+
+    public void setPosition(Vector2D position) {
+        if (position != null)
+            this.position = position;
+    }
+
+    public void reset() {
+        this.isActive = true;
+        this.isRenewing = true;
+        this.actions.clear();
+        this.newActions.clear();
+    }
+
+    public Renderer getRenderer() {
+        return renderer;
+    }
+
+    public GameObject setRenderer(Renderer renderer) {
+        if (renderer != null)
+            this.renderer = renderer;
+        return this;
+    }
+
+    public static void runAllActions() {
+        for (GameObject gameObject: gameObjects) {
+            if (gameObject.isActive)
+                gameObject.runActions();
+        }
+    }
+
+    private void runActions() {
+
+        actions.removeIf(action -> action.run(this));
+
+        actions.addAll(newActions);
+        newActions.clear();
+    }
+
+    public void addAction(Action action) {
+        newActions.add(action);
     }
 }

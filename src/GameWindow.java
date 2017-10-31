@@ -1,5 +1,7 @@
 import bases.GameObject;
+import bases.inputs.InputManager;
 import bases.settings.Settings;
+import smithitsmiths.Platform;
 import smithitsmiths.Player;
 
 import java.awt.*;
@@ -16,6 +18,7 @@ public class GameWindow extends Frame{
     private long lastTimeUpdate;
     private long currentTime;
 
+    InputManager inputManager = InputManager.instance;
 
     public GameWindow(){
         pack();                                     //?
@@ -57,12 +60,12 @@ public class GameWindow extends Frame{
 
             @Override
             public void keyPressed(KeyEvent e) {
-                //InputManager
+                inputManager.keyPressed(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                //InputManager
+                inputManager.keyReleased(e);
             }
         });
 
@@ -77,6 +80,23 @@ public class GameWindow extends Frame{
         GameObject.add(player);
 
         //Add platforms
+        for(int i = 0, platformX = 20; i < 20; i++, platformX += 30) {
+            Platform platform = new Platform();
+            platform.getPosition().set(platformX, 600);
+            GameObject.add(platform);
+        }
+
+        for(int i = 0, platformX = 350; i < 5; i++, platformX += 30) {
+            Platform platform = new Platform();
+            platform.getPosition().set(platformX, 500);
+            GameObject.add(platform);
+        }
+
+        for(int i = 0, platformY = 600; i < 3; i++, platformY -= 30) {
+            Platform platform = new Platform();
+            platform.getPosition().set(200, platformY);
+            GameObject.add(platform);
+        }
 
     }
 
@@ -99,11 +119,15 @@ public class GameWindow extends Frame{
 
     private void run(){
         //runAll gameObjects
+        GameObject.runAll();
+
         //runAllActions gameObjects
+        GameObject.runAllActions();
     }
 
     private void render() {
         backGraphics.drawImage(greyBackground,0, 0, null);
+        GameObject.renderAll(backGraphics);
         getGraphics().drawImage(backBufferedImage,0,0,null);
     }
 
