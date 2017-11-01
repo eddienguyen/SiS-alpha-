@@ -8,7 +8,7 @@ import bases.renderers.ImageRenderer;
 
 public class Platform extends GameObject implements PhysicsBody{
     private BoxCollider boxCollider;
-    private final float SPEED = 10;
+    private final float SPEED = 2;
     Vector2D velocity;
 
     public Platform() {
@@ -30,5 +30,9 @@ public class Platform extends GameObject implements PhysicsBody{
     @Override
     public BoxCollider getBoxCollider() {
         return boxCollider;
+    }
+
+    public float getSpeed() {
+        return SPEED;
     }
 }
