@@ -6,7 +6,6 @@ import bases.inputs.InputManager;
 import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.renderers.ImageRenderer;
-import smithitsmiths.Platform;
 
 public class Player extends GameObject {
     private Vector2D velocity;
@@ -14,7 +13,8 @@ public class Player extends GameObject {
     private final float JUMPSPEED = 10;     //might change later
     protected float force = 0;
     private BoxCollider boxCollider;
-    final int maxForce = 2;
+    final static int maxForce = 2;
+    public static float currentForce;
 
     public GaugeBar gaugeBar;
 
@@ -31,7 +31,7 @@ public class Player extends GameObject {
     }
 
     @Override
-    public void run(Vector2D parentPosition) {
+    public float run(Vector2D parentPosition) {
         super.run(parentPosition);
 
         //GRAVITY impact velocity && Inputs
@@ -41,6 +41,7 @@ public class Player extends GameObject {
             if (force <= maxForce){
                 gaugeBar.setValue(force);
                 force += 0.05f;
+                return currentForce = force;
             }
         }
         if (InputManager.instance.spaceReleased){
@@ -60,6 +61,7 @@ public class Player extends GameObject {
         //gaugebar update:
         gaugeBar.setPosition(this.position.x - 40, this.position.y - 40);
 
+        return 0;
     }
 
     private void moveVertical() {

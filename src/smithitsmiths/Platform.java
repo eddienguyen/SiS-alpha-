@@ -20,11 +20,12 @@ public class Platform extends GameObject implements PhysicsBody{
     }
 
     @Override
-    public void run(Vector2D parentPosition) {
+    public float run(Vector2D parentPosition) {
         super.run(parentPosition);
 
         velocity.x = -SPEED;
         position.addUp(velocity);
+        return 0;
     }
 
     @Override
