@@ -25,9 +25,41 @@ public class GameObject {
     private static Vector<GameObject> gameObjects = new Vector<>();
     private static Vector<GameObject> newGameObjects = new Vector<>();
 
-    /*
-        *** EACH OBJECT ***
-    */
+    public static void runAll() {
+
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject.isActive)
+                gameObject.run(new Vector2D(0, 0));
+        }
+
+        for (GameObject newGameObject : newGameObjects) {
+            if (newGameObject instanceof PhysicsBody) {
+                Physics.add((PhysicsBody)newGameObject);
+            }
+        }
+
+        gameObjects.addAll(newGameObjects);
+        newGameObjects.clear();
+    }
+
+    public static void renderAll(Graphics2D g2d) {
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject.isActive && !gameObject.isRenewing)
+                gameObject.render(g2d);
+        }
+    }
+
+    public static void clearAll() {
+        gameObjects.clear();
+        newGameObjects.clear();
+        Physics.clearAll();
+        GameObjectPool.clearAll();
+    }
+
+    public static void add(GameObject gameObject) {
+        newGameObjects.add(gameObject);
+    }
+
     public GameObject() {
         children = new ArrayList<>();
         actions = new ArrayList<Action>();
@@ -41,7 +73,7 @@ public class GameObject {
     public void run(Vector2D parentPosition) {
         screenPosition = parentPosition.add(position);
         isRenewing = false;
-        for (GameObject child : children) {
+        for (GameObject child: children) {
             if (child.isActive)
                 child.run(screenPosition);
         }
@@ -52,7 +84,7 @@ public class GameObject {
             renderer.render(g2d, screenPosition);
         }
 
-        for (GameObject child : children) {
+        for (GameObject child: children) {
             if (child.isActive)
                 child.render(g2d);
         }
@@ -96,66 +128,8 @@ public class GameObject {
         return this;
     }
 
-    public static <T extends GameObject> T recycle(Class<T> cls){
-        for (GameObject object : gameObjects){
-            if (!object.isActive){
-                if (object.getClass().equals(cls)){
-                    object.isActive = true;
-                    return (T) object;
-                }
-            }
-        }
-        try {
-            T newGameObject = cls.newInstance();
-            add(newGameObject);
-            return newGameObject;
-        } catch (InstantiationException  | IllegalAccessException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /*
-        *** ARRAY OF OBJECTS ***
-    */
-    public static void runAll() {
-
-        for (GameObject gameObject : gameObjects) {
-            if (gameObject.isActive)
-                gameObject.run(new Vector2D(0, 0));
-        }
-
-        for (GameObject newGameObject : newGameObjects) {
-            if (newGameObject instanceof PhysicsBody) {
-                Physics.add((PhysicsBody) newGameObject);
-            }
-        }
-
-        gameObjects.addAll(newGameObjects);
-        newGameObjects.clear();
-    }
-
-    public static void renderAll(Graphics2D g2d) {
-        for (GameObject gameObject : gameObjects) {
-            if (gameObject.isActive && !gameObject.isRenewing)
-                gameObject.render(g2d);
-        }
-    }
-
-    public static void clearAll() {
-        gameObjects.clear();
-        newGameObjects.clear();
-        Physics.clearAll();
-        GameObjectPool.clearAll();
-    }
-
-    public static void add(GameObject gameObject) {
-        newGameObjects.add(gameObject);
-    }
-
-
     public static void runAllActions() {
-        for (GameObject gameObject : gameObjects) {
+        for (GameObject gameObject: gameObjects) {
             if (gameObject.isActive)
                 gameObject.runActions();
         }
