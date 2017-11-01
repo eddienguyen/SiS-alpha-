@@ -81,23 +81,18 @@ public class GameWindow extends Frame{
         GameObject.add(player);
 
         //Add platforms
-        for(int i = 0, platformX = 20; i < 20; i++, platformX += 30) {
-            Platform platform = new Platform();
+        for(int i = 0, platformX = 20; i < 100; i++, platformX += 30) {
+            Platform platform = GameObject.recycle(Platform.class);
             platform.getPosition().set(platformX, 600);
             GameObject.add(platform);
         }
 
-        for(int i = 0, platformX = 350; i < 5; i++, platformX += 30) {
+        for(int i = 0, platformX = 350; i < 50; i++, platformX += 30) {
             Platform platform = new Platform();
             platform.getPosition().set(platformX, 500);
             GameObject.add(platform);
         }
 
-        for(int i = 0, platformY = 600; i < 3; i++, platformY -= 30) {
-            Platform platform = new Platform();
-            platform.getPosition().set(200, platformY);
-            GameObject.add(platform);
-        }
 
     }
 
