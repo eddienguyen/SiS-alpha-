@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class GameObject {
-    protected Vector2D position;
+    public Vector2D position;
     protected Vector2D screenPosition;
 
     protected Renderer renderer;

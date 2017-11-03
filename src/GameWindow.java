@@ -1,7 +1,7 @@
 import bases.GameObject;
 import bases.inputs.InputManager;
+import bases.maps.Map;
 import bases.settings.Settings;
-import smithitsmiths.Platform;
 import smithitsmiths.Player;
 import smithitsmiths.enemy.Enemy;
 
@@ -83,20 +83,9 @@ public class GameWindow extends Frame{
         GameObject.add(player);
         GameObject.add(enemy);
 
-        //Add platforms
-        for(int i = 0, platformX = 20; i < 100; i++, platformX += 30) {
-            Platform platform = GameObject.recycle(Platform.class);
-            platform.getPosition().set(platformX, 600);
-            GameObject.add(platform);
-        }
 
-        for(int i = 0, platformX = 350; i < 50; i++, platformX += 30) {
-            Platform platform = new Platform();
-            platform.getPosition().set(platformX, 300);
-            GameObject.add(platform);
-        }
-
-
+        Map map = Map.load("assets/maps/map_layer1.json");
+        map.generate();
     }
 
     public void loop(){
