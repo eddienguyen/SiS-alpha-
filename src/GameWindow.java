@@ -3,6 +3,7 @@ import bases.inputs.InputManager;
 import bases.settings.Settings;
 import smithitsmiths.Platform;
 import smithitsmiths.Player;
+import smithitsmiths.enemy.Enemy;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -77,7 +78,10 @@ public class GameWindow extends Frame{
         //Add player
         Player player = new Player();
         player.getPosition().set(100,50);
+        Enemy enemy = new Enemy();
+        enemy.getPosition().set(600,50);
         GameObject.add(player);
+        GameObject.add(enemy);
 
         //Add platforms
         for(int i = 0, platformX = 20; i < 100; i++, platformX += 30) {
