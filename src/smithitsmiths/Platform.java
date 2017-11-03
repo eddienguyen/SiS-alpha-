@@ -3,6 +3,7 @@ package smithitsmiths;
 import bases.GameObject;
 import bases.Vector2D;
 import bases.physics.BoxCollider;
+import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 
@@ -23,8 +24,11 @@ public class Platform extends GameObject implements PhysicsBody{
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
 
+//        velocity.x = -SPEED;
+//        position.addUp(velocity);
+
         velocity.x = -SPEED;
-        position.addUp(velocity);
+        dragHorizontal();
         return 0;
     }
 
@@ -35,5 +39,36 @@ public class Platform extends GameObject implements PhysicsBody{
 
     public float getSpeed() {
         return SPEED;
+    }
+
+    public void dragHorizontal(){
+
+        //calculate the future platformer (box collider) & predict collision
+        BoxCollider nextBoxCollider = this.boxCollider.shift(velocity.x,0);
+
+        Player player = Physics.collideWith(nextBoxCollider, Player.class);
+
+        if (player != null){
+            //move platform continously towards player
+            boolean moveContinue = true;
+            float shiftDistance = Math.signum(velocity.x);
+
+            while (moveContinue){
+                if (Physics.collideWith(this.boxCollider.shift(shiftDistance,0), Player.class) != null){
+                    moveContinue = false;
+                } else {
+                  shiftDistance += Math.signum(velocity.x);
+                  moveContinue = true;
+                }
+            }
+
+            //handling when player is being dragged
+            player.position.addUp(this.velocity);
+        }
+
+
+        //velocity impact position
+        this.position.addUp(velocity.x,0);
+        this.screenPosition.addUp(velocity.x, 0);
     }
 }

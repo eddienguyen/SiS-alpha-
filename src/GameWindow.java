@@ -79,12 +79,6 @@ public class GameWindow extends Frame{
         player.getPosition().set(100,50);
         GameObject.add(player);
 
-        //Add platforms
-//        for(int i = 0, platformX = 20; i < 100; i++, platformX += 30) {
-//            Platform platform = GameObject.recycle(Platform.class);
-//            platform.getPosition().set(platformX, 600);
-//            GameObject.add(platform);
-//        }
 
         Map map = Map.load("assets/maps/map_layer1.json");
         map.generate();
