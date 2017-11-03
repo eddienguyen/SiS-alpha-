@@ -38,13 +38,14 @@ public class GameObject {
         isActive = true;
     }
 
-    public void run(Vector2D parentPosition) {
+    public float run(Vector2D parentPosition) {
         screenPosition = parentPosition.add(position);
         isRenewing = false;
         for (GameObject child : children) {
             if (child.isActive)
                 child.run(screenPosition);
         }
+        return 0;
     }
 
     public void render(Graphics2D g2d) {

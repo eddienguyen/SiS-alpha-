@@ -2,9 +2,7 @@ package smithitsmiths;
 
 import bases.GameObject;
 import bases.Vector2D;
-import bases.renderers.ImageRenderer;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class GaugeBar extends GameObject {
@@ -32,8 +30,9 @@ public class GaugeBar extends GameObject {
     }
 
     @Override
-    public void run(Vector2D parentPosition) {
+    public float run(Vector2D parentPosition) {
         super.run(parentPosition);
+        return 0;
     }
 
     @Override
