@@ -42,30 +42,30 @@ public class Layer {
                 20% ra enemy: 30 <= randomObject < 50
                 còn lại chưa tính
                  */
-                else if (mapData == 2){                             //random object
+//                else if (mapData == 2){                             //random object
+//
+//                    Random rand = new Random() ;
+//                    int randomObject = rand.nextInt(101) ;
+//
+//                    if (randomObject < 10){                         //platform
+//                        int belowMapData = data.get( (titleY+1) * width + titleX);
+//                        if (belowMapData == 1){
+//
+//                            data.set(titleY * width + titleX,randomObject);
+//                            // if below spot == other platform, then spawn
+//                            Platform platform = new Platform();
+//                            platform.position.set(titleX*30, titleY*30);
+//                            GameObject.add(platform);
+//                        }
+//
+//                    }
+//                    else if (randomObject >= 10 && randomObject <30){           //Spike
+//                    }
+//                    else if (randomObject >= 30 && randomObject < 50 ){         //Enemy
+//                    }
+//                    //từ 50 đến 100 chưa tính đến
 
-                    Random rand = new Random() ;
-                    int randomObject = rand.nextInt(101) ;
-
-                    if (randomObject < 10){                         //platform
-                        int belowMapData = data.get( (titleY+1) * width + titleX);
-                        if (belowMapData == 1){
-
-                            data.set(titleY * width + titleX,randomObject);
-                            // if below spot == other platform, then spawn
-                            Platform platform = new Platform();
-                            platform.position.set(titleX*30, titleY*30);
-                            GameObject.add(platform);
-                        }
-
-                    }
-                    else if (randomObject >= 10 && randomObject <30){           //Spike
-                    }
-                    else if (randomObject >= 30 && randomObject < 50 ){         //Enemy
-                    }
-                    //từ 50 đến 100 chưa tính đến
-
-                }
+//                }
             }
         }
 

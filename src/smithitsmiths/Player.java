@@ -28,7 +28,7 @@ public class Player extends GameObject implements PhysicsBody {
 
     public Player() {
         super();
-        isActive = true;
+//        isActive = true;
         this.renderer = ImageRenderer.create("assets/images/players/player_walk1.png");
 
         velocity = new Vector2D();
@@ -51,7 +51,7 @@ public class Player extends GameObject implements PhysicsBody {
 
         //gaugebar update:
         gaugeBar.setPosition(this.position.x - 40, this.position.y - 40);
-        System.out.println(this.position);
+//        System.out.println(this.position);
 
         if (InputManager.instance.spacePressed) {
             if (force <= maxForce) {
@@ -150,6 +150,7 @@ public class Player extends GameObject implements PhysicsBody {
 
         //velocity impact position
         this.position.addUp(velocity.x, 0);
+        //TODO remove row below
         this.screenPosition.addUp(velocity.x, 0);
 
     }

@@ -6,6 +6,7 @@ import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
+import smithitsmiths.GaugeBar;
 import smithitsmiths.Platform;
 import smithitsmiths.Player;
 
