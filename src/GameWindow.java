@@ -25,10 +25,12 @@ public class GameWindow extends Frame{
         setupGameLoop();
         setupWindow();
         setupLevel();
+
     }
 
     private void setupGameLoop() {
         lastTimeUpdate = -1;
+
     }
 
     private void setupWindow() {
@@ -79,9 +81,12 @@ public class GameWindow extends Frame{
         player.getPosition().set(100,50);
         GameObject.add(player);
 
-
         Map map = Map.load("assets/maps/map_layer1.json");
+
         map.generate();
+        GameObject.add(map);
+        map.move();
+
     }
 
     public void loop(){
@@ -97,6 +102,7 @@ public class GameWindow extends Frame{
                 render();
                 //changeSceneIfNeeded
                 lastTimeUpdate = currentTime;
+
             }
         }
     }

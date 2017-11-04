@@ -154,6 +154,8 @@ public class GameObject {
         newGameObjects.add(gameObject);
     }
 
+    public static void addAll(ArrayList arrayList) {newGameObjects.addAll(arrayList);}
+
 
     public static void runAllActions() {
         for (GameObject gameObject : gameObjects) {

@@ -45,7 +45,6 @@ public class Player extends GameObject implements PhysicsBody {
 
         //gaugebar update:
         gaugeBar.setPosition(this.position.x - 40, this.position.y - 40);
-        System.out.println(gaugeBar.position);
 
         if (InputManager.instance.spacePressed) {
 
