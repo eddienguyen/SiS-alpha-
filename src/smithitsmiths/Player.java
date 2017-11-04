@@ -8,6 +8,7 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 import jdk.internal.util.xml.impl.Input;
+import smithitsmiths.enemy.Enemy;
 
 public class Player extends GameObject implements PhysicsBody {
     public Vector2D velocity;
@@ -19,20 +20,20 @@ public class Player extends GameObject implements PhysicsBody {
 //    Hammer hammer;
     final static float maxForce = 3.5f;
     public static float currentForce;
-
     public GaugeBar gaugeBar;
+
 
     public boolean isDragged;
 
 
     public Player() {
         super();
+        isActive = true;
         this.renderer = ImageRenderer.create("assets/images/players/player_walk1.png");
 
         velocity = new Vector2D();
         boxCollider = new BoxCollider(36, 45);
         this.children.add(boxCollider);
-
         gaugeBar = GameObject.recycle(GaugeBar.class);
         GameObject.add(gaugeBar);
         isDragged = false;
@@ -161,4 +162,9 @@ public class Player extends GameObject implements PhysicsBody {
     public BoxCollider getBoxCollider() {
         return this.boxCollider;
     }
+
+    public void getHit(){
+        isActive=false;
+    }
+
 }
