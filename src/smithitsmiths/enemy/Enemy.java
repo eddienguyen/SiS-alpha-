@@ -103,7 +103,6 @@ public class Enemy extends GameObject implements PhysicsBody{
         Player hitPlayer = Physics.collideWith(this.boxCollider, Player.class);
         if (hitPlayer != null){
             hitPlayer.getHit();
-            this.isActive = false;
         }
     }
 }
