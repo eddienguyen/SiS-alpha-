@@ -15,7 +15,9 @@ public class Player extends GameObject implements PhysicsBody {
     private final float JUMPSPEED = 10;
     protected float force = 0;
     private BoxCollider boxCollider;
-    final static int maxForce = 3;
+    PlayerSmite playerSmite;
+//    Hammer hammer;
+    final static float maxForce = 3.5f;
     public static float currentForce;
 
     public GaugeBar gaugeBar;
@@ -34,6 +36,9 @@ public class Player extends GameObject implements PhysicsBody {
         gaugeBar = GameObject.recycle(GaugeBar.class);
         GameObject.add(gaugeBar);
         isDragged = false;
+        playerSmite = new PlayerSmite();
+//        hammer = new Hammer();
+//        hammer.position.set(this.position);
     }
 
     @Override
@@ -45,10 +50,9 @@ public class Player extends GameObject implements PhysicsBody {
 
         //gaugebar update:
         gaugeBar.setPosition(this.position.x - 40, this.position.y - 40);
-        System.out.println(gaugeBar.position);
+        System.out.println(this.position);
 
         if (InputManager.instance.spacePressed) {
-
             if (force <= maxForce) {
                 gaugeBar.setValue(force);
                 force += 0.1f;
@@ -57,16 +61,22 @@ public class Player extends GameObject implements PhysicsBody {
 
         }
 
+        playerSmite.run(this);
+
+
         if (InputManager.instance.spaceReleased) {
             //when player is at platform(not in the air), enable jump, vice versa
             BoxCollider boxColliderAtBottom = this.boxCollider.shift(0, 1);
-
             if (Physics.collideWith(boxColliderAtBottom, Platform.class) != null) {
                 velocity.y = -JUMPSPEED * force;
+//                playerSmite.run(this);
+
             }
             force = 0;
             gaugeBar.reset();
         }
+
+//        playerSmite.run(this);
 
 
         //Platform physics
@@ -140,6 +150,10 @@ public class Player extends GameObject implements PhysicsBody {
         //velocity impact position
         this.position.addUp(velocity.x, 0);
         this.screenPosition.addUp(velocity.x, 0);
+
+    }
+
+    public void smite(){
 
     }
 
