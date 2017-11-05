@@ -3,6 +3,7 @@ import bases.inputs.InputManager;
 import bases.maps.Map;
 import bases.settings.Settings;
 import smithitsmiths.Player;
+import smithitsmiths.enemy.Enemy;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -79,7 +80,10 @@ public class GameWindow extends Frame{
         //Add player
         Player player = new Player();
         player.getPosition().set(100,50);
+        Enemy enemy = new Enemy();
+        enemy.getPosition().set(600,50);
         GameObject.add(player);
+        GameObject.add(enemy);
 
         Map map = Map.load("assets/maps/map_layer1.json");
 

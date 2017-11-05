@@ -1,5 +1,7 @@
 package bases;
 
+import smithitsmiths.Player;
+
 public class Vector2D {
     public float x, y;
 
@@ -75,4 +77,5 @@ public class Vector2D {
                 ", y=" + y +
                 '}';
     }
+
 }

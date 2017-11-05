@@ -8,6 +8,7 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 import jdk.internal.util.xml.impl.Input;
+import smithitsmiths.enemy.Enemy;
 
 public class Player extends GameObject implements PhysicsBody {
     public Vector2D velocity;
@@ -15,25 +16,30 @@ public class Player extends GameObject implements PhysicsBody {
     private final float JUMPSPEED = 10;
     protected float force = 0;
     private BoxCollider boxCollider;
-    final static int maxForce = 3;
+    PlayerSmite playerSmite;
+//    Hammer hammer;
+    final static float maxForce = 3.5f;
     public static float currentForce;
-
     public GaugeBar gaugeBar;
+
 
     public boolean isDragged;
 
 
     public Player() {
         super();
+        isActive = true;
         this.renderer = ImageRenderer.create("assets/images/players/player_walk1.png");
 
         velocity = new Vector2D();
         boxCollider = new BoxCollider(36, 45);
         this.children.add(boxCollider);
-
         gaugeBar = GameObject.recycle(GaugeBar.class);
         GameObject.add(gaugeBar);
         isDragged = false;
+        playerSmite = new PlayerSmite();
+//        hammer = new Hammer();
+//        hammer.position.set(this.position);
     }
 
     @Override
@@ -45,9 +51,9 @@ public class Player extends GameObject implements PhysicsBody {
 
         //gaugebar update:
         gaugeBar.setPosition(this.position.x - 40, this.position.y - 40);
+        System.out.println(this.position);
 
         if (InputManager.instance.spacePressed) {
-
             if (force <= maxForce) {
                 gaugeBar.setValue(force);
                 force += 0.1f;
@@ -56,16 +62,22 @@ public class Player extends GameObject implements PhysicsBody {
 
         }
 
+        playerSmite.run(this);
+
+
         if (InputManager.instance.spaceReleased) {
             //when player is at platform(not in the air), enable jump, vice versa
             BoxCollider boxColliderAtBottom = this.boxCollider.shift(0, 1);
-
             if (Physics.collideWith(boxColliderAtBottom, Platform.class) != null) {
                 velocity.y = -JUMPSPEED * force;
+//                playerSmite.run(this);
+
             }
             force = 0;
             gaugeBar.reset();
         }
+
+//        playerSmite.run(this);
 
 
         //Platform physics
@@ -142,8 +154,17 @@ public class Player extends GameObject implements PhysicsBody {
 
     }
 
+    public void smite(){
+
+    }
+
     @Override
     public BoxCollider getBoxCollider() {
         return this.boxCollider;
     }
+
+    public void getHit(){
+        isActive=false;
+    }
+
 }
