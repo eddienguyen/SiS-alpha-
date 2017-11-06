@@ -13,13 +13,15 @@ public class Enemy extends GameObject implements PhysicsBody {
     private BoxCollider boxCollider;
     private Vector2D velocity;
     private final float GRAVITY = 1f;
+    public float HP;
 
     public Enemy() {
         super();
         this.renderer = ImageRenderer.create("assets/images/platform/green_square.png");
         velocity = new Vector2D();
-        boxCollider = new BoxCollider(30, 30);
+        boxCollider = new BoxCollider(20, 20);
         this.children.add(boxCollider);
+        HP = 10;
     }
 
     @Override
@@ -108,8 +110,10 @@ public class Enemy extends GameObject implements PhysicsBody {
     }
 
     public void getHit() {
-        this.isActive = false;
-        System.out.println("enemy get hit");
+        if (this.HP <= 0){
+            this.isActive = false;
+        }
+        System.out.println(String.format("enemy get hit, left %s HP",HP ));
     }
 
 

@@ -41,9 +41,9 @@ public class GamePlayScene implements Scene {
 
 
         enemy.getPosition().set(600, 50);
-        enemy1.getPosition().set(700, 50);
-        enemy2.getPosition().set(800, 50);
-        enemy3.getPosition().set(900, 50);
+        enemy1.getPosition().set(800, 50);
+        enemy2.getPosition().set(1000, 50);
+        enemy3.getPosition().set(1200, 50);
 
         GameObject.add(enemy);
         GameObject.add(enemy1);

@@ -8,26 +8,42 @@ import bases.renderers.ImageRenderer;
 import java.awt.*;
 
 public class Hammer extends GameObject {
-//    public int material;
-//    public final int WOOD = 1;
 
+    public static final int WOODDAMAGE = 5;
+    public static final int ROCKDAMAGE = 10;
+    public static final int IRONDAMAGE = 12;
+    public static final int GOLDDAMAGE = 14;
+    public static final int DIAMONDDAMAGE = 20;
 
-    public Hammer(){
-        this.renderer = ImageRenderer.create("assets/images/hammer/hammer_bronze.png ");
+    public static float currentHammerDamage;
 
+    public Hammer() {
+        currentHammerDamage = WOODDAMAGE;
     }
 
-    @Override
-    public float run(Vector2D parentPosition) {
-        return super.run(parentPosition);
+    public float getCurrentHammerDamage() {
+        return currentHammerDamage;
     }
 
-    @Override
-    public void render(Graphics2D g2d) {
-        super.render(g2d);
-    }
-
-    public void setPosition(float x, float y){
-        this.position.set(x,y);
+    public static void changeHammer(String material) {          //  = setCurrentHammerDamage
+        switch (material) {
+            case "wood":
+                currentHammerDamage = WOODDAMAGE;
+                break;
+            case "rock":
+                currentHammerDamage = ROCKDAMAGE;
+                break;
+            case "iron":
+                currentHammerDamage = IRONDAMAGE;
+                break;
+            case "gold":
+                currentHammerDamage = GOLDDAMAGE;
+                break;
+            case "diamond":
+                currentHammerDamage = DIAMONDDAMAGE;
+                break;
+            default:
+                System.out.println("wrong in changeHammer()");
+        }
     }
 }

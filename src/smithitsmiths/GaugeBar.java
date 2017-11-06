@@ -6,7 +6,7 @@ import bases.Vector2D;
 import java.awt.*;
 
 public class GaugeBar extends GameObject {
-    public final int FILLCONSTANT = 30;
+    public final int FILLCONSTANT = 5;
     public float value;
     public float min, max;
 
@@ -20,7 +20,8 @@ public class GaugeBar extends GameObject {
     }
 
     public void setValue(float value){
-        this.value = value*FILLCONSTANT;    //easier to look
+        //this.value = value*FILLCONSTANT;    //easier to look
+        this.value = value;
     }
 
     public float getValue(){ return this.value; }
@@ -41,4 +42,6 @@ public class GaugeBar extends GameObject {
         g2d.setColor(Color.RED);
         g2d.drawLine((int)this.position.x, (int)this.position.y,(int)(this.position.x + value),(int)this.position.y);
     }
+
+    //TODO : reset value (to 0)
 }

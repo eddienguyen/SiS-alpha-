@@ -15,18 +15,20 @@ import smithitsmiths.scenes.GameOverScene;
 public class Player extends GameObject implements PhysicsBody {
     public Vector2D velocity;
     private final float GRAVITY = 1f;
-    private final float JUMPSPEED = 10;
-    protected float force = 0;
+
     private BoxCollider boxCollider;
-    final static float maxForce = 3.5f;
-    public static float currentForce;
+
     public GaugeBar gaugeBar;
 
 
     public boolean isDragged;
 
+    Hammer hammer;
     PlayerHammerDown playerHammerDown;
-
+    protected float force = 0;
+    final static float maxForce = 15f;
+    public static float currentForce;
+    public float Damage;
 
     public Player() {
         super();
@@ -40,7 +42,9 @@ public class Player extends GameObject implements PhysicsBody {
         gaugeBar = GameObject.recycle(GaugeBar.class);
         //GameObject.add(gaugeBar);
         this.children.add(gaugeBar);
+
         playerHammerDown = new PlayerHammerDown();
+        hammer = new Hammer();
 
     }
 
@@ -58,13 +62,15 @@ public class Player extends GameObject implements PhysicsBody {
         this.velocity.y += GRAVITY;
 
         //gaugebar update:
-        gaugeBar.setPosition(this.position.x - 40, this.position.y - 40);
+        gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
 
 
         if (InputManager.instance.spacePressed && !onAir) {
             if (force <= maxForce) {
-                gaugeBar.setValue(force);
-                force += 0.1f;
+                force += 0.4f;
+                Damage = force + hammer.getCurrentHammerDamage();
+                gaugeBar.setValue(Damage);
+
                 return currentForce = force;
 
             }
@@ -72,7 +78,8 @@ public class Player extends GameObject implements PhysicsBody {
 
         if (InputManager.instance.spaceReleased && !onAir) {
             //when player is at platform(not in the air), enable jump, vice versa
-            velocity.y = -JUMPSPEED * force;
+            velocity.y = - Damage;
+            System.out.println("Damage caused: " + Damage);
             force = 0;
             gaugeBar.reset();
 
@@ -82,13 +89,14 @@ public class Player extends GameObject implements PhysicsBody {
             InputManager.spaceReleased = false;
         }
 
-
         //Platform physics
         moveVertical();
         //moveHorizontal will be handled by Platformer
 
         this.position.addUp(velocity);
         this.screenPosition.addUp(velocity);
+
+        checkIfOutOfScreen();
 
         return 0;
     }
@@ -129,12 +137,16 @@ public class Player extends GameObject implements PhysicsBody {
         return this.boxCollider;
     }
 
-    public void getHit() {
-//        isActive=false;
-//        gaugeBar.setActive(false);
-//        System.out.println("player hitted");
+    public float getDamage(){ return this.Damage; }
 
+    public void getHit() {
         SceneManager.changeScene(new GameOverScene());
+    }
+
+    public void checkIfOutOfScreen(){
+        if (this.position.x <= -15 || this.position.y >= 768){
+            SceneManager.changeScene(new GameOverScene());
+        }
     }
 
     private void moveHorizontal() {

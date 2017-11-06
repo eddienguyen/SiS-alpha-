@@ -89,7 +89,6 @@ public class Layer {
                 platform.velocity.x = -SPEED;
             }
 
-
         }
     }
 

@@ -13,6 +13,7 @@ public class HammerSmite extends GameObject implements PhysicsBody {
     public BoxCollider boxCollider;
     public float duration;
     public Vector2D velocity;
+    public float damage;
 
     public HammerSmite() {
 
@@ -29,6 +30,7 @@ public class HammerSmite extends GameObject implements PhysicsBody {
         //check hit with Enemy
         Enemy enemy = Physics.collideWith(boxCollider, Enemy.class);
         if (enemy != null) {
+            enemy.HP -= this.damage;
             enemy.getHit();
             this.isActive = false;
         }
