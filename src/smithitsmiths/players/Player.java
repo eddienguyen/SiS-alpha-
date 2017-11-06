@@ -1,4 +1,4 @@
-package smithitsmiths;
+package smithitsmiths.players;
 
 import bases.GameObject;
 import bases.Vector2D;
@@ -7,8 +7,10 @@ import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
-import jdk.internal.util.xml.impl.Input;
-import smithitsmiths.enemy.Enemy;
+import bases.scenes.SceneManager;
+import smithitsmiths.GaugeBar;
+import smithitsmiths.Platform;
+import smithitsmiths.scenes.GameOverScene;
 
 public class Player extends GameObject implements PhysicsBody {
     public Vector2D velocity;
@@ -16,8 +18,6 @@ public class Player extends GameObject implements PhysicsBody {
     private final float JUMPSPEED = 10;
     protected float force = 0;
     private BoxCollider boxCollider;
-    PlayerSmite playerSmite;
-//    Hammer hammer;
     final static float maxForce = 3.5f;
     public static float currentForce;
     public GaugeBar gaugeBar;
@@ -25,59 +25,62 @@ public class Player extends GameObject implements PhysicsBody {
 
     public boolean isDragged;
 
+    PlayerHammerDown playerHammerDown;
+
 
     public Player() {
         super();
         isActive = true;
-        this.renderer = ImageRenderer.create("assets/images/players/player_walk1.png");
+        isDragged = false;
+        this.renderer = ImageRenderer.create("assets/images/players/demo_Player.png");
 
         velocity = new Vector2D();
-        boxCollider = new BoxCollider(36, 45);
+        boxCollider = new BoxCollider(30, 30);
         this.children.add(boxCollider);
         gaugeBar = GameObject.recycle(GaugeBar.class);
-        GameObject.add(gaugeBar);
-        isDragged = false;
-        playerSmite = new PlayerSmite();
-//        hammer = new Hammer();
-//        hammer.position.set(this.position);
+        //GameObject.add(gaugeBar);
+        this.children.add(gaugeBar);
+        playerHammerDown = new PlayerHammerDown();
+
     }
 
     @Override
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
 
+        BoxCollider boxColliderAtBottom = this.boxCollider.shift(0, 1);
+        boolean onAir = true;
+        if (Physics.collideWith(boxColliderAtBottom, Platform.class) != null) {
+            onAir = false;
+        }
+
         //GRAVITY impact velocity && Inputs
         this.velocity.y += GRAVITY;
 
         //gaugebar update:
         gaugeBar.setPosition(this.position.x - 40, this.position.y - 40);
-        System.out.println(this.position);
 
-        if (InputManager.instance.spacePressed) {
+
+        if (InputManager.instance.spacePressed && !onAir) {
             if (force <= maxForce) {
                 gaugeBar.setValue(force);
                 force += 0.1f;
                 return currentForce = force;
-            }
 
+            }
         }
 
-        playerSmite.run(this);
-
-
-        if (InputManager.instance.spaceReleased) {
+        if (InputManager.instance.spaceReleased && !onAir) {
             //when player is at platform(not in the air), enable jump, vice versa
-            BoxCollider boxColliderAtBottom = this.boxCollider.shift(0, 1);
-            if (Physics.collideWith(boxColliderAtBottom, Platform.class) != null) {
-                velocity.y = -JUMPSPEED * force;
-//                playerSmite.run(this);
-
-            }
+            velocity.y = -JUMPSPEED * force;
             force = 0;
             gaugeBar.reset();
-        }
 
-//        playerSmite.run(this);
+            //smash Hammer
+            playerHammerDown.run(this);
+
+            InputManager.spaceReleased = false;
+        }
 
 
         //Platform physics
@@ -86,9 +89,8 @@ public class Player extends GameObject implements PhysicsBody {
 
         this.position.addUp(velocity);
         this.screenPosition.addUp(velocity);
+
         return 0;
-
-
     }
 
     private void moveVertical() {
@@ -121,50 +123,24 @@ public class Player extends GameObject implements PhysicsBody {
 
     }
 
-    private void moveHorizontal() {
-
-
-        //calculate future position(box collider) & predict collision
-        BoxCollider nextBoxCollider = this.boxCollider.shift(velocity.x, 0);
-
-        Platform platform = Physics.collideWith(nextBoxCollider, Platform.class);
-        if (platform != null) {
-            //move player continously towards platform
-            boolean moveContinue = true;
-            float shiftDistance = Math.signum(velocity.x);
-
-            while (moveContinue) {
-                if (Physics.collideWith(this.boxCollider.shift(shiftDistance, 0), Platform.class) != null) {
-                    moveContinue = false;
-                } else {
-                    shiftDistance += Math.signum(velocity.x );
-                    this.position.addUp(Math.signum(velocity.x ), 0);
-                }
-            }
-            //end move player continously towards platform
-
-
-            //update velocity ()
-            velocity.x = 0;
-        }
-
-        //velocity impact position
-        this.position.addUp(velocity.x, 0);
-        this.screenPosition.addUp(velocity.x, 0);
-
-    }
-
-    public void smite(){
-
-    }
 
     @Override
     public BoxCollider getBoxCollider() {
         return this.boxCollider;
     }
 
-    public void getHit(){
-        isActive=false;
+    public void getHit() {
+//        isActive=false;
+//        gaugeBar.setActive(false);
+//        System.out.println("player hitted");
+
+        SceneManager.changeScene(new GameOverScene());
     }
+
+    private void moveHorizontal() {
+        //unused
+    }
+
+
 
 }

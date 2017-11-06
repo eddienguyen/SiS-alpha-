@@ -12,8 +12,11 @@ public class FrameCounter {
     public boolean run() {
         if (count >= countMax)
             return true;
-        count++;
-        return false;
+        else {
+            count++;
+            return false;
+        }
+
     }
 
     public void reset() {

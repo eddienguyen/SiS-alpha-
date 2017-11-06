@@ -3,9 +3,6 @@ public class Program {
         GameWindow gameWindow = new GameWindow();
         gameWindow.loop();
 
-
-
-
     }
 
 }

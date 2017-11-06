@@ -1,25 +1,33 @@
-package smithitsmiths;
+package smithitsmiths.players;
 
 import bases.GameObject;
 import bases.Vector2D;
 import bases.physics.BoxCollider;
 import bases.renderers.ImageRenderer;
 
+import java.awt.*;
+
 public class Hammer extends GameObject {
-    public Vector2D vector2D;
-    public BoxCollider boxCollider;
+//    public int material;
+//    public final int WOOD = 1;
+
 
     public Hammer(){
-        this.renderer = ImageRenderer.create("assets/images/hammer/hammer1.jpg");
-
-        vector2D = new Vector2D();
-        boxCollider = new BoxCollider(20,20);
-        this.children.add(boxCollider);
-    }
-
-    public void run(){
+        this.renderer = ImageRenderer.create("assets/images/hammer/hammer_bronze.png ");
 
     }
 
+    @Override
+    public float run(Vector2D parentPosition) {
+        return super.run(parentPosition);
+    }
 
+    @Override
+    public void render(Graphics2D g2d) {
+        super.render(g2d);
+    }
+
+    public void setPosition(float x, float y){
+        this.position.set(x,y);
+    }
 }

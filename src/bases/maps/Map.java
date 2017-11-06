@@ -57,7 +57,6 @@ public class Map extends GameObject {
     @Override
     public float run(Vector2D parentPosition) {
         this.position.addUp(-2,0);
-        System.out.println(this.position);
 
         return super.run(parentPosition);
 

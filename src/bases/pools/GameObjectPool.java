@@ -22,8 +22,7 @@ public class GameObjectPool {
             GameObject.add(newGameObject);
             pool.add(newGameObject);
             return newGameObject;
-        }
-        catch (InstantiationException | IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             return null;
         }

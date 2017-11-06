@@ -2,7 +2,6 @@ package bases.maps;
 
 import bases.GameObject;
 import smithitsmiths.Platform;
-import smithitsmiths.Player;
 
 import java.util.*;
 
@@ -79,14 +78,13 @@ public class Layer {
 
     }
 
-    public void initMap(){
+    public void initMap() {
         GameObject.addAll(mapComponents);
-        System.out.println(width*30);
     }
 
-    public void move(){
-        for (GameObject object : mapComponents){
-            if (object instanceof Platform){
+    public void move() {
+        for (GameObject object : mapComponents) {
+            if (object instanceof Platform) {
                 Platform platform = (Platform) object;
                 platform.velocity.x = -SPEED;
             }
@@ -100,9 +98,9 @@ public class Layer {
     }
 
 
-    public boolean isOutOfWorld(){
-        for (GameObject object : mapComponents){
-            if (object.position.x > 768){
+    public boolean isOutOfWorld() {
+        for (GameObject object : mapComponents) {
+            if (object.position.x > 768) {
                 return false;
             }
         }
