@@ -6,11 +6,13 @@ import bases.inputs.InputManager;
 import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
+import bases.renderers.Animation;
 import bases.renderers.ImageRenderer;
 import bases.scenes.SceneManager;
 import smithitsmiths.GaugeBar;
 import smithitsmiths.Platform;
 import smithitsmiths.scenes.GameOverScene;
+import tklibs.SpriteUtils;
 
 public class Player extends GameObject implements PhysicsBody {
     public Vector2D velocity;
@@ -34,7 +36,20 @@ public class Player extends GameObject implements PhysicsBody {
         super();
         isActive = true;
         isDragged = false;
-        this.renderer = ImageRenderer.create("assets/images/players/demo_Player.png");
+        this.renderer = new Animation(
+                10,
+                false,
+                false,
+                SpriteUtils.loadImage("assets/images/players/running/Smith_00000.png"),
+                SpriteUtils.loadImage("assets/images/players/running/Smith_00001.png"),
+                SpriteUtils.loadImage("assets/images/players/running/Smith_00002.png"),
+                SpriteUtils.loadImage("assets/images/players/running/Smith_00003.png"),
+                SpriteUtils.loadImage("assets/images/players/running/Smith_00004.png"),
+                SpriteUtils.loadImage("assets/images/players/running/Smith_00005.png"),
+                SpriteUtils.loadImage("assets/images/players/running/Smith_00006.png"),
+                SpriteUtils.loadImage("assets/images/players/running/Smith_00007.png")
+
+                        );
 
         velocity = new Vector2D();
         boxCollider = new BoxCollider(30, 30);
