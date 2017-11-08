@@ -1,6 +1,6 @@
 package bases.physics;
 
-import smithitsmiths.Player;
+import smithitsmiths.players.Player;
 import smithitsmiths.enemy.Enemy;
 
 import java.util.Vector;

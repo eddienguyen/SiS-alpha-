@@ -4,7 +4,9 @@ import bases.GameObject;
 import bases.maps.Map;
 import bases.scenes.Scene;
 import smithitsmiths.backgrounds.Background;
+import smithitsmiths.enemy.Bullet;
 import smithitsmiths.enemy.Enemy;
+import smithitsmiths.enemy.EnemyJumping;
 import smithitsmiths.players.Player;
 
 import java.awt.*;
@@ -17,7 +19,8 @@ public class GamePlayScene implements Scene {
     Enemy enemy1 = new Enemy();
     Enemy enemy2 = new Enemy();
     Enemy enemy3 = new Enemy();
-
+    EnemyJumping jumping = new EnemyJumping();
+    Bullet bullet = new Bullet();
     Background background = new Background();
 
     @Override
@@ -49,6 +52,8 @@ public class GamePlayScene implements Scene {
         GameObject.add(enemy1);
         GameObject.add(enemy2);
         GameObject.add(enemy3);
+        GameObject.add(jumping);
+        GameObject.add(bullet);
 
         //3.Platform
 

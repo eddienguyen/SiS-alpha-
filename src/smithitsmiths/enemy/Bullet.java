@@ -7,7 +7,7 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 import smithitsmiths.Platform;
-import smithitsmiths.Player;
+import smithitsmiths.players.Player;
 
 import java.awt.*;
 

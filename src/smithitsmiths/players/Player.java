@@ -34,7 +34,7 @@ public class Player extends GameObject implements PhysicsBody {
         super();
         isActive = true;
         isDragged = false;
-        this.renderer = ImageRenderer.create("assets/images/players/demo_Player.png");
+        this.renderer = ImageRenderer.create("assets/images/players/player_walk1.png");
 
         velocity = new Vector2D();
         boxCollider = new BoxCollider(30, 30);
