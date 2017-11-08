@@ -2,11 +2,9 @@ import bases.FrameCounter;
 import bases.GameObject;
 import bases.inputs.InputManager;
 import bases.maps.Map;
-import bases.physics.Physics;
 import bases.settings.Settings;
 import smithitsmiths.Player;
 import smithitsmiths.enemy.Bullet;
-import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
 
 import java.awt.*;
@@ -91,7 +89,7 @@ public class GameWindow extends Frame {
 
 
 //                Enemy enemy = new Enemy();
-//                enemy.getPosition().set(600,50);
+//                enemy.getPosition().set(1024,0);
 //                GameObject.add(enemy);
 
 

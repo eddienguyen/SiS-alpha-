@@ -26,7 +26,7 @@ public class Enemy extends GameObject implements PhysicsBody{
     @Override
     public float run(Vector2D parentPosition) {
 
-        moveHorizontal();
+//        moveHorizontal();
         moveVertical();
         playerHit();
         this.velocity.y += GRAVITY;

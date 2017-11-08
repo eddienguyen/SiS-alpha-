@@ -17,7 +17,7 @@ public class Player extends GameObject implements PhysicsBody {
     protected float force = 0;
     private BoxCollider boxCollider;
     PlayerSmite playerSmite;
-//    Hammer hammer;
+    //    Hammer hammer;
     final static float maxForce = 3.5f;
     public static float currentForce;
     public GaugeBar gaugeBar;

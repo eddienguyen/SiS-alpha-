@@ -17,6 +17,6 @@ public class FrameCounter {
     }
 
     public void reset() {
-        this.count = 0;
+        count = 0;
     }
 }
