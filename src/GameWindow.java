@@ -1,11 +1,13 @@
 import bases.GameObject;
 import bases.inputs.InputManager;
 import bases.maps.Map;
+import bases.scenes.Scene;
 import bases.scenes.SceneManager;
 import bases.settings.Settings;
 import smithitsmiths.players.Player;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.scenes.GamePlayScene;
+import smithitsmiths.scenes.GameTutorialScene;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -76,7 +78,7 @@ public class GameWindow extends Frame {
     private void setupLevel() {
 
         //create gamePlayScene
-        SceneManager.changeScene(new GamePlayScene());
+        SceneManager.changeScene(new GameTutorialScene());
 
     }
 
@@ -104,6 +106,13 @@ public class GameWindow extends Frame {
 
         //runAllActions gameObjects
         GameObject.runAllActions();
+
+        //test
+        if (InputManager.spaceReleased){
+            if (SceneManager.getCurrentScene().getClass().equals(GameTutorialScene.class)){
+                SceneManager.changeScene(new GamePlayScene());
+            }
+        }
 
         //out of for (gameObjects)
         SceneManager.changeSceneIfNeeded();

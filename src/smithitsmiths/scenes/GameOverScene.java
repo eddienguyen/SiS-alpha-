@@ -12,9 +12,11 @@ public class GameOverScene implements Scene {
 
     @Override
     public void init() {
-        GameObject background = new GameObject();
-        background.renderer = ImageRenderer.create("assets/images/background/gameover_bg.png");
-        background.position.set(512,384);
-        GameObject.add(background);
+        GameObject bg = new GameObject();
+        bg.position.set(512, 384);
+        bg.screenPosition.set(512,384);
+        bg.renderer = ImageRenderer.create("assets/images/background/gameover_bg.png");
+
+        GameObject.add(bg);
     }
 }
