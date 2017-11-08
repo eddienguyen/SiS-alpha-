@@ -18,7 +18,7 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     private final float SPEED = -2;
     private final float JUMPSPEED = -20;
     private BoxCollider boxCollider;
-    FrameCounter frameCounter = new FrameCounter(50);
+    FrameCounter frameCounter = new FrameCounter(60);
 
 
     public EnemyJumping(){
