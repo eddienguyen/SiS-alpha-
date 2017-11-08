@@ -96,6 +96,6 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
 
     @Override
     public BoxCollider getBoxCollider() {
-        return null;
+        return this.boxCollider;
     }
 }

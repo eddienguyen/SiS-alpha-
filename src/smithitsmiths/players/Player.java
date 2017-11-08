@@ -37,7 +37,7 @@ public class Player extends GameObject implements PhysicsBody {
         isActive = true;
         isDragged = false;
         this.renderer = new Animation(
-                10,
+                5,
                 false,
                 false,
                 SpriteUtils.loadImage("assets/images/players/running/Smith_00000.png"),
@@ -67,6 +67,21 @@ public class Player extends GameObject implements PhysicsBody {
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
 
+        //reposition if needed:
+        if (position.x < 100 ){
+
+            BoxCollider nextBoxCollider = this.boxCollider.shift(1, 0);
+            Platform pf = Physics.collideWith(nextBoxCollider, Platform.class);
+
+            if (pf != null){
+                velocity.x = 0;
+            } else {
+                System.out.println("reposition");
+                this.position.x += 1;
+            }
+        } else velocity.x = 0;
+
+        //on air check
         BoxCollider boxColliderAtBottom = this.boxCollider.shift(0, 1);
         boolean onAir = true;
         if (Physics.collideWith(boxColliderAtBottom, Platform.class) != null) {
@@ -112,7 +127,6 @@ public class Player extends GameObject implements PhysicsBody {
         this.screenPosition.addUp(velocity);
 
         checkIfOutOfScreen();
-        //TODO : repositioning
 
         return 0;
     }
@@ -168,6 +182,7 @@ public class Player extends GameObject implements PhysicsBody {
     private void moveHorizontal() {
         //unused
     }
+
 
 
 

@@ -6,7 +6,9 @@ import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
+import bases.scenes.SceneManager;
 import smithitsmiths.players.Player;
+import smithitsmiths.scenes.GamePlayScene;
 
 public class Platform extends GameObject implements PhysicsBody {
     private BoxCollider boxCollider;
@@ -54,13 +56,14 @@ public class Platform extends GameObject implements PhysicsBody {
                 }
             }
 
+
             //handling when player is being dragged
             player.position.addUp(this.velocity);
         }
 
-
         //velocity impact position
         this.position.addUp(velocity.x, 0);
         this.screenPosition.addUp(velocity.x, 0);
+
     }
 }
