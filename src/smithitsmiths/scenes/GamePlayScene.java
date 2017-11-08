@@ -19,6 +19,7 @@ public class GamePlayScene implements Scene {
     Enemy enemy3 = new Enemy();
 
     Background background = new Background();
+    Background background2 = new Background();
 
     @Override
     public void deinit() {
@@ -30,6 +31,10 @@ public class GamePlayScene implements Scene {
         //4.Background
 
         GameObject.add(background);
+        GameObject.add(background2);
+
+        if (background.position.x <= 512) background2.position.x = 1536;
+        if (background2.position.x <= 512) background.position.x = 1536;
 
         //1.Player
 
