@@ -14,7 +14,7 @@ public class GameObject {
     public Vector2D position;
     protected Vector2D screenPosition;
 
-    protected Renderer renderer;
+    public Renderer renderer;
 
     protected ArrayList<GameObject> children;
     protected ArrayList<Action> actions;
@@ -97,10 +97,10 @@ public class GameObject {
         return this;
     }
 
-    public static <T extends GameObject> T recycle(Class<T> cls){
-        for (GameObject object : gameObjects){
-            if (!object.isActive){
-                if (object.getClass().equals(cls)){
+    public static <T extends GameObject> T recycle(Class<T> cls) {
+        for (GameObject object : gameObjects) {
+            if (object.getClass().equals(cls)) {
+                if (!object.isActive) {
                     object.isActive = true;
                     return (T) object;
                 }
@@ -110,7 +110,7 @@ public class GameObject {
             T newGameObject = cls.newInstance();
             add(newGameObject);
             return newGameObject;
-        } catch (InstantiationException  | IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             return null;
         }
@@ -146,12 +146,17 @@ public class GameObject {
     public static void clearAll() {
         gameObjects.clear();
         newGameObjects.clear();
+
         Physics.clearAll();
         GameObjectPool.clearAll();
     }
 
     public static void add(GameObject gameObject) {
         newGameObjects.add(gameObject);
+    }
+
+    public static void addAll(ArrayList arrayList) {
+        newGameObjects.addAll(arrayList);
     }
 
 

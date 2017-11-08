@@ -1,11 +1,11 @@
-import bases.FrameCounter;
 import bases.GameObject;
 import bases.inputs.InputManager;
 import bases.maps.Map;
+import bases.scenes.SceneManager;
 import bases.settings.Settings;
-import smithitsmiths.Player;
-import smithitsmiths.enemy.Bullet;
-import smithitsmiths.enemy.EnemyJumping;
+import smithitsmiths.players.Player;
+import smithitsmiths.enemy.Enemy;
+import smithitsmiths.scenes.GamePlayScene;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,7 +15,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 public class GameWindow extends Frame {
-    private BufferedImage greyBackground;
+
     private BufferedImage backBufferedImage;
     private Graphics2D backGraphics;
     private long lastTimeUpdate;
@@ -23,17 +23,17 @@ public class GameWindow extends Frame {
 
     InputManager inputManager = InputManager.instance;
 
-    FrameCounter frameCounter = new FrameCounter(100);
-
     public GameWindow() {
         pack();                                     //?
         setupGameLoop();
         setupWindow();
         setupLevel();
+
     }
 
     private void setupGameLoop() {
         lastTimeUpdate = -1;
+
     }
 
     private void setupWindow() {
@@ -44,12 +44,6 @@ public class GameWindow extends Frame {
 
         this.backBufferedImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         this.backGraphics = (Graphics2D) this.backBufferedImage.getGraphics();
-
-        this.greyBackground = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D backgroundGraphics = (Graphics2D) this.greyBackground.getGraphics();
-        backgroundGraphics.setColor(Color.DARK_GRAY);
-        backgroundGraphics.fillRect(0, 0, this.getWidth(), this.getHeight());
-        backgroundGraphics.drawString("test", 10, 10);
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -80,21 +74,10 @@ public class GameWindow extends Frame {
 
 
     private void setupLevel() {
-        //Add player
-        Player player = new Player();
-        player.getPosition().set(100, 50);
-        GameObject.add(player);
-        Bullet bullet = GameObject.recycle(Bullet.class);
-        EnemyJumping enemyJumping = GameObject.recycle(EnemyJumping.class);
 
+        //create gamePlayScene
+        SceneManager.changeScene(new GamePlayScene());
 
-//                Enemy enemy = new Enemy();
-//                enemy.getPosition().set(1024,0);
-//                GameObject.add(enemy);
-
-
-        Map map = Map.load("assets/maps/map_layer1.json");
-        map.generate();
     }
 
     public void loop() {
@@ -110,6 +93,7 @@ public class GameWindow extends Frame {
                 render();
                 //changeSceneIfNeeded
                 lastTimeUpdate = currentTime;
+
             }
         }
     }
@@ -120,12 +104,34 @@ public class GameWindow extends Frame {
 
         //runAllActions gameObjects
         GameObject.runAllActions();
+
+        //out of for (gameObjects)
+        SceneManager.changeSceneIfNeeded();
     }
 
     private void render() {
-        backGraphics.drawImage(greyBackground, 0, 0, null);
-        GameObject.renderAll(backGraphics);
+
+        /*
+        Can uncomment this if we want to change the whole screen to new screen (when gameover)
+        when comment: we can make the gameover scene looks like WASTED (GTA style)
+
+        getGraphics().setColor(Color.BLACK);
+        getGraphics().fillRect(0,0,1024, 768);
+
+        call repaint() and add this method:
+
+
+        @Override
+        public void paintComponents(Graphics g) {
+            super.paintComponents(g);
+            g.drawImage(backBufferedImage, 0, 0, null);
+        }
+
+         */
+
         getGraphics().drawImage(backBufferedImage, 0, 0, null);
+        GameObject.renderAll(backGraphics);
     }
+
 
 }

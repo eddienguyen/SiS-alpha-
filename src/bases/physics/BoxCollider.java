@@ -6,6 +6,10 @@ public class BoxCollider extends GameObject {
     private float width;
     private float height;
 
+    public BoxCollider() {
+        this(0, 0, 0, 0);
+    }
+
     public BoxCollider(float x, float y, float width, float height) {
         super();
         this.position.set(x, y);
@@ -18,10 +22,10 @@ public class BoxCollider extends GameObject {
         this(0, 0, width, height);
     }
 
-    public BoxCollider shift(float dx, float dy){
+    public BoxCollider shift(float dx, float dy) {
         BoxCollider shiftedBoxCollider = new BoxCollider(this.width, this.height);
-        shiftedBoxCollider.position.set(this.position.add(dx,dy)); //new position of newBC = current position + (dx,dy)
-        shiftedBoxCollider.screenPosition.set(this.screenPosition.add(dx,dy));
+        shiftedBoxCollider.position.set(this.position.add(dx, dy)); //new position of newBC = current position + (dx,dy)
+        shiftedBoxCollider.screenPosition.set(this.screenPosition.add(dx, dy));
         return shiftedBoxCollider;
     }
 
@@ -47,6 +51,14 @@ public class BoxCollider extends GameObject {
 
     public float getHeight() {
         return height;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
     }
 
     public boolean intersects(BoxCollider other) {

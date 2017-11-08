@@ -6,16 +6,16 @@ import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
+import smithitsmiths.players.Player;
 
-public class Platform extends GameObject implements PhysicsBody{
+public class Platform extends GameObject implements PhysicsBody {
     private BoxCollider boxCollider;
-    private final float SPEED = 2;
-    Vector2D velocity;
+    public Vector2D velocity;
 
     public Platform() {
         super();
         this.renderer = ImageRenderer.create("assets/images/platform/yellow_square.jpg");
-        boxCollider = new BoxCollider(30,30);
+        boxCollider = new BoxCollider(30, 30);
         this.children.add(boxCollider);
         velocity = new Vector2D();
     }
@@ -24,10 +24,6 @@ public class Platform extends GameObject implements PhysicsBody{
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
 
-//        velocity.x = -SPEED;
-//        position.addUp(velocity);
-
-        velocity.x = -SPEED;
         dragHorizontal();
         return 0;
     }
@@ -37,28 +33,24 @@ public class Platform extends GameObject implements PhysicsBody{
         return boxCollider;
     }
 
-    public float getSpeed() {
-        return SPEED;
-    }
-
-    public void dragHorizontal(){
+    public void dragHorizontal() {
 
         //calculate the future platformer (box collider) & predict collision
-        BoxCollider nextBoxCollider = this.boxCollider.shift(velocity.x,0);
+        BoxCollider nextBoxCollider = this.boxCollider.shift(velocity.x, 0);
 
         Player player = Physics.collideWith(nextBoxCollider, Player.class);
 
-        if (player != null){
+        if (player != null) {
             //move platform continously towards player
             boolean moveContinue = true;
             float shiftDistance = Math.signum(velocity.x);
 
-            while (moveContinue){
-                if (Physics.collideWith(this.boxCollider.shift(shiftDistance,0), Player.class) != null){
+            while (moveContinue) {
+                if (Physics.collideWith(this.boxCollider.shift(shiftDistance, 0), Player.class) != null) {
                     moveContinue = false;
                 } else {
-                  shiftDistance += Math.signum(velocity.x);
-                  moveContinue = true;
+                    shiftDistance += Math.signum(velocity.x);
+                    moveContinue = true;
                 }
             }
 
@@ -68,7 +60,7 @@ public class Platform extends GameObject implements PhysicsBody{
 
 
         //velocity impact position
-        this.position.addUp(velocity.x,0);
+        this.position.addUp(velocity.x, 0);
         this.screenPosition.addUp(velocity.x, 0);
     }
 }

@@ -13,11 +13,11 @@ public class InputManager {
     public boolean rightPressed;
     public boolean xPressed;
 
-    public boolean spacePressed, spaceReleased;
+    public static boolean spacePressed, spaceReleased;
 
     public static final InputManager instance = new InputManager();
 
-    private InputManager() {
+    public InputManager() {
 
     }
 
