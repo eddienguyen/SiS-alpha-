@@ -14,6 +14,7 @@ public class Enemy extends GameObject implements PhysicsBody {
     private BoxCollider boxCollider;
     private Vector2D velocity;
     private final float GRAVITY = 1f;
+    private float SPEED = 1;
     public float HP;
 
     public Enemy() {
@@ -71,6 +72,7 @@ public class Enemy extends GameObject implements PhysicsBody {
 
         //calculate future position(box collider) & predict collision
         BoxCollider nextBoxCollider = this.boxCollider.shift(velocity.x, 0);
+        this.position.addUp(-SPEED,0);
 
         Platform platform = Physics.collideWith(nextBoxCollider, Platform.class);
         if (platform != null) {
@@ -85,16 +87,15 @@ public class Enemy extends GameObject implements PhysicsBody {
                 } else {
                     shiftDistance += Math.signum(velocity.x);
                     this.position.addUp(Math.signum(velocity.x), 0);
+
                 }
             }
-
             //update velocity ()
             velocity.x = 0;
+
         }
 
         //velocity impact position
-        this.position.addUp(velocity.x, 0);
-        this.screenPosition.addUp(velocity.x, 0);
     }
 
 

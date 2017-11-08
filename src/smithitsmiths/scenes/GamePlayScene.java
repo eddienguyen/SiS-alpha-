@@ -6,6 +6,7 @@ import bases.scenes.Scene;
 import smithitsmiths.backgrounds.Background;
 import smithitsmiths.enemy.Bullet;
 import smithitsmiths.enemy.Enemy;
+import smithitsmiths.enemy.EnemyCharging;
 import smithitsmiths.enemy.EnemyJumping;
 import smithitsmiths.players.Player;
 
@@ -20,6 +21,7 @@ public class GamePlayScene implements Scene {
     Enemy enemy2 = new Enemy();
     Enemy enemy3 = new Enemy();
     EnemyJumping jumping = new EnemyJumping();
+    EnemyCharging enemyCharging = new EnemyCharging();
     Bullet bullet = new Bullet();
     Background background = new Background();
     Background background2 = new Background();
@@ -47,7 +49,7 @@ public class GamePlayScene implements Scene {
 
         //2.Enemy
 
-
+        enemyCharging.getPosition().set(800,100);
         enemy.getPosition().set(600, 50);
         enemy1.getPosition().set(800, 50);
         enemy2.getPosition().set(1000, 50);
@@ -58,7 +60,8 @@ public class GamePlayScene implements Scene {
 //        GameObject.add(enemy2);
 //        GameObject.add(enemy3);
 //        GameObject.add(jumping);
-        GameObject.add(bullet);
+//        GameObject.add(bullet);
+        GameObject.add(enemyCharging);
 
         //3.Platform
 
