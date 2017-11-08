@@ -97,6 +97,7 @@ public class Player extends GameObject implements PhysicsBody {
         this.screenPosition.addUp(velocity);
 
         checkIfOutOfScreen();
+        //TODO : repositioning
 
         return 0;
     }

@@ -12,7 +12,7 @@ import java.util.Vector;
 
 public class GameObject {
     public Vector2D position;
-    protected Vector2D screenPosition;
+    public Vector2D screenPosition;
 
     public Renderer renderer;
 

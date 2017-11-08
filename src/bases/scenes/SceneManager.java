@@ -13,10 +13,11 @@ public class SceneManager {
     public static void changeSceneIfNeeded() {
         //outside gameLoop
         //1. check if changeScene is needed to made
-        if (nextScene != null){
-            if (currentScene != null)
-
+        if (nextScene != null) {
+            if (currentScene != null) {
                 currentScene.deinit();
+            }
+
             nextScene.init();
             currentScene = nextScene;
 
@@ -25,5 +26,9 @@ public class SceneManager {
         }
         //2.if changeScene is needed to made => deinit - init
 
+    }
+
+    public static Scene getCurrentScene(){
+        return currentScene;
     }
 }
