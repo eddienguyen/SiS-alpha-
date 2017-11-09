@@ -2,11 +2,13 @@ package smithitsmiths.scenes;
 
 import bases.GameObject;
 import bases.maps.Map;
+import bases.physics.Physics;
 import bases.scenes.Scene;
 import smithitsmiths.backgrounds.Background;
 import smithitsmiths.enemy.Bullet;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
+import smithitsmiths.enemy.Spike;
 import smithitsmiths.players.Player;
 
 import java.awt.*;
@@ -15,10 +17,10 @@ import java.awt.image.BufferedImage;
 public class GamePlayScene implements Scene {
 
     Player player = new Player();
-    Enemy enemy = new Enemy();
-    Enemy enemy1 = new Enemy();
-    Enemy enemy2 = new Enemy();
-    Enemy enemy3 = new Enemy();
+    Spike spike1 = new Spike();
+    Spike spike2 = new Spike();
+    Spike spike3 = new Spike();
+    Spike spike4 = new Spike();
     EnemyJumping jumping = new EnemyJumping();
     Bullet bullet = new Bullet();
     Background background = new Background();
@@ -48,17 +50,18 @@ public class GamePlayScene implements Scene {
         //2.Enemy
 
 
-        enemy.getPosition().set(600, 50);
-        enemy1.getPosition().set(800, 50);
-        enemy2.getPosition().set(1000, 50);
-        enemy3.getPosition().set(1200, 50);
+        spike1.getPosition().set(600, 50);
+        spike2.getPosition().set(1200, 50);
+        spike3.getPosition().set(1500, 50);
+        spike4.getPosition().set(2000, 50);
 
-//        GameObject.add(enemy);
-//        GameObject.add(enemy1);
-//        GameObject.add(enemy2);
-//        GameObject.add(enemy3);
+//        GameObject.add(spike1);
+//        GameObject.add(spike2);
+//        GameObject.add(spike3);
+//        GameObject.add(spike4);
+//
 //        GameObject.add(jumping);
-        GameObject.add(bullet);
+//        GameObject.add(bullet);
 
         //3.Platform
 

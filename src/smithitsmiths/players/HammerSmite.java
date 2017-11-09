@@ -7,6 +7,7 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 import smithitsmiths.enemy.Enemy;
+import smithitsmiths.enemy.Spike;
 
 public class HammerSmite extends GameObject implements PhysicsBody {
 
@@ -32,6 +33,13 @@ public class HammerSmite extends GameObject implements PhysicsBody {
         if (enemy != null) {
             enemy.HP -= this.damage;
             enemy.getHit();
+            this.isActive = false;
+        }
+
+        Spike spike = Physics.collideWith(boxCollider, Spike.class);
+        if (spike != null){
+            spike.HP -= this.damage;
+            spike.getHit();
             this.isActive = false;
         }
 

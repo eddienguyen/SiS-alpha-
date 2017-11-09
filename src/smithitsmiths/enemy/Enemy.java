@@ -11,30 +11,28 @@ import smithitsmiths.Platform;
 import smithitsmiths.players.Player;
 
 public class Enemy extends GameObject implements PhysicsBody {
-    private BoxCollider boxCollider;
-    private Vector2D velocity;
+    public BoxCollider boxCollider;
+    public Vector2D velocity;
     private final float GRAVITY = 1f;
     public float HP;
 
     public Enemy() {
         super();
-        this.renderer = ImageRenderer.create("assets/images/platform/green_square.png");
         velocity = new Vector2D();
-        boxCollider = new BoxCollider(20, 20);
+        boxCollider = new BoxCollider();
         this.children.add(boxCollider);
-        HP = 10;
     }
 
     @Override
     public float run(Vector2D parentPosition) {
+        super.run(parentPosition);
 
-//        moveHorizontal();
-        moveVertical();
-        playerHit();
         this.velocity.y += GRAVITY;
         this.position.x -= 2;
-        return super.run(parentPosition);
-
+        moveVertical();
+        moveHorizontal();
+        playerHit();
+        return 0;
 
     }
 
@@ -103,7 +101,7 @@ public class Enemy extends GameObject implements PhysicsBody {
         return this.boxCollider;
     }
 
-    private void playerHit() {
+    public void playerHit() {
         Player hitPlayer = Physics.collideWith(this.boxCollider, Player.class);
         if (hitPlayer != null) {
             hitPlayer.getHit();
@@ -111,6 +109,7 @@ public class Enemy extends GameObject implements PhysicsBody {
     }
 
     public void getHit() {
+
         if (this.HP <= 0){
             this.isActive = false;
         }

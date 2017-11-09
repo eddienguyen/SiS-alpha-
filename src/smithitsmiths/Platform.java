@@ -7,6 +7,7 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 import bases.scenes.SceneManager;
+import smithitsmiths.enemy.Enemy;
 import smithitsmiths.players.Player;
 import smithitsmiths.scenes.GamePlayScene;
 
@@ -16,7 +17,7 @@ public class Platform extends GameObject implements PhysicsBody {
 
     public Platform() {
         super();
-        this.renderer = ImageRenderer.create("assets/images/platform/yellow_square.jpg");
+        this.renderer = ImageRenderer.create("assets/images/platform/dirt_grass.png");
         boxCollider = new BoxCollider(30, 30);
         this.children.add(boxCollider);
         velocity = new Vector2D();
@@ -42,6 +43,24 @@ public class Platform extends GameObject implements PhysicsBody {
 
         Player player = Physics.collideWith(nextBoxCollider, Player.class);
 
+        //J:
+        Enemy e = Physics.collideWith(nextBoxCollider,Enemy.class);
+
+        if (e != null){
+            boolean eMoveContinue = true;
+            float eShiftDistance = Math.signum(velocity.x);
+
+            while(eMoveContinue){
+                if (Physics.collideWith(this.boxCollider.shift(eShiftDistance,0), Enemy.class) != null){
+                    eMoveContinue = false;
+                }else {
+                    eShiftDistance += Math.signum(velocity.x);
+                    eMoveContinue = true;
+                }
+            }
+            e.position.addUp(this.velocity);
+        }
+
         if (player != null) {
             //move platform continously towards player
             boolean moveContinue = true;
@@ -55,7 +74,6 @@ public class Platform extends GameObject implements PhysicsBody {
                     moveContinue = true;
                 }
             }
-
 
             //handling when player is being dragged
             player.position.addUp(this.velocity);

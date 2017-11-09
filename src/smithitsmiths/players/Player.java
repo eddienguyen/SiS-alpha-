@@ -8,6 +8,7 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.Animation;
 import bases.renderers.ImageRenderer;
+import bases.renderers.PlayerAnimator;
 import bases.scenes.SceneManager;
 import smithitsmiths.GaugeBar;
 import smithitsmiths.Platform;
@@ -22,6 +23,7 @@ public class Player extends GameObject implements PhysicsBody {
 
     public GaugeBar gaugeBar;
 
+    PlayerAnimator animator;
 
     public boolean isDragged;
 
@@ -36,23 +38,11 @@ public class Player extends GameObject implements PhysicsBody {
         super();
         isActive = true;
         isDragged = false;
-        this.renderer = new Animation(
-                5,
-                false,
-                false,
-                SpriteUtils.loadImage("assets/images/players/running/Smith_00000.png"),
-                SpriteUtils.loadImage("assets/images/players/running/Smith_00001.png"),
-                SpriteUtils.loadImage("assets/images/players/running/Smith_00002.png"),
-                SpriteUtils.loadImage("assets/images/players/running/Smith_00003.png"),
-                SpriteUtils.loadImage("assets/images/players/running/Smith_00004.png"),
-                SpriteUtils.loadImage("assets/images/players/running/Smith_00005.png"),
-                SpriteUtils.loadImage("assets/images/players/running/Smith_00006.png"),
-                SpriteUtils.loadImage("assets/images/players/running/Smith_00007.png")
-
-                        );
+        animator = new PlayerAnimator();
+        this.renderer = animator;
 
         velocity = new Vector2D();
-        boxCollider = new BoxCollider(30, 30);
+        boxCollider = new BoxCollider(42, 58);
         this.children.add(boxCollider);
         gaugeBar = GameObject.recycle(GaugeBar.class);
         //GameObject.add(gaugeBar);
@@ -67,17 +57,17 @@ public class Player extends GameObject implements PhysicsBody {
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
 
+        animator.run(this);
+
         //reposition if needed:
         if (position.x < 100 ){
-
             BoxCollider nextBoxCollider = this.boxCollider.shift(1, 0);
             Platform pf = Physics.collideWith(nextBoxCollider, Platform.class);
 
             if (pf != null){
                 velocity.x = 0;
             } else {
-                System.out.println("reposition");
-                this.position.x += 1;
+                this.position.x += 0.5f;
             }
         } else velocity.x = 0;
 
@@ -100,9 +90,7 @@ public class Player extends GameObject implements PhysicsBody {
                 force += 0.4f;
                 Damage = force + hammer.getCurrentHammerDamage();
                 gaugeBar.setValue(Damage);
-
                 return currentForce = force;
-
             }
         }
 
