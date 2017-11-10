@@ -57,7 +57,7 @@ public class GamePlayScene implements Scene {
 //        GameObject.add(enemy1);
 //        GameObject.add(enemy2);
 //        GameObject.add(enemy3);
-        GameObject.add(jumping);
+//        GameObject.add(jumping);
         GameObject.add(bullet);
 
         //3.Platform
@@ -67,5 +67,9 @@ public class GamePlayScene implements Scene {
         map.generate();
         GameObject.add(map);
 
+    }
+
+    public Player getPlayer(){
+        return player;
     }
 }
