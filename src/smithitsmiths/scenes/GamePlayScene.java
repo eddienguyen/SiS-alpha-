@@ -9,6 +9,8 @@ import smithitsmiths.enemy.Bullet;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
 import smithitsmiths.enemy.Spike;
+import smithitsmiths.maps.MapLevel1;
+import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
 
 import java.awt.*;
@@ -65,14 +67,16 @@ public class GamePlayScene implements Scene {
 
         //3.Platform
 
-        Map map = Map.load("assets/maps/map_layer1.json");
+//        Map map = Map.load("assets/maps/map_layer1.json");
+//
+//        map.generate();
+//        GameObject.add(map);
 
-        map.generate();
-        GameObject.add(map);
-
+        MapSpawner mapSpawner = new MapSpawner();
+        GameObject.add(mapSpawner);
     }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return player;
     }
 }

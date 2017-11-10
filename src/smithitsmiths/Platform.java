@@ -26,7 +26,7 @@ public class Platform extends GameObject implements PhysicsBody {
     @Override
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
-
+        velocity.x = -2;
         dragHorizontal();
         return 0;
     }
