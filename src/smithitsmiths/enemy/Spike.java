@@ -7,9 +7,9 @@ public class Spike extends Enemy  {
 
     public Spike(){
         super();
-        this.renderer = ImageRenderer.create("assets/images/platform/green_square.png");
-        this.boxCollider.setHeight(30);
-        this.boxCollider.setWidth(30);
+        this.renderer = ImageRenderer.create("assets/images/enemies/spike.png");
+        this.boxCollider.setHeight(10);
+        this.boxCollider.setWidth(20);
         this.HP = 10;
     }
 

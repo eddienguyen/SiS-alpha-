@@ -42,7 +42,7 @@ public class Player extends GameObject implements PhysicsBody {
         this.renderer = animator;
 
         velocity = new Vector2D();
-        boxCollider = new BoxCollider(42, 58);
+        boxCollider = new BoxCollider(32, 42);
         this.children.add(boxCollider);
         gaugeBar = GameObject.recycle(GaugeBar.class);
         //GameObject.add(gaugeBar);

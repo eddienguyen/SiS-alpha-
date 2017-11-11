@@ -19,12 +19,9 @@ import java.awt.image.BufferedImage;
 public class GamePlayScene implements Scene {
 
     Player player = new Player();
-    Spike spike1 = new Spike();
-    Spike spike2 = new Spike();
-    Spike spike3 = new Spike();
-    Spike spike4 = new Spike();
-    EnemyJumping jumping = new EnemyJumping();
-    Bullet bullet = new Bullet();
+
+
+
     Background background = new Background();
     Background background2 = new Background();
 
@@ -50,20 +47,7 @@ public class GamePlayScene implements Scene {
         GameObject.add(player);
 
         //2.Enemy
-
-
-        spike1.getPosition().set(600, 50);
-        spike2.getPosition().set(1200, 50);
-        spike3.getPosition().set(1500, 50);
-        spike4.getPosition().set(2000, 50);
-
-//        GameObject.add(spike1);
-//        GameObject.add(spike2);
-//        GameObject.add(spike3);
-//        GameObject.add(spike4);
-//
-//        GameObject.add(jumping);
-//        GameObject.add(bullet);
+        
 
         //3.Platform
 
