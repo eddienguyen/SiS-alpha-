@@ -7,6 +7,7 @@ import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
+import smithitsmiths.GaugeBar;
 import smithitsmiths.Platform;
 import smithitsmiths.players.Player;
 
@@ -18,8 +19,9 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     private final float SPEED = -2;
     private final float JUMPSPEED = -20;
     private BoxCollider boxCollider;
-    FrameCounter frameCounter = new FrameCounter(60);
-
+    FrameCounter frameCounter = new FrameCounter(100);
+    public float HP;
+    public GaugeBar gaugeBar;
 
     public EnemyJumping(){
         super();
@@ -28,17 +30,28 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
         velocity = new Vector2D();
         boxCollider = new BoxCollider(50, 50);
         this.children.add(boxCollider);
+        velocity.x = SPEED;
+        HP = 10;
+        gaugeBar = GameObject.recycle(GaugeBar.class);
+        this.children.add(gaugeBar);
     }
 
     @Override
     public float run(Vector2D parentPosition) {
         this.velocity.y += GRAVITY;
+        gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
+        gaugeBar.setValue(HP);
         moveVertical();
         playerHit();
         jump();
         deActiveIfNeeded();
-
         return super.run(parentPosition);
+    }
+
+    public void getHit() {
+        if (this.HP <= 0){
+            this.isActive = false;
+        }
     }
 
 
@@ -53,7 +66,6 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
             frameCounter.reset();
             velocity.y += JUMPSPEED;
             velocity.x += 0.5*SPEED;
-
         }
     }
 

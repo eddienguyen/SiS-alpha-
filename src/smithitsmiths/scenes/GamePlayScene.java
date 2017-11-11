@@ -55,9 +55,9 @@ public class GamePlayScene implements Scene {
 
 //        GameObject.add(enemy);
 //        GameObject.add(enemy1);
-//        GameObject.add(enemy2);
-//        GameObject.add(enemy3);
-//        GameObject.add(jumping);
+        GameObject.add(enemy2);
+        GameObject.add(enemy3);
+        GameObject.add(jumping);
         GameObject.add(bullet);
 
         //3.Platform
