@@ -7,6 +7,7 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 import smithitsmiths.enemy.Enemy;
+import smithitsmiths.enemy.EnemyJumping;
 
 public class HammerSmite extends GameObject implements PhysicsBody {
 
@@ -32,6 +33,12 @@ public class HammerSmite extends GameObject implements PhysicsBody {
         if (enemy != null) {
             enemy.HP -= this.damage;
             enemy.getHit();
+            this.isActive = false;
+        }
+        EnemyJumping jumping = Physics.collideWith(boxCollider, EnemyJumping.class);
+        if (jumping != null) {
+            jumping.HP -= this.damage;
+            jumping.getHit();
             this.isActive = false;
         }
 

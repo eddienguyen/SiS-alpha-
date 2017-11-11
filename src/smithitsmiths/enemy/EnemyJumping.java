@@ -55,6 +55,7 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
         else {
             velocity.x -= 4*SPEED ;
             velocity.y += JUMPSPEED;
+            frameCounter.reset();
         }
     }
 
