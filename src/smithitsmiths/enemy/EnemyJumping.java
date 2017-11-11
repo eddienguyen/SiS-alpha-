@@ -26,11 +26,9 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     public EnemyJumping(){
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/enemy3.png");
-        this.getPosition().set(1024,0);
         velocity = new Vector2D();
         boxCollider = new BoxCollider(50, 50);
         this.children.add(boxCollider);
-        velocity.x = SPEED;
         HP = 25;
         gaugeBar = GameObject.recycle(GaugeBar.class);
         this.children.add(gaugeBar);
@@ -39,6 +37,7 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     @Override
     public float run(Vector2D parentPosition) {
         this.velocity.y += GRAVITY;
+        this.velocity.x = SPEED;
         gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
         gaugeBar.setValue(HP);
         moveVertical();

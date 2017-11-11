@@ -26,7 +26,6 @@ public class MapSpawner extends GameObject {
         if (currentMap == null) {
             currentMap = newMap;
             currentMap.init();
-            System.out.println("null");
         } else {
             if (currentMap.getLastPlatform().position.x <= 1054) {
                 changeMap(new MapLevelN());
@@ -37,7 +36,6 @@ public class MapSpawner extends GameObject {
             if (previousMap != null){
                 if (previousMap.getLastPlatform().position.x <= 0)
                 previousMap.deinit();
-                System.out.println("deinit");
             }
         }
     }

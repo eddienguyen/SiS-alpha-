@@ -56,7 +56,6 @@ public class PlayerAnimator implements Renderer {
 
         //change animation based on velocity
         if (velocity.y < 0){
-            System.out.println("jump");
             currentAnimation = jumpAnimation;
         } else {
             currentAnimation = runAnimation;

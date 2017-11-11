@@ -4,6 +4,7 @@ import bases.GameObject;
 import bases.renderers.ImageRenderer;
 import smithitsmiths.Platform;
 import smithitsmiths.enemy.Bullet;
+import smithitsmiths.enemy.EnemyJumping;
 import smithitsmiths.enemy.Spike;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class MapLevelN implements Map {
         //cac tang tren
         generateUpperLayer(2);
         generateUpperLayer(3);
-//        generateUpperLayer(4);
+        generateUpperLayer(4);
         generateUpperLayer(5);
     }
 
@@ -62,6 +63,14 @@ public class MapLevelN implements Map {
             object.setActive(false);
         }
         thirdLayerObjects.clear();
+        for (GameObject object : fourthLayerObjects) {
+            object.setActive(false);
+        }
+        fourthLayerObjects.clear();
+        for (GameObject object : fifthLayerObjects ) {
+            object.setActive(false);
+        }
+        fifthLayerObjects.clear();
     }
 
     public void generateBaseLayer() {
@@ -114,7 +123,7 @@ public class MapLevelN implements Map {
                         secondLayerSpike.position.set(suitablePositions[layerElement], 570);
                         secondLayerObjects.add(secondLayerSpike);
                     }
-                    //spike
+
 
                     //bullet:
                     else if (randomObject >= 70 && randomObject < 71) {
@@ -155,10 +164,13 @@ public class MapLevelN implements Map {
                 break;
             case FOURTHLAYER:
                 //leave space for onairPlatforms
+                EnemyJumping enemyJumping = GameObject.recycle(EnemyJumping.class);
+                enemyJumping.position.set(1200,510);
+                fourthLayerObjects.add(enemyJumping);
                 break;
             case FIFTHLAYER:
                 //on air platform
-                int airPlatformFirstPos = r.nextInt(50);
+                int airPlatformFirstPos = r.nextInt(39);
                 int randomAirPlatformsWidth = r.nextInt(10) + 1;
                 for (int i = 0; i < randomAirPlatformsWidth; i++){
                     Platform airPlatform = GameObject.recycle(Platform.class);

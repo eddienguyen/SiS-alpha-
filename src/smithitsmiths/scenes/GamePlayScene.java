@@ -7,6 +7,7 @@ import smithitsmiths.backgrounds.Background;
 import smithitsmiths.enemy.Bullet;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
+import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
 
 import java.awt.*;
@@ -41,31 +42,15 @@ public class GamePlayScene implements Scene {
 
         //1.Player
 
-        player.position.set(100, 50);
-
-        GameObject.add(player);
-
-        //2.Enemy
-
-
-        enemy.getPosition().set(600, 50);
-        enemy1.getPosition().set(800, 50);
-        enemy2.getPosition().set(1000, 50);
-        enemy3.getPosition().set(1200, 50);
-
-        GameObject.add(enemy);
-        GameObject.add(enemy1);
-        GameObject.add(enemy2);
-        GameObject.add(enemy3);
-        GameObject.add(jumping);
-        GameObject.add(bullet);
 
         //3.Platform
 
-        Map map = Map.load("assets/maps/map_layer1.json");
+        MapSpawner mapSpawner = new MapSpawner();
+        GameObject.add(mapSpawner);
 
-        map.generate();
-        GameObject.add(map);
+
+        player.position.set(100, 50);
+        GameObject.add(player);
 
     }
 

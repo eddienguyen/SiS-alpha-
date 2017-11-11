@@ -11,8 +11,8 @@ import smithitsmiths.Platform;
 import smithitsmiths.players.Player;
 
 public class Enemy extends GameObject implements PhysicsBody {
-    private BoxCollider boxCollider;
-    private Vector2D velocity;
+    public BoxCollider boxCollider;
+    public Vector2D velocity;
     private final float GRAVITY = 1f;
     public float HP;
     GaugeBar gaugeBar;
@@ -21,26 +21,24 @@ public class Enemy extends GameObject implements PhysicsBody {
         super();
         this.renderer = ImageRenderer.create("assets/images/platform/green_square.png");
         velocity = new Vector2D();
-        boxCollider = new BoxCollider(20, 20);
+        boxCollider = new BoxCollider();
         this.children.add(boxCollider);
-        HP = 10;
         gaugeBar = new GaugeBar();
         this.children.add(gaugeBar);
     }
 
     @Override
     public float run(Vector2D parentPosition) {
+        super.run(parentPosition);
 
-//        moveHorizontal();
+        moveHorizontal();
         moveVertical();
         gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
         gaugeBar.setValue(HP);
         playerHit();
         this.velocity.y += GRAVITY;
         this.position.x -= 2;
-        return super.run(parentPosition);
-
-
+        return 0;
     }
 
     private void moveVertical() {

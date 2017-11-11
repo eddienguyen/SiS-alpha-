@@ -5,7 +5,7 @@ import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 
 public class Spike extends Enemy  {
-    BoxCollider boxCollider;
+
     public Spike(){
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/spike.png");
