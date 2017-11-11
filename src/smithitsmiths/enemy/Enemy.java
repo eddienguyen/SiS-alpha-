@@ -15,7 +15,6 @@ public class Enemy extends GameObject implements PhysicsBody {
     private Vector2D velocity;
     private final float GRAVITY = 1f;
     public float HP;
-    GaugeBar gaugeBar;
 
     public Enemy() {
         super();
@@ -24,9 +23,6 @@ public class Enemy extends GameObject implements PhysicsBody {
         boxCollider = new BoxCollider(20, 20);
         this.children.add(boxCollider);
         HP = 10;
-        gaugeBar = new GaugeBar();
-        this.children.add(gaugeBar);
-
     }
 
     @Override
@@ -34,8 +30,6 @@ public class Enemy extends GameObject implements PhysicsBody {
 
 //        moveHorizontal();
         moveVertical();
-        gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
-        gaugeBar.setValue(HP);
         playerHit();
         this.velocity.y += GRAVITY;
         this.position.x -= 2;

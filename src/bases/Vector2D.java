@@ -68,6 +68,14 @@ public class Vector2D {
         );
     }
 
+    public boolean isMatch(Vector2D anotherVector){
+        return  (this.isMatch(anotherVector.x, anotherVector.y));
+    }
+
+    public boolean isMatch(float dx, float dy){
+        return (this.x == dx && this.y == dy);
+    }
+
     @Override
     public String toString() {
         return "Vector2D{" +

@@ -7,7 +7,6 @@ public class SceneManager {
     public static void changeScene(Scene newScene) {
         //(maybe) still inside gameLoop, so: change when gameLoop is done
         nextScene = newScene;
-
     }
 
     public static void changeSceneIfNeeded() {
