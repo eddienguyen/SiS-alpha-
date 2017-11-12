@@ -32,6 +32,7 @@ public class EnemyCharging extends GameObject implements PhysicsBody{
         this.position.addUp(SPEED,0);
         charge();
         moveVertical();
+        moveHorizontal();
         playerHit();
         deActiveIfNeeded();
         return super.run(parentPosition);
@@ -87,6 +88,36 @@ public class EnemyCharging extends GameObject implements PhysicsBody{
         //velocity impact position
         this.position.addUp(0, velocity.y);
         this.screenPosition.addUp(0, velocity.y);
+    }
+
+    private void moveHorizontal() {
+
+        //calculate future position(box collider) & predict collision
+        BoxCollider nextBoxCollider = this.boxCollider.shift(velocity.x, 0);
+
+        Platform platform = Physics.collideWith(nextBoxCollider, Platform.class);
+        if (platform != null) {
+
+            //move player continously towards platform
+            boolean moveContinue = true;
+            float shiftDistance = Math.signum(velocity.x);
+            while (moveContinue) {
+                if (Physics.collideWith(this.boxCollider.shift(shiftDistance, 0), Platform.class) != null) {
+                    platform.getHit();
+                    moveContinue = false;
+                } else {
+                    shiftDistance += Math.signum(velocity.x);
+                    this.position.addUp(Math.signum(velocity.x), 0);
+                }
+            }
+
+            //update velocity ()
+            velocity.x = 0;
+        }
+
+        //velocity impact position
+        this.position.addUp(0, velocity.x);
+        this.screenPosition.addUp(0, velocity.x);
     }
 
 
