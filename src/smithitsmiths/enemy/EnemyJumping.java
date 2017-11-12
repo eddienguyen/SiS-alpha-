@@ -17,7 +17,7 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     public Vector2D velocity;
     private final float GRAVITY = 1f;
     private final float SPEED = -2;
-    private final float JUMPSPEED = -20;
+    private final float JUMPSPEED = -10;
     private BoxCollider boxCollider;
     FrameCounter frameCounter = new FrameCounter(100);
     public float HP;
@@ -44,6 +44,8 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
         playerHit();
         jump();
         deActiveIfNeeded();
+        this.position.addUp(velocity);
+        this.screenPosition.addUp(velocity);
         return super.run(parentPosition);
     }
 
@@ -69,7 +71,7 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
         if (frameCounter.run()){
             frameCounter.reset();
             velocity.y += JUMPSPEED;
-            velocity.x += 0.5*SPEED;
+            velocity.x += 2*SPEED;
         }
     }
 

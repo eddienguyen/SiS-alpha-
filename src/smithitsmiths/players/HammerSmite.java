@@ -8,6 +8,7 @@ import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
+import smithitsmiths.enemy.Spike;
 
 public class HammerSmite extends GameObject implements PhysicsBody {
 
@@ -18,8 +19,7 @@ public class HammerSmite extends GameObject implements PhysicsBody {
 
     public HammerSmite() {
 
-        this.renderer = ImageRenderer.create("assets/images/hammer/hammerSmite.png");
-        boxCollider = new BoxCollider(40, 30);
+        boxCollider = new BoxCollider(30, 42);
         this.children.add(boxCollider);
     }
 
@@ -28,11 +28,20 @@ public class HammerSmite extends GameObject implements PhysicsBody {
         this.duration -= 1;
         this.position.addUp(-2, 0);                  // SPEED = -2, change with gameSpeed
 
-        //check hit with Enemy
-        Enemy enemy = Physics.collideWith(boxCollider, Enemy.class);
-        if (enemy != null) {
-            enemy.HP -= this.damage;
-            enemy.getHit();
+        checkHitWithEnemy();
+
+
+        //TODO: allow player to jump if hammer collide with platform
+
+        deactiveIfNeeded();
+        return super.run(parentPosition);
+    }
+
+    private void checkHitWithEnemy() {
+        Spike spike = Physics.collideWith(boxCollider, Spike.class);
+        if (spike != null) {
+            spike.HP -= this.damage;
+            spike.getHit();
             this.isActive = false;
         }
         EnemyJumping jumping = Physics.collideWith(boxCollider, EnemyJumping.class);
@@ -41,11 +50,6 @@ public class HammerSmite extends GameObject implements PhysicsBody {
             jumping.getHit();
             this.isActive = false;
         }
-
-        //TODO: allow player to jump if hammer collide with platform
-
-        deactiveIfNeeded();
-        return super.run(parentPosition);
     }
 
 

@@ -28,7 +28,7 @@ public class Player extends GameObject implements PhysicsBody {
     public boolean isDragged;
 
     Hammer hammer;
-    PlayerHammerDown playerHammerDown;
+    public PlayerHammerDown playerHammerDown;
     protected float force = 0;
     final static float maxForce = 15f;
     public static float currentForce;
@@ -45,7 +45,6 @@ public class Player extends GameObject implements PhysicsBody {
         boxCollider = new BoxCollider(32, 42);
         this.children.add(boxCollider);
         gaugeBar = GameObject.recycle(GaugeBar.class);
-        //GameObject.add(gaugeBar);
         this.children.add(gaugeBar);
 
         playerHammerDown = new PlayerHammerDown();
@@ -91,6 +90,7 @@ public class Player extends GameObject implements PhysicsBody {
                 Damage = force + hammer.getCurrentHammerDamage();
                 gaugeBar.setValue(Damage);
                 return currentForce = force;
+
             }
         }
 
@@ -103,7 +103,7 @@ public class Player extends GameObject implements PhysicsBody {
 
             //smash Hammer
             playerHammerDown.run(this);
-
+            animator.changeAnimation(PlayerAnimator.smashAnimation);
             InputManager.spaceReleased = false;
         }
 
