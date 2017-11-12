@@ -1,49 +1,66 @@
 package smithitsmiths.enemy;
 
+import bases.FrameCounter;
 import bases.GameObject;
 import bases.Vector2D;
 import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
-import smithitsmiths.GaugeBar;
 import smithitsmiths.Platform;
 import smithitsmiths.players.Player;
 
-public class Enemy extends GameObject implements PhysicsBody {
-    private BoxCollider boxCollider;
-    private Vector2D velocity;
+public class EnemyCharging extends GameObject implements PhysicsBody{
+    public Vector2D velocity;
     private final float GRAVITY = 1f;
-    private float SPEED = 1;
-    public float HP;
-    GaugeBar gaugeBar;
+    private float SPEED = -2;
+    private BoxCollider boxCollider;
+    private final float JUMPSPEED = -12;
 
-    public Enemy() {
+    public EnemyCharging(){
         super();
-        this.renderer = ImageRenderer.create("assets/images/platform/green_square.png");
+        this.renderer = ImageRenderer.create("assets/images/enemies/enemy3.png");
+        this.getPosition().set(1024,0);
         velocity = new Vector2D();
-        boxCollider = new BoxCollider(20, 20);
+        boxCollider = new BoxCollider(50, 50);
         this.children.add(boxCollider);
-        HP = 10;
-        gaugeBar = new GaugeBar();
-        this.children.add(gaugeBar);
     }
 
     @Override
     public float run(Vector2D parentPosition) {
-
-//        moveHorizontal();
-        moveVertical();
-        gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
-        gaugeBar.setValue(HP);
-        playerHit();
         this.velocity.y += GRAVITY;
-        this.position.x -= 2;
+        this.position.addUp(SPEED,0);
+        charge();
+        moveVertical();
+        moveHorizontal();
+        playerHit();
+        deActiveIfNeeded();
         return super.run(parentPosition);
-
-
     }
 
+    private void jump() {
+            velocity.y += JUMPSPEED;
+            velocity.x += 0.5*SPEED;
+    }
+
+    private void charge(){
+        if (this.position.x <= 600) {
+            SPEED = -4;
+        }
+    }
+
+    private void deActiveIfNeeded() {
+        if (this.position.x < 0){
+            this.isActive = false;
+        }
+    }
+
+    private void playerHit() {
+        Player playerHit = Physics.collideWith(this.boxCollider,Player.class);
+        if (playerHit != null){
+            playerHit.getHit();
+        }
+    }
     private void moveVertical() {
 
         //calculate future position(box collider) & predict collision
@@ -77,7 +94,6 @@ public class Enemy extends GameObject implements PhysicsBody {
 
         //calculate future position(box collider) & predict collision
         BoxCollider nextBoxCollider = this.boxCollider.shift(velocity.x, 0);
-        this.position.addUp(-SPEED,0);
 
         Platform platform = Physics.collideWith(nextBoxCollider, Platform.class);
         if (platform != null) {
@@ -87,20 +103,21 @@ public class Enemy extends GameObject implements PhysicsBody {
             float shiftDistance = Math.signum(velocity.x);
             while (moveContinue) {
                 if (Physics.collideWith(this.boxCollider.shift(shiftDistance, 0), Platform.class) != null) {
+                    platform.getHit();
                     moveContinue = false;
-//                    position.x -= platform.getSpeed();
                 } else {
                     shiftDistance += Math.signum(velocity.x);
                     this.position.addUp(Math.signum(velocity.x), 0);
-
                 }
             }
+
             //update velocity ()
             velocity.x = 0;
-
         }
 
         //velocity impact position
+        this.position.addUp(0, velocity.x);
+        this.screenPosition.addUp(0, velocity.x);
     }
 
 
@@ -108,20 +125,4 @@ public class Enemy extends GameObject implements PhysicsBody {
     public BoxCollider getBoxCollider() {
         return this.boxCollider;
     }
-
-    private void playerHit() {
-        Player hitPlayer = Physics.collideWith(this.boxCollider, Player.class);
-        if (hitPlayer != null) {
-            hitPlayer.getHit();
-        }
-    }
-
-    public void getHit() {
-        if (this.HP <= 0){
-            this.isActive = false;
-        }
-        System.out.println(String.format("enemy get hit, left %s HP",HP ));
-    }
-
-
 }
