@@ -68,4 +68,8 @@ public class Platform extends GameObject implements PhysicsBody {
         this.screenPosition.addUp(velocity.x, 0);
 
     }
+
+    public void getHit(){
+        isActive = false;
+    }
 }
