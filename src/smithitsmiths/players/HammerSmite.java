@@ -19,7 +19,7 @@ public class HammerSmite extends GameObject implements PhysicsBody {
     public HammerSmite() {
 
         this.renderer = ImageRenderer.create("assets/images/hammer/hammerSmite.png");
-        boxCollider = new BoxCollider(40, 30);
+        boxCollider = new BoxCollider(200, 30);
         this.children.add(boxCollider);
     }
 
