@@ -65,7 +65,7 @@ public class GamePlayScene implements Scene {
         GameObject.add(player);
 
         GameObject.add(new EnemySpawner());
-        GameObject.add(scoreManager );
+        GameObject.add(scoreManager);
     }
 
     public Player getPlayer(){

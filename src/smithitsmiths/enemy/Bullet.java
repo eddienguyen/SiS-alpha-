@@ -12,13 +12,12 @@ import smithitsmiths.players.Player;
 import java.awt.*;
 
 public class Bullet extends GameObject implements PhysicsBody{
-    private BoxCollider boxCollider;
+    public BoxCollider boxCollider;
     private Vector2D velocity;
     private final float SPEED = -10;
     public Bullet(){
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/Bullet.png");
-        this.getPosition().set(1024,550);
         velocity = new Vector2D();
         boxCollider = new BoxCollider(60,30);
         this.children.add(boxCollider);

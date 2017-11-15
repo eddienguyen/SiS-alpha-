@@ -18,7 +18,7 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     private final float GRAVITY = 1f;
     private final float SPEED = -2;
     private final float JUMPSPEED = -20;
-    private BoxCollider boxCollider;
+    public BoxCollider boxCollider;
     FrameCounter frameCounter = new FrameCounter(100);
     public float HP;
     public GaugeBar gaugeBar;
@@ -31,7 +31,6 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
         boxCollider = new BoxCollider(50, 50);
         this.children.add(boxCollider);
         velocity.x = SPEED;
-        HP = 25;
         gaugeBar = GameObject.recycle(GaugeBar.class);
         this.children.add(gaugeBar);
     }
