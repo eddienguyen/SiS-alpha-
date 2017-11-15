@@ -30,7 +30,7 @@ public class GameObject {
     */
     public GameObject() {
         children = new ArrayList<>();
-        actions = new ArrayList<Action>();
+        actions = new ArrayList<>();
         newActions = new ArrayList<>();
 
         position = new Vector2D();
@@ -45,6 +45,7 @@ public class GameObject {
             if (child.isActive)
                 child.run(screenPosition);
         }
+//        System.out.println(gameObjects.size());
         return 0;
     }
 
@@ -122,8 +123,10 @@ public class GameObject {
     public static void runAll() {
 
         for (GameObject gameObject : gameObjects) {
-            if (gameObject.isActive)
+            if (gameObject.isActive) {
                 gameObject.run(new Vector2D(0, 0));
+                gameObject.runActions();
+            }
         }
 
         for (GameObject newGameObject : newGameObjects) {
@@ -169,9 +172,9 @@ public class GameObject {
 
     private void runActions() {
 
-        actions.removeIf(action -> action.run(this));
+        this.actions.removeIf(action -> action.run(this));
 
-        actions.addAll(newActions);
+        this.actions.addAll(newActions);
         newActions.clear();
     }
 

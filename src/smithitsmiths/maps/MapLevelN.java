@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MapLevelN implements Map {
+    public float eachPlatformSpeed;
     final int BASELAYER = 1;
     final int SECONDLAYER = 2;
     final int THIRDLAYER = 3;
@@ -45,7 +46,7 @@ public class MapLevelN implements Map {
         generateUpperLayer(2);
         generateUpperLayer(3);
         generateUpperLayer(4);
-        generateUpperLayer(5);
+        generateUpperLayer(6);
     }
 
     @Override
@@ -54,6 +55,7 @@ public class MapLevelN implements Map {
             platform.setActive(false);
         }
         basePlatforms.clear();
+
         for (GameObject object : secondLayerObjects) {
             object.setActive(false);
         }
@@ -63,14 +65,21 @@ public class MapLevelN implements Map {
             object.setActive(false);
         }
         thirdLayerObjects.clear();
+
         for (GameObject object : fourthLayerObjects) {
             object.setActive(false);
         }
         fourthLayerObjects.clear();
-        for (GameObject object : fifthLayerObjects ) {
+
+        for (GameObject object : fifthLayerObjects){
             object.setActive(false);
         }
         fifthLayerObjects.clear();
+
+        for (GameObject object : sixthLayerObjects) {
+            object.setActive(false);
+        }
+        sixthLayerObjects.clear();
     }
 
     public void generateBaseLayer() {
@@ -96,10 +105,7 @@ public class MapLevelN implements Map {
                 sinh ngẫu nhiên các object
                 tỉ lệ:
                 30% ra platform: randomObject <30
-                5% ra spike: 30 <= randomObject < 35
-                20% ra enemy: 50 <= randomObject < 70
-                1% ra bullet: 70 <= randomObject <71
-                còn lại chưa tính
+                2% ra spike: 30 <= randomObject < 32
                  */
                 //at single place of 50 places in a layer:
                 for (int layerElement = 0; layerElement < suitablePositions.length; layerElement++) {
@@ -118,19 +124,16 @@ public class MapLevelN implements Map {
 
                     }
                     //spike:
-                    else if (randomObject >= 30 && randomObject < 35) {
-                        Spike secondLayerSpike = GameObject.recycle(Spike.class);
-                        secondLayerSpike.position.set(suitablePositions[layerElement], 570);
-                        secondLayerObjects.add(secondLayerSpike);
+                    else if (randomObject >= 30 && randomObject < 32) {
+                        for (Platform belowPlatform : basePlatforms) {
+                            if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
+                                Spike secondLayerSpike = GameObject.recycle(Spike.class);
+                                secondLayerSpike.position.set(suitablePositions[layerElement], 570);
+                                secondLayerObjects.add(secondLayerSpike);
+                            }
+                        }
                     }
 
-
-                    //bullet:
-                    else if (randomObject >= 70 && randomObject < 71) {
-                        Bullet secondLayerBullet = GameObject.recycle(Bullet.class);
-                        secondLayerBullet.position.set(suitablePositions[layerElement], 570);
-                        secondLayerObjects.add(secondLayerBullet);
-                    }
                 }
                 break;
 
@@ -141,8 +144,6 @@ public class MapLevelN implements Map {
                 tỉ lệ:
                 20% ra platform: randomObject <20
                 20% ra spike: 20 <= randomObject < 40
-                10% ra enemy: 40 <= randomObject < 50
-                còn lại chưa tính
                  */
                 //at single place of 50 places in a layer:
                 for (int layerElement = 0; layerElement < suitablePositions.length; layerElement++) {
@@ -164,23 +165,22 @@ public class MapLevelN implements Map {
                 break;
             case FOURTHLAYER:
                 //leave space for onairPlatforms
-                EnemyJumping enemyJumping = GameObject.recycle(EnemyJumping.class);
-                enemyJumping.position.set(1200,510);
-                fourthLayerObjects.add(enemyJumping);
-                break;
+
             case FIFTHLAYER:
+                //leave space for onAirPlatform
+
+                break;
+            case SIXTHLAYER:
                 //on air platform
                 int airPlatformFirstPos = r.nextInt(39);
                 int randomAirPlatformsWidth = r.nextInt(10) + 1;
-                for (int i = 0; i < randomAirPlatformsWidth; i++){
+                for (int i = 0; i < randomAirPlatformsWidth; i++) {
                     Platform airPlatform = GameObject.recycle(Platform.class);
                     airPlatform.renderer = ImageRenderer.create("assets/images/platform/brickBrown.png");
-                    airPlatform.position.set(suitablePositions[airPlatformFirstPos], 480);
+                    airPlatform.position.set(suitablePositions[airPlatformFirstPos], 450);
                     airPlatformFirstPos++;
-                    fifthLayerObjects.add(airPlatform);
+                    sixthLayerObjects.add(airPlatform);
                 }
-                break;
-            case SIXTHLAYER:
                 break;
 
         }

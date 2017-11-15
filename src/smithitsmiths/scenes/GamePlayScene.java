@@ -3,10 +3,12 @@ package smithitsmiths.scenes;
 import bases.GameObject;
 import bases.maps.Map;
 import bases.scenes.Scene;
+import smithitsmiths.HUD.ScoreManager;
 import smithitsmiths.backgrounds.Background;
 import smithitsmiths.enemy.Bullet;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
+import smithitsmiths.enemy.EnemySpawner;
 import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
 
@@ -24,6 +26,7 @@ public class GamePlayScene implements Scene {
     Bullet bullet = new Bullet();
     Background background = new Background();
     Background background2 = new Background();
+    ScoreManager scoreManager = new ScoreManager();
 
     @Override
     public void deinit() {
@@ -34,11 +37,20 @@ public class GamePlayScene implements Scene {
     public void init() {
         //4.Background
 
+
+        background.position.x = 512;//still unstable
+        background.screenPosition.x = 512;//still unstable
+        background.position.y = 768/2;
+        background.screenPosition.y = 768/2;
+
+        background2.position.x = 512+1024;//still unstable
+        background2.screenPosition.x = 512+1024;//still unstable
+        background2.position.y = 768/2;
+        background2.screenPosition.y = 768/2;
+
         GameObject.add(background);
         GameObject.add(background2);
 
-        if (background.position.x <= 512) background2.position.x = 1536;
-        if (background2.position.x <= 512) background.position.x = 1536;
 
         //1.Player
 
@@ -52,6 +64,8 @@ public class GamePlayScene implements Scene {
         player.position.set(100, 50);
         GameObject.add(player);
 
+        GameObject.add(new EnemySpawner());
+        GameObject.add(scoreManager );
     }
 
     public Player getPlayer(){

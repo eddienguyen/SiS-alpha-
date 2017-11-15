@@ -14,11 +14,9 @@ public class HammerSmite extends GameObject implements PhysicsBody {
 
     public BoxCollider boxCollider;
     public float duration;
-    public Vector2D velocity;
     public float damage;
 
     public HammerSmite() {
-
         boxCollider = new BoxCollider(30, 42);
         this.children.add(boxCollider);
     }
@@ -26,7 +24,7 @@ public class HammerSmite extends GameObject implements PhysicsBody {
     @Override
     public float run(Vector2D parentPosition) {
         this.duration -= 1;
-        this.position.addUp(-2, 0);                  // SPEED = -2, change with gameSpeed
+//        this.position.addUp(-2, 0);                  // SPEED = -2, change with gameSpeed
 
         checkHitWithEnemy();
 
@@ -38,18 +36,21 @@ public class HammerSmite extends GameObject implements PhysicsBody {
     }
 
     private void checkHitWithEnemy() {
-        Spike spike = Physics.collideWith(boxCollider, Spike.class);
-        if (spike != null) {
-            spike.HP -= this.damage;
-            spike.getHit();
-            this.isActive = false;
+        if (isActive) {
+            Enemy enemy = Physics.collideWith(boxCollider, Enemy.class);
+            if (enemy != null) {
+                enemy.HP -= this.damage;
+                enemy.getHit();
+                this.isActive = false;
+            }
+            EnemyJumping jumping = Physics.collideWith(boxCollider, EnemyJumping.class);
+            if (jumping != null) {
+                jumping.HP -= this.damage;
+                jumping.getHit();
+                this.isActive = false;
+            }
         }
-        EnemyJumping jumping = Physics.collideWith(boxCollider, EnemyJumping.class);
-        if (jumping != null) {
-            jumping.HP -= this.damage;
-            jumping.getHit();
-            this.isActive = false;
-        }
+
     }
 
 

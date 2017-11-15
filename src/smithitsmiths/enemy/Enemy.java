@@ -2,6 +2,8 @@ package smithitsmiths.enemy;
 
 import bases.GameObject;
 import bases.Vector2D;
+import bases.actions.Action;
+import bases.actions.ActionWait;
 import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
@@ -11,6 +13,7 @@ import smithitsmiths.Platform;
 import smithitsmiths.players.Player;
 
 public class Enemy extends GameObject implements PhysicsBody {
+    public  int SPEED = 5;
     public BoxCollider boxCollider;
     public Vector2D velocity;
     private final float GRAVITY = 1f;
@@ -25,6 +28,33 @@ public class Enemy extends GameObject implements PhysicsBody {
         this.children.add(boxCollider);
         gaugeBar = new GaugeBar();
         this.children.add(gaugeBar);
+
+        ActionWait actionWait = new ActionWait(30);
+        Action hi = new Action() {
+            @Override
+            public boolean run(GameObject owner) {
+                System.out.println("Hi");
+                return true;
+            }
+
+            @Override
+            public void reset() {
+
+            }
+        };
+        Action helloWorld = new Action() {
+            @Override
+            public boolean run(GameObject owner) {
+                System.out.println("HelloWorld");
+                return true;
+            }
+
+            @Override
+            public void reset() {
+
+            }
+        };
+
     }
 
     @Override
@@ -33,11 +63,13 @@ public class Enemy extends GameObject implements PhysicsBody {
 
         moveHorizontal();
         moveVertical();
+
         gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
         gaugeBar.setValue(HP);
         playerHit();
         this.velocity.y += GRAVITY;
-        this.position.x -= 2;
+        this.velocity.x = -2;
+//        this.position.addUp(velocity);
         return 0;
     }
 
@@ -71,7 +103,6 @@ public class Enemy extends GameObject implements PhysicsBody {
     }
 
     private void moveHorizontal() {
-
         //calculate future position(box collider) & predict collision
         BoxCollider nextBoxCollider = this.boxCollider.shift(velocity.x, 0);
 
@@ -92,7 +123,8 @@ public class Enemy extends GameObject implements PhysicsBody {
             }
 
             //update velocity ()
-            velocity.x = 0;
+//            velocity.x = 0;
+            velocity.x = -velocity.x ;
         }
 
         //velocity impact position
