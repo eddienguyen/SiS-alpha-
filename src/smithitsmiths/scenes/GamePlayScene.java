@@ -3,10 +3,13 @@ package smithitsmiths.scenes;
 import bases.GameObject;
 import bases.maps.Map;
 import bases.scenes.Scene;
+import smithitsmiths.HUD.ScoreManager;
 import smithitsmiths.backgrounds.Background;
 import smithitsmiths.enemy.Bullet;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
+import smithitsmiths.enemy.EnemySpawner;
+import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
 
 import java.awt.*;
@@ -23,6 +26,7 @@ public class GamePlayScene implements Scene {
     Bullet bullet = new Bullet();
     Background background = new Background();
     Background background2 = new Background();
+    ScoreManager scoreManager = new ScoreManager();
 
     @Override
     public void deinit() {
@@ -33,40 +37,35 @@ public class GamePlayScene implements Scene {
     public void init() {
         //4.Background
 
+
+        background.position.x = 512;//still unstable
+        background.screenPosition.x = 512;//still unstable
+        background.position.y = 768/2;
+        background.screenPosition.y = 768/2;
+
+        background2.position.x = 512+1024;//still unstable
+        background2.screenPosition.x = 512+1024;//still unstable
+        background2.position.y = 768/2;
+        background2.screenPosition.y = 768/2;
+
         GameObject.add(background);
         GameObject.add(background2);
 
-        if (background.position.x <= 512) background2.position.x = 1536;
-        if (background2.position.x <= 512) background.position.x = 1536;
 
         //1.Player
 
-        player.position.set(100, 50);
-
-        GameObject.add(player);
-
-        //2.Enemy
-
-
-        enemy.getPosition().set(600, 50);
-        enemy1.getPosition().set(800, 50);
-        enemy2.getPosition().set(1000, 50);
-        enemy3.getPosition().set(1200, 50);
-
-        GameObject.add(enemy);
-        GameObject.add(enemy1);
-        GameObject.add(enemy2);
-        GameObject.add(enemy3);
-        GameObject.add(jumping);
-        GameObject.add(bullet);
 
         //3.Platform
 
-        Map map = Map.load("assets/maps/map_layer1.json");
+        MapSpawner mapSpawner = new MapSpawner();
+        GameObject.add(mapSpawner);
 
-        map.generate();
-        GameObject.add(map);
 
+        player.position.set(100, 50);
+        GameObject.add(player);
+
+        GameObject.add(new EnemySpawner());
+        GameObject.add(scoreManager );
     }
 
     public Player getPlayer(){

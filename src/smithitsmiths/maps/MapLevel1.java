@@ -2,6 +2,7 @@ package smithitsmiths.maps;
 
 import bases.GameObject;
 import smithitsmiths.Platform;
+import smithitsmiths.players.Player;
 
 import java.util.ArrayList;
 
@@ -14,11 +15,10 @@ public class MapLevel1 implements Map {
         //tang 1:
         int firstPosition = 0;
         for (int i = 0; i < 50; i++) {
-            Platform platform = new Platform();
+            Platform platform = GameObject.recycle(Platform.class);
             platform.position.set(firstPosition, 600);
             firstPosition += platform.getBoxCollider().getWidth();
             platforms.add(platform);
-            GameObject.add(platform);
             if (i == 49) {
                 //last position
                 lastPlatform = platform;
@@ -33,6 +33,7 @@ public class MapLevel1 implements Map {
         for (Platform platform : platforms){
             platform.setActive(false);
         }
+        platforms.clear();
     }
 
     @Override

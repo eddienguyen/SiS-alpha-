@@ -5,12 +5,20 @@ import bases.Vector2D;
 import smithitsmiths.Platform;
 
 public class MapSpawner extends GameObject {
+    public float eachMapSpeed;
+    public final float SPEED_MULTIPLIER = 1.25f;
+    public float speedIncreaseMap;      //= mapWidth =
+    public float mapCount;
+
+
     static Map currentMap;
     static Map nextMap;
     static Map previousMap;
 
     public MapSpawner() {
         super();
+
+//        speedIncreaseMap =
     }
 
     @Override
@@ -23,27 +31,33 @@ public class MapSpawner extends GameObject {
     }
 
     public static void autoLoadNextMap(Map newMap) {      //changeMap
+        //change speed of nextMap => change speed of currentMap also
+
+
         if (currentMap == null) {
             currentMap = newMap;
             currentMap.init();
-            System.out.println("null");
         } else {
             if (currentMap.getLastPlatform().position.x <= 1054) {
                 changeMap(new MapLevelN());
                 previousMap = currentMap;
                 currentMap = nextMap;
                 currentMap.init();
+                nextMap = null;
             }
-            if (previousMap != null){
-                if (previousMap.getLastPlatform().position.x <= 0)
-                previousMap.deinit();
-                System.out.println("deinit");
+            if (previousMap != null) {
+                if (previousMap.getLastPlatform().position.x <= 0) {
+                    previousMap.deinit();
+                    previousMap = null;
+                }
             }
         }
     }
 
     public static void changeMap(Map newMap) {
+
         nextMap = newMap;
+
     }
 
 

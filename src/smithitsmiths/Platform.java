@@ -12,6 +12,7 @@ import smithitsmiths.players.Player;
 import smithitsmiths.scenes.GamePlayScene;
 
 public class Platform extends GameObject implements PhysicsBody {
+    public float moveSpeed = 2;
     private BoxCollider boxCollider;
     public Vector2D velocity;
 
@@ -43,23 +44,6 @@ public class Platform extends GameObject implements PhysicsBody {
 
         Player player = Physics.collideWith(nextBoxCollider, Player.class);
 
-        //J:
-        Enemy e = Physics.collideWith(nextBoxCollider,Enemy.class);
-
-        if (e != null){
-            boolean eMoveContinue = true;
-            float eShiftDistance = Math.signum(velocity.x);
-
-            while(eMoveContinue){
-                if (Physics.collideWith(this.boxCollider.shift(eShiftDistance,0), Enemy.class) != null){
-                    eMoveContinue = false;
-                }else {
-                    eShiftDistance += Math.signum(velocity.x);
-                    eMoveContinue = true;
-                }
-            }
-            e.position.addUp(this.velocity);
-        }
 
         if (player != null) {
             //move platform continously towards player
@@ -83,5 +67,9 @@ public class Platform extends GameObject implements PhysicsBody {
         this.position.addUp(velocity.x, 0);
         this.screenPosition.addUp(velocity.x, 0);
 
+    }
+
+    public void getHit(){
+        isActive = false;
     }
 }
