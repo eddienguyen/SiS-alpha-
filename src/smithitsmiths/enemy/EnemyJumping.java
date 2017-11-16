@@ -17,8 +17,8 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     public Vector2D velocity;
     private final float GRAVITY = 1f;
     private final float SPEED = -2;
-    private final float JUMPSPEED = -10;
-    private BoxCollider boxCollider;
+    private final float JUMPSPEED = -20;
+    public BoxCollider boxCollider;
     FrameCounter frameCounter = new FrameCounter(100);
     public float HP;
     public GaugeBar gaugeBar;
@@ -26,10 +26,11 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     public EnemyJumping(){
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/enemy3.png");
+        this.getPosition().set(1024,0);
         velocity = new Vector2D();
         boxCollider = new BoxCollider(50, 50);
         this.children.add(boxCollider);
-        HP = 25;
+        velocity.x = SPEED;
         gaugeBar = GameObject.recycle(GaugeBar.class);
         this.children.add(gaugeBar);
     }
@@ -37,15 +38,12 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     @Override
     public float run(Vector2D parentPosition) {
         this.velocity.y += GRAVITY;
-        this.velocity.x = SPEED;
         gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
         gaugeBar.setValue(HP);
         moveVertical();
         playerHit();
         jump();
         deActiveIfNeeded();
-        this.position.addUp(velocity);
-        this.screenPosition.addUp(velocity);
         return super.run(parentPosition);
     }
 
@@ -71,7 +69,10 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
         if (frameCounter.run()){
             frameCounter.reset();
             velocity.y += JUMPSPEED;
-            velocity.x += 2*SPEED;
+            if(velocity.x > 0){
+                velocity.x += 4*SPEED;
+            }
+            velocity.x += 0.5*SPEED;
         }
     }
 
