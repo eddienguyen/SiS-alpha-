@@ -14,7 +14,7 @@ public class EnemyCharging extends GameObject implements PhysicsBody{
     public Vector2D velocity;
     private final float GRAVITY = 1f;
     private float SPEED = -2;
-    private BoxCollider boxCollider;
+    public BoxCollider boxCollider;
     private final float JUMPSPEED = -12;
 
     public EnemyCharging(){
