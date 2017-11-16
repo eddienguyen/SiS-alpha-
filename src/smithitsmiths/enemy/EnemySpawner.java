@@ -72,7 +72,7 @@ public class EnemySpawner extends GameObject {
             @Override
             public boolean run(GameObject owner) {
                 Bullet bullet = GameObject.recycle(Bullet.class);
-                bullet.position.set(1024, 550);
+                bullet.position.set(1024, 524);
                 bullet.boxCollider.setWidth(60);
                 bullet.boxCollider.setHeight(30);
 //                charging.HP = 15;
