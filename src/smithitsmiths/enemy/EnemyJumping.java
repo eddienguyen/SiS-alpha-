@@ -42,10 +42,8 @@ public class EnemyJumping extends GameObject implements PhysicsBody {
         playerHit();
         jump();
         deActiveIfNeeded();
-        if (isActive = true) {
             gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
             gaugeBar.setValue(HP);
-        }
         return super.run(parentPosition);
     }
 
