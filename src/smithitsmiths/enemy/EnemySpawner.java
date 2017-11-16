@@ -7,6 +7,7 @@ import bases.actions.Action;
 import bases.actions.ActionRepeatForever;
 import bases.actions.ActionSequence;
 import bases.actions.ActionWait;
+import smithitsmiths.maps.MapSpawner;
 
 import java.util.Random;
 
@@ -17,8 +18,8 @@ public class EnemySpawner extends GameObject {
     FrameCounter frameCounter = new FrameCounter(7200);
     int Lv = 1;
     int waitTime = 1000;
-    int waitTimeJump = 2400;
-    int waitTimeBullet = 3600;
+    int waitTimeJump = 4200;
+    int waitTimeBullet = 7200;
 
 
     Random random = new Random();
@@ -34,6 +35,7 @@ public class EnemySpawner extends GameObject {
                 enemy.position.set(1024, 0);
                 enemy.boxCollider.setWidth(30);
                 enemy.boxCollider.setHeight(30);
+                enemy.setMoveSpeed(MapSpawner.getCurrentSpeed());
                 enemy.HP = 10;
                 return true;
             }
@@ -52,8 +54,8 @@ public class EnemySpawner extends GameObject {
             public boolean run(GameObject owner) {
                 EnemyJumping jumping = GameObject.recycle(EnemyJumping.class);
                 jumping.position.set(1024, 0);
-                jumping.boxCollider.setWidth(30);
-                jumping.boxCollider.setHeight(30);
+                jumping.boxCollider.setWidth(50);
+                jumping.boxCollider.setHeight(50);
                 jumping.HP = 15;
                 return true;
             }

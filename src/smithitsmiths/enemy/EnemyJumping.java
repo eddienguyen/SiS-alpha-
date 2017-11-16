@@ -13,7 +13,7 @@ import smithitsmiths.players.Player;
 
 import java.util.function.BinaryOperator;
 
-public class EnemyJumping extends GameObject implements PhysicsBody{
+public class EnemyJumping extends GameObject implements PhysicsBody {
     public Vector2D velocity;
     private final float GRAVITY = 1f;
     private final float SPEED = -2;
@@ -23,10 +23,10 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     public float HP;
     public GaugeBar gaugeBar;
 
-    public EnemyJumping(){
+    public EnemyJumping() {
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/enemy3.png");
-        this.getPosition().set(1024,0);
+        this.getPosition().set(1024, 0);
         velocity = new Vector2D();
         boxCollider = new BoxCollider(50, 50);
         this.children.add(boxCollider);
@@ -48,37 +48,39 @@ public class EnemyJumping extends GameObject implements PhysicsBody{
     }
 
     public void getHit() {
-        if (this.HP <= 0){
+        if (this.HP <= 0) {
             this.isActive = false;
-        }
-        else {
-            velocity.x -= 4*SPEED ;
-            velocity.y += JUMPSPEED;
-            frameCounter.reset();
+        } else {
+            if (frameCounter.run()) {
+                velocity.x -= 4 * SPEED;
+                velocity.y += JUMPSPEED;
+                frameCounter.reset();
+            }
+
         }
     }
 
 
     private void deActiveIfNeeded() {
-        if (this.position.x < 0){
+        if (this.position.x < 0) {
             this.isActive = false;
         }
     }
 
     private void jump() {
-        if (frameCounter.run()){
+        if (frameCounter.run()) {
             frameCounter.reset();
             velocity.y += JUMPSPEED;
-            if(velocity.x > 0){
-                velocity.x += 4*SPEED;
+            if (velocity.x > 0) {
+                velocity.x += 4 * SPEED;
             }
-            velocity.x += 0.5*SPEED;
+            velocity.x += 0.5 * SPEED;
         }
     }
 
     private void playerHit() {
-        Player playerHit = Physics.collideWith(this.boxCollider,Player.class);
-        if (playerHit != null){
+        Player playerHit = Physics.collideWith(this.boxCollider, Player.class);
+        if (playerHit != null) {
             playerHit.getHit();
         }
     }

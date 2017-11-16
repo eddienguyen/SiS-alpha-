@@ -22,38 +22,14 @@ public class Enemy extends GameObject implements PhysicsBody {
 
     public Enemy() {
         super();
-        this.renderer = ImageRenderer.create("assets/images/platform/green_square.png");
+        this.renderer = ImageRenderer.create("assets/images/enemies/enemyWalking.png");
         velocity = new Vector2D();
         boxCollider = new BoxCollider();
         this.children.add(boxCollider);
         gaugeBar = new GaugeBar();
         this.children.add(gaugeBar);
 
-        ActionWait actionWait = new ActionWait(30);
-        Action hi = new Action() {
-            @Override
-            public boolean run(GameObject owner) {
-                System.out.println("Hi");
-                return true;
-            }
 
-            @Override
-            public void reset() {
-
-            }
-        };
-        Action helloWorld = new Action() {
-            @Override
-            public boolean run(GameObject owner) {
-                System.out.println("HelloWorld");
-                return true;
-            }
-
-            @Override
-            public void reset() {
-
-            }
-        };
 
     }
 
