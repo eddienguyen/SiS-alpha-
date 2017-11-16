@@ -3,6 +3,7 @@ package smithitsmiths.HUD;
 import bases.FrameCounter;
 import bases.GameObject;
 import bases.Vector2D;
+import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Hammer;
 import smithitsmiths.players.Player;
 
@@ -46,7 +47,7 @@ public class ScoreManager extends GameObject {
         if (scoreCount >= highScoreCount){
             highScoreCount = scoreCount;
         }
-        scoreString = "Meters: " + Math.round(scoreCount);
+        scoreString = "Meters: " + Math.round(scoreCount * MapSpawner.getCurrentSpeed());
         highScoreString = "Highest: " + Math.round(highScoreCount);
 //        System.out.println(scoreString);
 //        System.out.println(highScoreString);

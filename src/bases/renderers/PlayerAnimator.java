@@ -19,20 +19,35 @@ public class PlayerAnimator implements Renderer {
                 2,
                 false,
                 false,
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00000.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00001.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00002.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00003.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00004.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00005.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00006.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00007.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00008.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00009.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00010.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00011.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00012.png"),
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00013.png")
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00000.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00001.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00002.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00003.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00004.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00005.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00006.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00007.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00008.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00009.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00010.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00011.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00012.png"),
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00013.png")
+
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00000.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00001.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00002.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00003.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00004.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00005.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00006.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00007.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00008.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00009.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00010.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00011.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00012.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00013.png")
 
         );
 
@@ -40,8 +55,9 @@ public class PlayerAnimator implements Renderer {
                 5,
                 false,
                 false,
-                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00013.png")
+//                SpriteUtils.loadImage("assets/images/players/running/demo_smith_00013.png")
 
+                SpriteUtils.loadImage("assets/images/players/changed/run/demo_smith_00013.png")
         );
 
         smashAnimation = new Animation(
@@ -56,13 +72,18 @@ public class PlayerAnimator implements Renderer {
 //                SpriteUtils.loadImage("assets/images/players/smashing/05.png"),
 //                SpriteUtils.loadImage("assets/images/players/smashing/06.png"),
 
-                SpriteUtils.loadImage("assets/images/players/smashing/07.png"),
-                SpriteUtils.loadImage("assets/images/players/smashing/08.png")
+//                SpriteUtils.loadImage("assets/images/players/smashing/07.png"),
+//                SpriteUtils.loadImage("assets/images/players/smashing/08.png")
+
 //                SpriteUtils.loadImage("assets/images/players/smashing/09.png")
 //                SpriteUtils.loadImage("assets/images/players/smashing/10.png"),
 //                SpriteUtils.loadImage("assets/images/players/smashing/11.png")
-
 //                SpriteUtils.loadImage("assets/images/players/smashing/12.png")
+
+                SpriteUtils.loadImage("assets/images/players/changed/smash/demo_smith07.png"),
+                SpriteUtils.loadImage("assets/images/players/changed/smash/demo_smith08.png")
+
+
         );
         currentAnimation = runAnimation;
     }

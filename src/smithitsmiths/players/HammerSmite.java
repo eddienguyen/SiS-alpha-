@@ -17,7 +17,7 @@ public class HammerSmite extends GameObject implements PhysicsBody {
     public float damage;
 
     public HammerSmite() {
-        boxCollider = new BoxCollider(30, 42);
+        boxCollider = new BoxCollider(16, 32);
         this.children.add(boxCollider);
     }
 

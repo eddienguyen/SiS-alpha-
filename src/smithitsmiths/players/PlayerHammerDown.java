@@ -12,7 +12,7 @@ public class PlayerHammerDown {
             HammerSmite hammerSmite = GameObject.recycle(HammerSmite.class);
             hammerSmite.damage = owner.getDamage();
             hammerSmite.duration = 5;
-            hammerSmite.position.set(owner.position.x + owner.getBoxCollider().getWidth() , owner.position.y);
+            hammerSmite.position.set(owner.position.x + 16 , owner.position.y);
 
             InputManager.spaceReleased = false;
         }
