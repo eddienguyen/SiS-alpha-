@@ -19,12 +19,7 @@ import java.awt.image.BufferedImage;
 public class GamePlayScene implements Scene {
 
     Player player = new Player();
-    Enemy enemy = new Enemy();
-    Enemy enemy1 = new Enemy();
-    Enemy enemy2 = new Enemy();
-    Enemy enemy3 = new Enemy();
-    EnemyJumping jumping = new EnemyJumping();
-    Bullet bullet = new Bullet();
+
     Background background = new Background();
     Background background2 = new Background();
     ScoreManager scoreManager = new ScoreManager(player);
