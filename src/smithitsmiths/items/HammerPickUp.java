@@ -10,6 +10,9 @@ import smithitsmiths.Platform;
 import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Hammer;
 import smithitsmiths.players.Player;
+import tklibs.AudioUtils;
+
+import javax.sound.sampled.Clip;
 
 public class HammerPickUp extends GameObject implements PhysicsBody {
     public float moveSpeed;
@@ -27,10 +30,13 @@ public class HammerPickUp extends GameObject implements PhysicsBody {
 
     public BoxCollider boxCollider;
 
+    Clip pickUp;
+
     public HammerPickUp(int material) {
         super();
         this.boxCollider = new BoxCollider(32, 32);
         velocity = new Vector2D();
+        pickUp = AudioUtils.loadSound("assets/sound effect/pickup_01.wav");
         switch (material) {
             case WOOD:
                 this.renderer = ImageRenderer.create("assets/images/hammer/hammer_wood.png");
@@ -92,8 +98,10 @@ public class HammerPickUp extends GameObject implements PhysicsBody {
                     Hammer.changeHammer("diamond");
                     break;
             }
+            pickUp.start();
             this.isActive = false;
         }
+        pickUp.setFramePosition(0);
 
         deactivateIfNeeded();
         return 0;

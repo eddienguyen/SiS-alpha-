@@ -7,14 +7,19 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
+import tklibs.AudioUtils;
+
+import javax.sound.sampled.Clip;
 
 public class HammerSmite extends GameObject implements PhysicsBody {
 
     public BoxCollider boxCollider;
     public float duration;
     public float damage;
+    Clip kill;
 
     public HammerSmite() {
+        kill = AudioUtils.loadSound("assets/sound effect/hammering_01.wav");
         boxCollider = new BoxCollider(16, 32);
         this.children.add(boxCollider);
     }
@@ -39,14 +44,17 @@ public class HammerSmite extends GameObject implements PhysicsBody {
             if (enemy != null) {
                 enemy.HP -= this.damage;
                 enemy.getHit();
+                kill.start();
                 this.isActive = false;
             }
             EnemyJumping jumping = Physics.collideWith(boxCollider, EnemyJumping.class);
             if (jumping != null) {
                 jumping.HP -= this.damage;
                 jumping.getHit();
+                kill.start();
                 this.isActive = false;
             }
+            kill.setFramePosition(0);
         }
 
     }

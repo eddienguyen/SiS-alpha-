@@ -13,7 +13,9 @@ import bases.scenes.SceneManager;
 import smithitsmiths.GaugeBar;
 import smithitsmiths.Platform;
 import smithitsmiths.scenes.GameOverScene;
-import tklibs.SpriteUtils;
+import tklibs.AudioUtils;
+
+import javax.sound.sampled.Clip;
 
 public class Player extends GameObject implements PhysicsBody {
     public Vector2D velocity;
@@ -24,6 +26,11 @@ public class Player extends GameObject implements PhysicsBody {
     public GaugeBar gaugeBar;
 
     PlayerAnimator animator;
+
+    Clip charging;
+    Clip keepCharging;
+    Clip jumping;
+    int loop = 0;
 
     public boolean isDragged;
 
@@ -40,6 +47,9 @@ public class Player extends GameObject implements PhysicsBody {
         isDragged = false;
         animator = new PlayerAnimator();
         this.renderer = animator;
+        charging = AudioUtils.loadSound("assets/sound effect/charging_01.wav");
+        keepCharging = AudioUtils.loadSound("assets/sound effect/keepcharging_01.wav");
+        jumping = AudioUtils.loadSound("assets/sound effect/jump_01.wav");
 
         velocity = new Vector2D();
         boxCollider = new BoxCollider(30, 40);
@@ -55,7 +65,6 @@ public class Player extends GameObject implements PhysicsBody {
     @Override
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
-
         animator.run(this);
 
         //reposition if needed:
@@ -89,8 +98,13 @@ public class Player extends GameObject implements PhysicsBody {
                 force += 0.4f;
                 Damage = force + hammer.getCurrentHammerDamage();
                 gaugeBar.setValue(Damage);
+                charging.start();
                 return currentForce = force;
 
+            }
+            if (force >= maxForce){
+                loop += 1;
+                keepCharging.loop(loop);
             }
         }
 
@@ -105,6 +119,13 @@ public class Player extends GameObject implements PhysicsBody {
             playerHammerDown.run(this);
             animator.changeAnimation(PlayerAnimator.smashAnimation);
             InputManager.spaceReleased = false;
+            loop = 0;
+            charging.stop();
+            keepCharging.stop();
+            keepCharging.setFramePosition(0);
+            charging.setFramePosition(0);
+            jumping.start();
+            jumping.setFramePosition(0);
         }
 
         //Platform physics
@@ -171,7 +192,10 @@ public class Player extends GameObject implements PhysicsBody {
         //unused
     }
 
-
+    void play(Clip clip){
+        clip.setFramePosition(0); // reset con trỏ về đầu đoạn sound
+        clip.start();
+    }
 
 
 }
