@@ -15,14 +15,31 @@ public class Hammer extends GameObject {
     public static final int GOLDDAMAGE = 14;
     public static final int DIAMONDDAMAGE = 20;
 
+    public static String material;
+
     public static float currentHammerDamage;
 
     public Hammer() {
         currentHammerDamage = WOODDAMAGE;
     }
 
+
     public float getCurrentHammerDamage() {
         return currentHammerDamage;
+    }
+
+    public String toString() {
+        if (currentHammerDamage == WOODDAMAGE) {
+            return "WOOD";
+        } else if (currentHammerDamage == ROCKDAMAGE) {
+            return "ROCK";
+        } else if (currentHammerDamage == IRONDAMAGE) {
+            return "IRON";
+        } else if (currentHammerDamage == GOLDDAMAGE) {
+            return "GOLD";
+        } else {
+            return "DIAMOND";
+        }
     }
 
     public static void changeHammer(String material) {          //  = setCurrentHammerDamage
@@ -46,4 +63,6 @@ public class Hammer extends GameObject {
                 System.out.println("wrong in changeHammer()");
         }
     }
+
+
 }

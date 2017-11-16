@@ -7,6 +7,7 @@ import smithitsmiths.players.Player;
 import java.util.ArrayList;
 
 public class MapLevel1 implements Map {
+    public float eachPlatformSpeed;
     Platform lastPlatform = new Platform();
     ArrayList<Platform> platforms = new ArrayList<>();
     @Override
@@ -39,5 +40,13 @@ public class MapLevel1 implements Map {
     @Override
     public Platform getLastPlatform() {
         return lastPlatform;
+    }
+
+    @Override
+    public void setEachPlatformSpeed(float eachPlatformSpeed) {
+        this.eachPlatformSpeed = eachPlatformSpeed;
+        for (Platform platform : platforms){
+            platform.setMoveSpeed(eachPlatformSpeed);
+        }
     }
 }

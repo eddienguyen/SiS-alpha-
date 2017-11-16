@@ -5,6 +5,8 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.pools.GameObjectPool;
 import bases.renderers.Renderer;
+import smithitsmiths.Platform;
+import smithitsmiths.enemy.Spike;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -45,7 +47,6 @@ public class GameObject {
             if (child.isActive)
                 child.run(screenPosition);
         }
-//        System.out.println(gameObjects.size());
         return 0;
     }
 
@@ -180,5 +181,17 @@ public class GameObject {
 
     public void addAction(Action action) {
         newActions.add(action);
+    }
+
+    //not work
+    public static void changeMapSpeed(float moveSpeed){
+        for (GameObject object : gameObjects){
+            if (object instanceof Platform){
+                ((Platform) object).setMoveSpeed(moveSpeed);
+            }
+            if (object instanceof Spike){
+                ((Spike) object).setMoveSpeed(moveSpeed);
+            }
+        }
     }
 }

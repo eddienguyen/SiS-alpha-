@@ -12,6 +12,7 @@ import smithitsmiths.players.Player;
 public class Spike extends GameObject implements PhysicsBody{
     public BoxCollider boxCollider;
     public Vector2D velocity;
+    public float moveSpeed;
 
     public Spike() {
         super();
@@ -27,7 +28,7 @@ public class Spike extends GameObject implements PhysicsBody{
         playerHit();
 
         moveVertical();
-        this.position.x -= 2;
+        this.position.x -= moveSpeed;
         this.velocity.y += 2;
         return 0;
     }
@@ -72,5 +73,11 @@ public class Spike extends GameObject implements PhysicsBody{
         this.screenPosition.addUp(0, velocity.y);
     }
 
+    public float getMoveSpeed() {
+        return moveSpeed;
+    }
 
+    public void setMoveSpeed(float moveSpeed) {
+        this.moveSpeed = moveSpeed;
+    }
 }

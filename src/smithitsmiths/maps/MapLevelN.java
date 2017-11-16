@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MapLevelN implements Map {
-    public float eachPlatformSpeed;
+    public static float eachPlatformSpeed;
+
     final int BASELAYER = 1;
     final int SECONDLAYER = 2;
     final int THIRDLAYER = 3;
@@ -190,5 +191,48 @@ public class MapLevelN implements Map {
     @Override
     public Platform getLastPlatform() {
         return lastPlatform;
+    }
+
+    public void setEachPlatformSpeed(float eachPlatformSpeed){
+        this.eachPlatformSpeed = eachPlatformSpeed;
+        for (Platform platform : basePlatforms){
+            platform.setMoveSpeed(eachPlatformSpeed);
+        }
+        for (GameObject object : secondLayerObjects){
+            if (object instanceof  Platform){
+                 ((Platform) object).setMoveSpeed(eachPlatformSpeed);
+            }
+            if (object instanceof  Spike){
+                ((Spike) object).setMoveSpeed(eachPlatformSpeed);
+            }
+        }
+
+        for (GameObject object : thirdLayerObjects){
+            if (object instanceof  Platform){
+                ((Platform) object).setMoveSpeed(eachPlatformSpeed);
+            }
+        }
+
+        for (GameObject object : fourthLayerObjects){
+            if (object instanceof  Platform){
+                ((Platform) object).setMoveSpeed(eachPlatformSpeed);
+            }
+        }
+
+        for (GameObject object : fifthLayerObjects){
+            if (object instanceof  Platform){
+                ((Platform) object).setMoveSpeed(eachPlatformSpeed);
+            }
+        }
+
+        for (GameObject object : sixthLayerObjects){
+            if (object instanceof  Platform){
+                ((Platform) object).setMoveSpeed(eachPlatformSpeed);
+            }
+        }
+    }
+
+    public float getEachPlatformSpeed(){
+        return this.eachPlatformSpeed;
     }
 }

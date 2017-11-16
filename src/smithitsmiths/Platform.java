@@ -12,7 +12,7 @@ import smithitsmiths.players.Player;
 import smithitsmiths.scenes.GamePlayScene;
 
 public class Platform extends GameObject implements PhysicsBody {
-    public float moveSpeed = 2;
+    public float moveSpeed;
     private BoxCollider boxCollider;
     public Vector2D velocity;
 
@@ -27,7 +27,7 @@ public class Platform extends GameObject implements PhysicsBody {
     @Override
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
-        velocity.x = -2;
+        velocity.x = -moveSpeed;
         dragHorizontal();
         return 0;
     }
@@ -71,5 +71,13 @@ public class Platform extends GameObject implements PhysicsBody {
 
     public void getHit(){
         isActive = false;
+    }
+
+    public void setMoveSpeed(float moveSpeed){
+        this.moveSpeed = moveSpeed;
+    }
+
+    public float getMoveSpeed(){
+        return this.moveSpeed;
     }
 }

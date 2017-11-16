@@ -13,7 +13,7 @@ import smithitsmiths.Platform;
 import smithitsmiths.players.Player;
 
 public class Enemy extends GameObject implements PhysicsBody {
-    public  int SPEED = 5;
+    public float moveSpeed;
     public BoxCollider boxCollider;
     public Vector2D velocity;
     private final float GRAVITY = 1f;
@@ -68,7 +68,7 @@ public class Enemy extends GameObject implements PhysicsBody {
         gaugeBar.setValue(HP);
         playerHit();
         this.velocity.y += GRAVITY;
-        this.velocity.x = -2;
+        this.velocity.x = -moveSpeed*2;
 //        this.position.addUp(velocity);
         return 0;
     }
@@ -123,8 +123,8 @@ public class Enemy extends GameObject implements PhysicsBody {
             }
 
             //update velocity ()
-//            velocity.x = 0;
-            velocity.x = -velocity.x ;
+            velocity.x = 0;
+//            velocity.x = -velocity.x ;
         }
 
         //velocity impact position
@@ -152,5 +152,11 @@ public class Enemy extends GameObject implements PhysicsBody {
         System.out.println(String.format("enemy get hit, left %s HP",HP ));
     }
 
+    public float getMoveSpeed() {
+        return moveSpeed;
+    }
 
+    public void setMoveSpeed(float moveSpeed) {
+        this.moveSpeed = moveSpeed;
+    }
 }

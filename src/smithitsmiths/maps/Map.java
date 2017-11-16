@@ -8,4 +8,5 @@ public interface Map {
     public void init();
     public void deinit();
     public Platform getLastPlatform();
+    public void setEachPlatformSpeed(float eachPlatformSpeed);
 }

@@ -7,6 +7,8 @@ import bases.actions.Action;
 import bases.actions.ActionRepeatForever;
 import bases.actions.ActionSequence;
 import bases.actions.ActionWait;
+import smithitsmiths.items.HammerPickUp;
+import smithitsmiths.maps.MapSpawner;
 
 import java.util.Random;
 
@@ -14,6 +16,7 @@ public class EnemySpawner extends GameObject {
     public final int NORMAL_ENEMIES_EACH_MAP = 5;
     int spawnCount;
     int level;
+
     FrameCounter frameCounter = new FrameCounter(200);
 
     Random random = new Random();
@@ -27,6 +30,7 @@ public class EnemySpawner extends GameObject {
                 enemy.position.set(1024, 200);
                 enemy.boxCollider.setWidth(30);
                 enemy.boxCollider.setHeight(30);
+                enemy.setMoveSpeed(MapSpawner.getCurrentSpeed());
                 enemy.HP = 10;
                 return true;
             }
@@ -45,24 +49,10 @@ public class EnemySpawner extends GameObject {
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
 
-        //spawn by framecounter:
-//        if (frameCounter.run()) {
-//
-//            spawnByRow();
-//            spawnCount++;
-//
-//            if (spawnCount >= NORMAL_ENEMIES_EACH_MAP) {
-//                spawnCount = 0;
-//                level++;
-//                //spawnBoss(level);
-//            }
-//
-//            frameCounter.reset();
-//        }
-
         return 0;
     }
 
+    //move to spawn by Action
     private void spawnByRow() {
         //4 layers's objects
         Enemy enemy = GameObject.recycle(Enemy.class);

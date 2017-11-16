@@ -9,6 +9,7 @@ import smithitsmiths.enemy.Bullet;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
 import smithitsmiths.enemy.EnemySpawner;
+import smithitsmiths.items.ItemSpawner;
 import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
 
@@ -26,7 +27,7 @@ public class GamePlayScene implements Scene {
     Bullet bullet = new Bullet();
     Background background = new Background();
     Background background2 = new Background();
-    ScoreManager scoreManager = new ScoreManager();
+    ScoreManager scoreManager = new ScoreManager(player);
 
     @Override
     public void deinit() {
@@ -48,23 +49,16 @@ public class GamePlayScene implements Scene {
         background2.position.y = 768/2;
         background2.screenPosition.y = 768/2;
 
+        MapSpawner mapSpawner = new MapSpawner();
+        player.position.set(100, 50);
+
         GameObject.add(background);
         GameObject.add(background2);
-
-
-        //1.Player
-
-
-        //3.Platform
-
-        MapSpawner mapSpawner = new MapSpawner();
         GameObject.add(mapSpawner);
-
-
-        player.position.set(100, 50);
         GameObject.add(player);
 
         GameObject.add(new EnemySpawner());
+        GameObject.add(new ItemSpawner());
         GameObject.add(scoreManager );
     }
 

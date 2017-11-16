@@ -9,6 +9,7 @@ import smithitsmiths.maps.MapLevelN;
 import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
 import smithitsmiths.enemy.Enemy;
+import smithitsmiths.scenes.GameOverScene;
 import smithitsmiths.scenes.GamePlayScene;
 import smithitsmiths.scenes.GameTutorialScene;
 

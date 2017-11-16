@@ -27,7 +27,7 @@ public class Player extends GameObject implements PhysicsBody {
 
     public boolean isDragged;
 
-    Hammer hammer;
+    public Hammer hammer;
     public PlayerHammerDown playerHammerDown;
     protected float force = 0;
     final static float maxForce = 15f;
