@@ -30,7 +30,7 @@ public class Player extends GameObject implements PhysicsBody {
     public Hammer hammer;
     public PlayerHammerDown playerHammerDown;
     protected float force = 0;
-    final static float maxForce = 15f;
+    final static float maxForce = 20f;
     public static float currentForce;
     public float Damage;
 

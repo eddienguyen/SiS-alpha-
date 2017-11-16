@@ -3,8 +3,6 @@ package smithitsmiths.maps;
 import bases.GameObject;
 import bases.renderers.ImageRenderer;
 import smithitsmiths.Platform;
-import smithitsmiths.enemy.Bullet;
-import smithitsmiths.enemy.EnemyJumping;
 import smithitsmiths.enemy.Spike;
 
 import java.util.ArrayList;
@@ -37,7 +35,7 @@ public class MapLevelN implements Map {
 
         //each platform is 30pixel wide, so suitablePositions is an array of x where each platform can placed on
         for (int i = 0; i < suitablePositions.length; i++) {
-            suitablePositions[i] = 1054 + (i * 30);
+            suitablePositions[i] = 1024 + (i * 45);
         }
 
 
@@ -84,7 +82,7 @@ public class MapLevelN implements Map {
     }
 
     public void generateBaseLayer() {
-        int firstPosition = 1054;
+        int firstPosition = 1069;
         for (int i = 0; i < 50; i++) {
             Platform platform = GameObject.recycle(Platform.class);
             platform.position.set(firstPosition, 600);
@@ -112,24 +110,25 @@ public class MapLevelN implements Map {
                 for (int layerElement = 0; layerElement < suitablePositions.length; layerElement++) {
                     int randomObject = r.nextInt(101);
                     //platform:
-                    if (randomObject < 30) {
+                    if (randomObject < 90) {
 
                         //check if underLayer with specific position has any platform, if true => spawn:
                         for (Platform belowPlatform : basePlatforms) {
                             if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
                                 Platform secondLayerPlatform = GameObject.recycle(Platform.class);
-                                secondLayerPlatform.position.set(suitablePositions[layerElement], 570);
+                                secondLayerPlatform.renderer = ImageRenderer.create("assets/images/platform/dirt_grass.png");
+                                secondLayerPlatform.position.set(suitablePositions[layerElement], 555);
                                 secondLayerObjects.add(secondLayerPlatform);
                             }
                         }
 
                     }
                     //spike:
-                    else if (randomObject >= 30 && randomObject < 32) {
+                    else if (randomObject >= 90 && randomObject < 101) {
                         for (Platform belowPlatform : basePlatforms) {
                             if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
                                 Spike secondLayerSpike = GameObject.recycle(Spike.class);
-                                secondLayerSpike.position.set(suitablePositions[layerElement], 570);
+                                secondLayerSpike.position.set(suitablePositions[layerElement], 555);
                                 secondLayerObjects.add(secondLayerSpike);
                             }
                         }
@@ -156,7 +155,8 @@ public class MapLevelN implements Map {
                         for (GameObject object : secondLayerObjects) {
                             if ((object.getClass().equals(Platform.class)) && (object.position.isMatch(suitablePositions[layerElement], 570))) {
                                 Platform thirdLayerPlatform = GameObject.recycle(Platform.class);
-                                thirdLayerPlatform.position.set(suitablePositions[layerElement], 540);
+                                thirdLayerPlatform.renderer = ImageRenderer.create("assets/images/platform/dirt_grass.png");
+                                thirdLayerPlatform.position.set(suitablePositions[layerElement], 510);
                                 thirdLayerObjects.add(thirdLayerPlatform);
                             }
                         }
@@ -178,12 +178,11 @@ public class MapLevelN implements Map {
                 for (int i = 0; i < randomAirPlatformsWidth; i++) {
                     Platform airPlatform = GameObject.recycle(Platform.class);
                     airPlatform.renderer = ImageRenderer.create("assets/images/platform/brickBrown.png");
-                    airPlatform.position.set(suitablePositions[airPlatformFirstPos], 450);
+                    airPlatform.position.set(suitablePositions[airPlatformFirstPos], 375);
                     airPlatformFirstPos++;
                     sixthLayerObjects.add(airPlatform);
                 }
                 break;
-
         }
 
     }

@@ -5,10 +5,8 @@ import bases.Vector2D;
 import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
-import bases.renderers.ImageRenderer;
 import smithitsmiths.enemy.Enemy;
 import smithitsmiths.enemy.EnemyJumping;
-import smithitsmiths.enemy.Spike;
 
 public class HammerSmite extends GameObject implements PhysicsBody {
 
