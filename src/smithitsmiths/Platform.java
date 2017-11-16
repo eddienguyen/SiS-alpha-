@@ -18,8 +18,8 @@ public class Platform extends GameObject implements PhysicsBody {
 
     public Platform() {
         super();
-        this.renderer = ImageRenderer.create("assets/images/platform/dirt_grass.png");
-        boxCollider = new BoxCollider(30, 30);
+        this.renderer = ImageRenderer.create("assets/images/platform/dirt.png");
+        boxCollider = new BoxCollider(45, 45);
         this.children.add(boxCollider);
         velocity = new Vector2D();
     }

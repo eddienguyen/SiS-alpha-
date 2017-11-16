@@ -16,7 +16,7 @@ public class Spike extends GameObject implements PhysicsBody{
     public Spike() {
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/spike.png");
-        this.boxCollider = new BoxCollider(20, 10);
+        this.boxCollider = new BoxCollider(40, 18);
         velocity = new Vector2D();
         this.children.add(boxCollider);
     }

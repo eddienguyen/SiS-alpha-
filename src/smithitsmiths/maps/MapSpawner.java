@@ -38,7 +38,7 @@ public class MapSpawner extends GameObject {
             currentMap = newMap;
             currentMap.init();
         } else {
-            if (currentMap.getLastPlatform().position.x <= 1054) {
+            if (currentMap.getLastPlatform().position.x <= 1069) {
                 changeMap(new MapLevelN());
                 previousMap = currentMap;
                 currentMap = nextMap;
