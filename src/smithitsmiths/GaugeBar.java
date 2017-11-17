@@ -43,9 +43,9 @@ public class GaugeBar extends GameObject {
         super.render(g2d);
 
 //        g2d.drawLine((int)this.position.x, (int)this.position.y,(int)(this.position.x + value),(int)this.position.y);
-        g2d.drawRect((int)this.position.x, (int)this.position.y,200 , 32);
+        g2d.drawRect((int)this.position.x, (int)this.position.y,50 , 10);
         g2d.setColor(Color.RED);
-        g2d.fillRect((int)this.position.x+1, (int)this.position.y+1,(int) value, 31);
+        g2d.fillRect((int)this.position.x+1, (int)this.position.y+1,(int) value, 9);
     }
 
     //TODO : reset value (to 0)
