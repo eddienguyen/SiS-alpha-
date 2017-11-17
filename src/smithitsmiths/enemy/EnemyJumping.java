@@ -51,6 +51,7 @@ public class EnemyJumping extends GameObject implements PhysicsBody {
     public void getHit() {
         if (this.HP <= 0) {
             this.isActive = false;
+            this.gaugeBar.setActive(false);
         } else {
             if (frameCounter.run()) {
                 velocity.x -= 4 * SPEED;

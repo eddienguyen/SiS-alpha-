@@ -10,7 +10,7 @@ public class Background extends GameObject {
     Vector2D secondPosition;
 
     public Background() {
-        this.renderer = ImageRenderer.create("assets/images/background/blue_desert.png");
+        this.renderer = ImageRenderer.create("assets/images/background/background1-01.png");
     }
 
     @Override
