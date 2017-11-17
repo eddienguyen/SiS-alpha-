@@ -181,6 +181,7 @@ public class Player extends GameObject implements PhysicsBody {
 
     public void getHit() {
         AudioUtils.mediaStop(background);
+        AudioUtils.stop(keepCharging);
         isActive = false;
         SceneManager.changeScene(new GameOverScene());
     }
