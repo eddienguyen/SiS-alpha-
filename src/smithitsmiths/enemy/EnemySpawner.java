@@ -21,14 +21,14 @@ public class EnemySpawner extends GameObject {
     int level;
     FrameCounter frameCounter = new FrameCounter(7200);
     int Lv = 1;
-    int waitTime = 800;
-    int waitTimeJump = 600;
-    int waitTimeBullet = 200;
+    int waitTime = 2800;
+    int waitTimeJump = 2600;
+    int waitTimeBullet = 2200;
 
 
     Random random = new Random();
 
-    public EnemySpawner(){
+    public EnemySpawner() {
         rocket = AudioUtils.loadSound("assets/sound effect/rocket.wav");
         Action wait = new ActionWait(waitTime);
         Action waitJump = new ActionWait(waitTimeJump);
@@ -98,7 +98,7 @@ public class EnemySpawner extends GameObject {
     @Override
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
-        if (frameCounter.run() && Lv <= 10){
+        if (frameCounter.run() && Lv <= 10) {
             frameCounter.reset();
             waitTime -= 50;
             waitTimeJump -= 240;
@@ -107,44 +107,7 @@ public class EnemySpawner extends GameObject {
         }
 
 
-        //spawn by framecounter:
-//        if (frameCounter.run()) {
-//
-//            spawnByRow();
-//            spawnCount++;
-//
-//            if (spawnCount >= NORMAL_ENEMIES_EACH_MAP) {
-//                spawnCount = 0;
-//                level++;
-//                //spawnBoss(level);
-//            }
-//
-//            frameCounter.reset();
-//        }
-
         return 0;
     }
 
-//    private void spawnByRow() {
-//        //4 layers's objects
-//        Enemy enemy = GameObject.recycle(Enemy.class);
-//        enemy.boxCollider.setWidth(30);
-//        enemy.boxCollider.setHeight(30);
-//        enemy.HP = 10;
-//        int randomSpawnY = random.nextInt(4) + 2;
-//        switch (randomSpawnY) {
-//            case 2:
-//                enemy.position.set(1054, 570);
-//                break;
-//            case 3:
-//                enemy.position.set(1054, 540);
-//                break;
-//            case 4:
-//                enemy.position.set(1054, 510);
-//                break;
-//            case 5:
-//                enemy.position.set(1054, 480);
-//                break;
-//        }
-//    }
 }
