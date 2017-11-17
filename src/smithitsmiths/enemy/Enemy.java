@@ -29,8 +29,6 @@ public class Enemy extends GameObject implements PhysicsBody {
         gaugeBar = new GaugeBar();
         this.children.add(gaugeBar);
 
-
-
     }
 
     @Override
