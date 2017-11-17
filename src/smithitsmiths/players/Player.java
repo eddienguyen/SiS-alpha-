@@ -88,7 +88,7 @@ public class Player extends GameObject implements PhysicsBody {
         this.velocity.y += GRAVITY;
 
         //gaugebar update:
-        gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
+        gaugeBar.setPosition(50, 150);
 
 
         if (InputManager.instance.spacePressed && !onAir) {
@@ -98,7 +98,6 @@ public class Player extends GameObject implements PhysicsBody {
                 gaugeBar.setValue(Damage);
                 charging.start();
                 return currentForce = force;
-
             }
             if (force >= maxForce){
                 loop += 1;
