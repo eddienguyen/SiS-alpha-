@@ -11,6 +11,7 @@ import java.util.Random;
 public class MapLevelN implements Map {
     public static float eachPlatformSpeed;
 
+//    final int
     final int BASELAYER = 1;
     final int SECONDLAYER = 2;
     final int THIRDLAYER = 3;
@@ -18,7 +19,7 @@ public class MapLevelN implements Map {
     final int FIFTHLAYER = 5;
     final int SIXTHLAYER = 6;
     Random r = new Random();
-    int[] suitablePositions = new int[50];
+    int[] suitablePositions = new int[30];
 
     Platform lastPlatform = new Platform();
     ArrayList<Platform> basePlatforms = new ArrayList<>();
@@ -35,7 +36,7 @@ public class MapLevelN implements Map {
 
         //each platform is 30pixel wide, so suitablePositions is an array of x where each platform can placed on
         for (int i = 0; i < suitablePositions.length; i++) {
-            suitablePositions[i] = 1024 + (i * 45);
+            suitablePositions[i] = 1080 + (i * 45);
         }
 
 
@@ -82,13 +83,13 @@ public class MapLevelN implements Map {
     }
 
     public void generateBaseLayer() {
-        int firstPosition = 1069;
-        for (int i = 0; i < 50; i++) {
+        int firstPosition = 1080;
+        for (int i = 0; i < 25; i++) {
             Platform platform = GameObject.recycle(Platform.class);
             platform.position.set(firstPosition, 600);
             firstPosition += platform.getBoxCollider().getWidth();
             basePlatforms.add(platform);
-            if (i == 49) {
+            if (i == 24) {
                 //last position
                 lastPlatform = platform;
             }
@@ -124,11 +125,13 @@ public class MapLevelN implements Map {
 
                     }
                     //spike:
-                    else if (randomObject >= 90 && randomObject < 101) {
+                    else if (randomObject >= 90) {
+//                        spawnSpike();
                         for (Platform belowPlatform : basePlatforms) {
                             if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
                                 Spike secondLayerSpike = GameObject.recycle(Spike.class);
-                                secondLayerSpike.position.set(suitablePositions[layerElement], 555);
+                                secondLayerSpike.renderer = ImageRenderer.create("assets/images/enemies/spike.png");
+                                secondLayerSpike.position.set(suitablePositions[layerElement]-3, 568);
                                 secondLayerObjects.add(secondLayerSpike);
                             }
                         }
@@ -173,7 +176,7 @@ public class MapLevelN implements Map {
                 break;
             case SIXTHLAYER:
                 //on air platform
-                int airPlatformFirstPos = r.nextInt(39);
+                int airPlatformFirstPos = r.nextInt(19);
                 int randomAirPlatformsWidth = r.nextInt(10) + 1;
                 for (int i = 0; i < randomAirPlatformsWidth; i++) {
                     Platform airPlatform = GameObject.recycle(Platform.class);
@@ -233,5 +236,17 @@ public class MapLevelN implements Map {
 
     public float getEachPlatformSpeed(){
         return this.eachPlatformSpeed;
+    }
+
+    public void spawnSpike(){
+        for (int layerElement = 0; layerElement < suitablePositions.length; layerElement++) {
+            for (Platform belowPlatform : basePlatforms) {
+            if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
+                Spike secondLayerSpike = GameObject.recycle(Spike.class);
+                secondLayerSpike.position.set(suitablePositions[layerElement], 555);
+                secondLayerObjects.add(secondLayerSpike);
+                }
+            }
+        }
     }
 }

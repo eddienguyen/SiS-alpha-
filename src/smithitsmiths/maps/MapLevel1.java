@@ -15,12 +15,12 @@ public class MapLevel1 implements Map {
         System.out.println("loading map level1");
         //tang 1:
         int firstPosition = 0;
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 30; i++) {
             Platform platform = GameObject.recycle(Platform.class);
             platform.position.set(firstPosition, 600);
-            firstPosition += platform.getBoxCollider().getWidth();
+            firstPosition += 45;
             platforms.add(platform);
-            if (i == 49) {
+            if (i == 29) {
                 //last position
                 lastPlatform = platform;
             }

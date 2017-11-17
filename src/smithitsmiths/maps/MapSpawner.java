@@ -6,7 +6,7 @@ import smithitsmiths.Platform;
 
 public class MapSpawner extends GameObject {
     public static float eachMapSpeed;
-    public static final float SPEED_MULTIPLIER = 1.25f;
+    public static final float SPEED_MULTIPLIER = 1.05f;
 
     static Map currentMap;
     static Map nextMap;
@@ -15,7 +15,7 @@ public class MapSpawner extends GameObject {
     public MapSpawner() {
         super();
 
-        eachMapSpeed = 1;
+        eachMapSpeed = 3;
 
     }
 
@@ -38,7 +38,7 @@ public class MapSpawner extends GameObject {
             currentMap.setEachPlatformSpeed(eachMapSpeed);
 
         } else {
-            if (currentMap.getLastPlatform().position.x <= 1069) {
+            if (currentMap.getLastPlatform().position.x <= 1035) {
                 changeMap(new MapLevelN());
                 eachMapSpeed *= SPEED_MULTIPLIER;
                 previousMap = currentMap;

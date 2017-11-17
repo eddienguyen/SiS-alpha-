@@ -102,7 +102,6 @@ public class Player extends GameObject implements PhysicsBody {
                 gaugeBar.setValue(Damage);
                 charging.start();
                 return currentForce = force;
-
             }
             if (force >= maxForce){
                 if (charging.getMicrosecondLength() == charging.getMicrosecondPosition()){
