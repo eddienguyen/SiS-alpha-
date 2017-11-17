@@ -31,7 +31,7 @@ public class Player extends GameObject implements PhysicsBody {
     Clip charging;
     Clip keepCharging;
     Clip jumping;
-    MediaPlayer background ;
+    MediaPlayer background;
 
     public boolean isDragged;
 
@@ -70,11 +70,11 @@ public class Player extends GameObject implements PhysicsBody {
         animator.run(this);
 
         //reposition if needed:
-        if (position.x < 100 ){
+        if (position.x < 100) {
             BoxCollider nextBoxCollider = this.boxCollider.shift(1, 0);
             Platform pf = Physics.collideWith(nextBoxCollider, Platform.class);
 
-            if (pf != null){
+            if (pf != null) {
                 velocity.x = 0;
             } else {
                 this.position.x += 0.5f;
@@ -102,12 +102,13 @@ public class Player extends GameObject implements PhysicsBody {
                 charging.start();
                 return currentForce = force;
             }
-            if (force >= maxForce){
-                if (charging.getMicrosecondLength() == charging.getMicrosecondPosition()){
+            if (force >= maxForce) {
+                if (charging.getMicrosecondLength() == charging.getMicrosecondPosition()) {
                     charging.stop();
                     keepCharging.loop(Clip.LOOP_CONTINUOUSLY);
                 }
 
+            }
         }
 
         if (InputManager.instance.spaceReleased && !onAir) {
@@ -115,7 +116,7 @@ public class Player extends GameObject implements PhysicsBody {
             AudioUtils.stop(charging);
             AudioUtils.stop(keepCharging);
             AudioUtils.play(jumping);
-            velocity.y = - Damage;
+            velocity.y = -Damage;
             System.out.println("Damage caused: " + Damage);
             force = 0;
             gaugeBar.reset();
@@ -127,7 +128,6 @@ public class Player extends GameObject implements PhysicsBody {
             changeAnimationForSmash();
 
             InputManager.spaceReleased = false;
-            loop = 0;
             charging.stop();
             keepCharging.stop();
             keepCharging.setFramePosition(0);
@@ -205,7 +205,9 @@ public class Player extends GameObject implements PhysicsBody {
         return this.boxCollider;
     }
 
-    public float getDamage(){ return this.Damage; }
+    public float getDamage() {
+        return this.Damage;
+    }
 
     public void getHit() {
         AudioUtils.mediaStop(background);
@@ -214,8 +216,8 @@ public class Player extends GameObject implements PhysicsBody {
         SceneManager.changeScene(new GameOverScene());
     }
 
-    public void checkIfOutOfScreen(){
-        if (this.position.x <= -15 || this.position.y >= 768){
+    public void checkIfOutOfScreen() {
+        if (this.position.x <= -15 || this.position.y >= 768) {
             AudioUtils.mediaStop(background);
             AudioUtils.stop(keepCharging);
             SceneManager.changeScene(new GameOverScene());
@@ -226,7 +228,7 @@ public class Player extends GameObject implements PhysicsBody {
         //unused
     }
 
-    void play(Clip clip){
+    void play(Clip clip) {
         clip.setFramePosition(0); // reset con trỏ về đầu đoạn sound
         clip.start();
     }
