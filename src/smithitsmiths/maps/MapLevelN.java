@@ -11,6 +11,7 @@ import java.util.Random;
 public class MapLevelN implements Map {
     public static float eachPlatformSpeed;
 
+//    final int
     final int BASELAYER = 1;
     final int SECONDLAYER = 2;
     final int THIRDLAYER = 3;
@@ -18,7 +19,7 @@ public class MapLevelN implements Map {
     final int FIFTHLAYER = 5;
     final int SIXTHLAYER = 6;
     Random r = new Random();
-    int[] suitablePositions = new int[50];
+    int[] suitablePositions = new int[30];
 
     Platform lastPlatform = new Platform();
     ArrayList<Platform> basePlatforms = new ArrayList<>();
@@ -83,12 +84,12 @@ public class MapLevelN implements Map {
 
     public void generateBaseLayer() {
         int firstPosition = 1069;
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 30; i++) {
             Platform platform = GameObject.recycle(Platform.class);
             platform.position.set(firstPosition, 600);
             firstPosition += platform.getBoxCollider().getWidth();
             basePlatforms.add(platform);
-            if (i == 49) {
+            if (i == 29) {
                 //last position
                 lastPlatform = platform;
             }
@@ -174,7 +175,7 @@ public class MapLevelN implements Map {
                 break;
             case SIXTHLAYER:
                 //on air platform
-                int airPlatformFirstPos = r.nextInt(39);
+                int airPlatformFirstPos = r.nextInt(19);
                 int randomAirPlatformsWidth = r.nextInt(10) + 1;
                 for (int i = 0; i < randomAirPlatformsWidth; i++) {
                     Platform airPlatform = GameObject.recycle(Platform.class);
