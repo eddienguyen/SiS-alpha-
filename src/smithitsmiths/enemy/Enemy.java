@@ -18,7 +18,7 @@ public class Enemy extends GameObject implements PhysicsBody {
     public Vector2D velocity;
     private final float GRAVITY = 1f;
     public float HP;
-    public float JUMPSPEED = -10;
+    public float JUMPSPEED = -4;
     GaugeBar gaugeBar;
 
     public Enemy() {
