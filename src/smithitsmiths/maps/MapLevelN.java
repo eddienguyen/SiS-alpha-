@@ -125,6 +125,7 @@ public class MapLevelN implements Map {
                     }
                     //spike:
                     else if (randomObject >= 90 && randomObject < 101) {
+//                        spawnSpike();
                         for (Platform belowPlatform : basePlatforms) {
                             if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
                                 Spike secondLayerSpike = GameObject.recycle(Spike.class);
@@ -233,5 +234,17 @@ public class MapLevelN implements Map {
 
     public float getEachPlatformSpeed(){
         return this.eachPlatformSpeed;
+    }
+
+    public void spawnSpike(){
+        for (int layerElement = 0; layerElement < suitablePositions.length; layerElement++) {
+            for (Platform belowPlatform : basePlatforms) {
+            if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
+                Spike secondLayerSpike = GameObject.recycle(Spike.class);
+                secondLayerSpike.position.set(suitablePositions[layerElement], 555);
+                secondLayerObjects.add(secondLayerSpike);
+                }
+            }
+        }
     }
 }
