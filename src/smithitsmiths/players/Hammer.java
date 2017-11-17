@@ -24,7 +24,7 @@ public class Hammer extends GameObject {
     }
 
 
-    public float getCurrentHammerDamage() {
+    public static float getCurrentHammerDamage() {
         return currentHammerDamage;
     }
 

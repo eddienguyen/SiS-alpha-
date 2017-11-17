@@ -13,7 +13,7 @@ public class ItemSpawner extends GameObject {
 
     Random r = new Random();
     public ItemSpawner(){
-        Action wait = new ActionWait(1500);
+        Action wait = new ActionWait(500);
         Action spawnAction = new Action() {
 
             @Override
