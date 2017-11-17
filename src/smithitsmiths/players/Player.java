@@ -32,7 +32,6 @@ public class Player extends GameObject implements PhysicsBody {
     Clip keepCharging;
     Clip jumping;
     MediaPlayer background ;
-    int loop = 0;
 
     public boolean isDragged;
 
@@ -106,15 +105,13 @@ public class Player extends GameObject implements PhysicsBody {
             if (force >= maxForce){
                 if (charging.getMicrosecondLength() == charging.getMicrosecondPosition()){
                     charging.stop();
-                    loop += 1;
-                    keepCharging.loop(loop);
+                    keepCharging.loop(Clip.LOOP_CONTINUOUSLY);
                 }
             }
         }
 
         if (InputManager.instance.spaceReleased && !onAir) {
             //when player is at platform(not in the air), enable jump, vice versa
-            loop = 0;
             AudioUtils.stop(charging);
             AudioUtils.stop(keepCharging);
             AudioUtils.play(jumping);
