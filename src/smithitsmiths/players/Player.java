@@ -32,7 +32,6 @@ public class Player extends GameObject implements PhysicsBody {
     Clip keepCharging;
     Clip jumping;
     MediaPlayer background;
-    int loop = 0;
 
     public boolean isDragged;
 
@@ -45,14 +44,15 @@ public class Player extends GameObject implements PhysicsBody {
 
     public Player() {
         super();
+        AudioUtils.initialize();
         isActive = true;
         isDragged = false;
         animator = new PlayerAnimator();
         this.renderer = animator;
-//        charging = AudioUtils.loadSound("assets/sound effect/charging_01.wav");
-//        keepCharging = AudioUtils.loadSound("assets/sound effect/keepcharging_01.wav");
-//        jumping = AudioUtils.loadSound("assets/sound effect/jump_01.wav");
-//        background = AudioUtils.playMedia("assets/sound effect/background/background.wav");
+        charging = AudioUtils.loadSound("assets/sound effect/charnging_modified.wav");
+        keepCharging = AudioUtils.loadSound("assets/sound effect/keepcharnging_modified.wav");
+        jumping = AudioUtils.loadSound("assets/sound effect/jump_01.wav");
+        background = AudioUtils.playMedia("assets/sound effect/background/background.wav");
 
         velocity = new Vector2D();
         boxCollider = new BoxCollider(30, 40);
@@ -97,28 +97,27 @@ public class Player extends GameObject implements PhysicsBody {
 
         if (InputManager.instance.spacePressed && !onAir) {
             if (force <= maxForce) {
+                charging.start();
                 force += 0.4f;
                 Damage = force + hammer.getCurrentHammerDamage();
                 gaugeBar.setValue(Damage);
-//                charging.start();
                 return currentForce = force;
             }
             if (force >= maxForce) {
-//                if (charging.getMicrosecondLength() == charging.getMicrosecondPosition()) {
-////                    charging.stop();
-//                    loop += 1;
-////                    keepCharging.loop(loop);
+                if (charging.getMicrosecondLength() == charging.getMicrosecondPosition()) {
+                    AudioUtils.stop(charging);
+                    keepCharging.loop(Clip.LOOP_CONTINUOUSLY);
 //                }
 
+                }
             }
         }
 
         if (InputManager.instance.spaceReleased && !onAir) {
             //when player is at platform(not in the air), enable jump, vice versa
-            loop = 0;
-//            AudioUtils.stop(charging);
-//            AudioUtils.stop(keepCharging);
-//            AudioUtils.play(jumping);
+            AudioUtils.stop(charging);
+            AudioUtils.stop(keepCharging);
+            AudioUtils.play(jumping);
             velocity.y = -Damage;
             System.out.println("Damage caused: " + Damage);
             force = 0;
@@ -131,19 +130,12 @@ public class Player extends GameObject implements PhysicsBody {
             changeAnimationForSmash();
 
             InputManager.spaceReleased = false;
-            loop = 0;
-//            charging.stop();
-//            keepCharging.stop();
-//            keepCharging.setFramePosition(0);
-//            charging.setFramePosition(0);
-//            jumping.start();
-//            jumping.setFramePosition(0);
         }
 
         //Platform physics
         moveVertical();
         //moveHorizontal will be handled by Platformer
-//        AudioUtils.mediaLoop(background);
+        AudioUtils.mediaLoop(background);
         this.position.addUp(velocity);
         this.screenPosition.addUp(velocity);
 
@@ -215,16 +207,16 @@ public class Player extends GameObject implements PhysicsBody {
     }
 
     public void getHit() {
-//        AudioUtils.mediaStop(background);
-//        AudioUtils.stop(keepCharging);
+        AudioUtils.mediaStop(background);
+        AudioUtils.stop(keepCharging);
         isActive = false;
         SceneManager.changeScene(new GameOverScene());
     }
 
     public void checkIfOutOfScreen() {
         if (this.position.x <= -15 || this.position.y >= 768) {
-//            AudioUtils.mediaStop(background);
-//            AudioUtils.stop(keepCharging);
+            AudioUtils.mediaStop(background);
+            AudioUtils.stop(keepCharging);
             SceneManager.changeScene(new GameOverScene());
         }
     }
