@@ -48,9 +48,8 @@ public class Player extends GameObject implements PhysicsBody {
         isDragged = false;
         animator = new PlayerAnimator();
         this.renderer = animator;
-        AudioUtils.initialize();
-        charging = AudioUtils.loadSound("assets/sound effect/charnging_modified.wav");
-        keepCharging = AudioUtils.loadSound("assets/sound effect/keepcharnging_modified.wav");
+        charging = AudioUtils.loadSound("assets/sound effect/charging_01.wav");
+        keepCharging = AudioUtils.loadSound("assets/sound effect/keepcharging_01.wav");
         jumping = AudioUtils.loadSound("assets/sound effect/jump_01.wav");
         background = AudioUtils.playMedia("assets/sound effect/background/background.wav");
 
@@ -69,6 +68,7 @@ public class Player extends GameObject implements PhysicsBody {
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
         animator.run(this);
+
         //reposition if needed:
         if (position.x < 100 ){
             BoxCollider nextBoxCollider = this.boxCollider.shift(1, 0);
@@ -107,7 +107,7 @@ public class Player extends GameObject implements PhysicsBody {
                     charging.stop();
                     keepCharging.loop(Clip.LOOP_CONTINUOUSLY);
                 }
-            }
+
         }
 
         if (InputManager.instance.spaceReleased && !onAir) {
@@ -122,8 +122,18 @@ public class Player extends GameObject implements PhysicsBody {
 
             //smash Hammer
             playerHammerDown.run(this);
-            animator.changeAnimation(PlayerAnimator.smashAnimation);
+
+            //change animation based on currentHammerDamage:
+            changeAnimationForSmash();
+
             InputManager.spaceReleased = false;
+            loop = 0;
+            charging.stop();
+            keepCharging.stop();
+            keepCharging.setFramePosition(0);
+            charging.setFramePosition(0);
+            jumping.start();
+            jumping.setFramePosition(0);
         }
 
         //Platform physics
@@ -136,6 +146,27 @@ public class Player extends GameObject implements PhysicsBody {
         checkIfOutOfScreen();
 
         return 0;
+    }
+
+    private void changeAnimationForSmash() {
+        int currentHammerDamage = (int) hammer.getCurrentHammerDamage();
+        switch (currentHammerDamage) {
+            case Hammer.WOODDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashWoodAnimation);
+                break;
+            case Hammer.ROCKDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashRockAnimation);
+                break;
+            case Hammer.IRONDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashIronAnimation);
+                break;
+            case Hammer.GOLDDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashGoldAnimation);
+                break;
+            case Hammer.DIAMONDDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashDiamondAnimation);
+                break;
+        }
     }
 
     private void moveVertical() {
