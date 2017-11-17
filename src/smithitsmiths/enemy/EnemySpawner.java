@@ -18,7 +18,7 @@ public class EnemySpawner extends GameObject {
     FrameCounter frameCounter = new FrameCounter(7200);
     int Lv = 1;
     int waitTime = 800;
-    int waitTimeJump = 600;
+    int waitTimeJump = 2600;
     int waitTimeBullet = 4200;
 
 

@@ -6,8 +6,6 @@ import bases.inputs.InputManager;
 import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
-import bases.renderers.Animation;
-import bases.renderers.ImageRenderer;
 import bases.renderers.PlayerAnimator;
 import bases.scenes.SceneManager;
 import smithitsmiths.GaugeBar;
@@ -19,7 +17,7 @@ import javax.sound.sampled.Clip;
 
 public class Player extends GameObject implements PhysicsBody {
     public Vector2D velocity;
-    private final float GRAVITY = 1f;
+    private final float GRAVITY = 0.8f;
 
     private BoxCollider boxCollider;
 

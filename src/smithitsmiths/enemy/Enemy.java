@@ -8,7 +8,7 @@ import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
-import smithitsmiths.GaugeBar;
+import smithitsmiths.enemy.EnemyHP;
 import smithitsmiths.Platform;
 import smithitsmiths.players.Player;
 
@@ -19,7 +19,7 @@ public class Enemy extends GameObject implements PhysicsBody {
     private final float GRAVITY = 1f;
     public float HP;
     public float JUMPSPEED = -4;
-    GaugeBar gaugeBar;
+    EnemyHP enemyHP;
 
     public Enemy() {
         super();
@@ -27,8 +27,8 @@ public class Enemy extends GameObject implements PhysicsBody {
         velocity = new Vector2D();
         boxCollider = new BoxCollider();
         this.children.add(boxCollider);
-        gaugeBar = new GaugeBar();
-        this.children.add(gaugeBar);
+        enemyHP = new EnemyHP();
+        this.children.add(enemyHP);
 
     }
 
@@ -40,8 +40,8 @@ public class Enemy extends GameObject implements PhysicsBody {
         moveVertical();
         spikeChecker();
 
-        gaugeBar.setPosition(this.position.x - 18, this.position.y - 40);
-        gaugeBar.setValue(HP * 3);
+        enemyHP.setPosition(this.position.x - 18, this.position.y - 40);
+        enemyHP.setValue(HP * 3);
         playerHit();
         this.velocity.y += GRAVITY;
         this.velocity.x = -moveSpeed * 3 / 2;
