@@ -16,13 +16,13 @@ public class EnemySpawner extends GameObject {
     int spawnCount;
     int level;
     FrameCounter frameCounter = new FrameCounter(7200);
-    Random random = new Random();
-
     int Lv = 1;
-    int waitTime = 2000;
-    int waitTimeJump = 8400;
-    int waitTimeBullet = 14200;
+    int waitTime = 800;
+    int waitTimeJump = 600;
+    int waitTimeBullet = 4200;
 
+
+    Random random = new Random();
 
     public EnemySpawner(){
         Action wait = new ActionWait(waitTime);
@@ -31,15 +31,12 @@ public class EnemySpawner extends GameObject {
         Action spawnAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
-                int r = random.nextInt(100);
-                if (r < 90) {
-                    Enemy enemy = GameObject.recycle(Enemy.class);
-                    enemy.position.set(1024, 0);
-                    enemy.boxCollider.setWidth(30);
-                    enemy.boxCollider.setHeight(30);
-                    enemy.setMoveSpeed(MapSpawner.getCurrentSpeed());
-                    enemy.HP = 10;
-                }
+                Enemy enemy = GameObject.recycle(Enemy.class);
+                enemy.position.set(1100, 0);
+                enemy.boxCollider.setWidth(30);
+                enemy.boxCollider.setHeight(30);
+                enemy.setMoveSpeed(MapSpawner.getCurrentSpeed());
+                enemy.HP = 10;
                 return true;
             }
 
@@ -55,14 +52,12 @@ public class EnemySpawner extends GameObject {
         Action spawnJumpAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
-                int r = random.nextInt(100);
-                if (r < 70){
-                    EnemyJumping jumping = GameObject.recycle(EnemyJumping.class);
-                    jumping.position.set(1024, 0);
-                    jumping.boxCollider.setWidth(50);
-                    jumping.boxCollider.setHeight(50);
-                    jumping.HP = 15;
-                }
+                EnemyJumping jumping = GameObject.recycle(EnemyJumping.class);
+                jumping.position.set(1024, 0);
+                jumping.boxCollider.setWidth(50);
+                jumping.boxCollider.setHeight(50);
+                jumping.setMoveSpeed(MapSpawner.getCurrentSpeed());
+                jumping.HP = 15;
                 return true;
             }
 
@@ -78,7 +73,7 @@ public class EnemySpawner extends GameObject {
             @Override
             public boolean run(GameObject owner) {
                 Bullet bullet = GameObject.recycle(Bullet.class);
-                bullet.position.set(1024, 524);
+                bullet.position.set(1024, 500);
                 bullet.boxCollider.setWidth(60);
                 bullet.boxCollider.setHeight(30);
 //                charging.HP = 15;

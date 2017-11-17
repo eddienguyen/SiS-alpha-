@@ -41,16 +41,17 @@ public class Enemy extends GameObject implements PhysicsBody {
         spikeChecker();
 
         gaugeBar.setPosition(this.position.x - 18, this.position.y - 40);
-        gaugeBar.setValue(HP*3);
+        gaugeBar.setValue(HP * 3);
         playerHit();
         this.velocity.y += GRAVITY;
-        this.velocity.x = -moveSpeed*2;
+        this.velocity.x = -moveSpeed * 3 / 2;
+//        this.position.addUp(velocity);
         return 0;
     }
 
     private void spikeChecker() {
-        Spike spike = Physics.collideWith(this.boxCollider,Spike.class);
-        if (spike != null){
+        Spike spike = Physics.collideWith(this.boxCollider, Spike.class);
+        if (spike != null) {
             this.velocity.y += JUMPSPEED;
         }
     }
@@ -128,10 +129,10 @@ public class Enemy extends GameObject implements PhysicsBody {
     }
 
     public void getHit() {
-        if (this.HP <= 0){
+        if (this.HP <= 0) {
             this.isActive = false;
         }
-        System.out.println(String.format("enemy get hit, left %s HP",HP ));
+        System.out.println(String.format("enemy get hit, left %s HP", HP));
     }
 
     public float getMoveSpeed() {
