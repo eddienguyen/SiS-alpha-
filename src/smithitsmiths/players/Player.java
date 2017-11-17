@@ -188,6 +188,8 @@ public class Player extends GameObject implements PhysicsBody {
 
     public void checkIfOutOfScreen(){
         if (this.position.x <= -15 || this.position.y >= 768){
+            AudioUtils.mediaStop(background);
+            AudioUtils.stop(keepCharging);
             SceneManager.changeScene(new GameOverScene());
         }
     }
