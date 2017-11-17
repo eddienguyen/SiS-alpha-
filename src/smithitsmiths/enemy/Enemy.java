@@ -45,7 +45,6 @@ public class Enemy extends GameObject implements PhysicsBody {
         playerHit();
         this.velocity.y += GRAVITY;
         this.velocity.x = -moveSpeed*2;
-//        this.position.addUp(velocity);
         return 0;
     }
 

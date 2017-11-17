@@ -19,9 +19,9 @@ public class EnemySpawner extends GameObject {
     Random random = new Random();
 
     int Lv = 1;
-    int waitTime = 1000;
-    int waitTimeJump = 4400;
-    int waitTimeBullet = 7200;
+    int waitTime = 2000;
+    int waitTimeJump = 8400;
+    int waitTimeBullet = 14200;
 
 
     public EnemySpawner(){
