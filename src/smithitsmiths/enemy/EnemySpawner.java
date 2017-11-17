@@ -18,7 +18,7 @@ public class EnemySpawner extends GameObject {
     FrameCounter frameCounter = new FrameCounter(7200);
     int Lv = 1;
     int waitTime = 1000;
-    int waitTimeJump = 4400;
+    int waitTimeJump = 4600;
     int waitTimeBullet = 7200;
 
 
@@ -72,7 +72,7 @@ public class EnemySpawner extends GameObject {
             @Override
             public boolean run(GameObject owner) {
                 Bullet bullet = GameObject.recycle(Bullet.class);
-                bullet.position.set(1024, 524);
+                bullet.position.set(1024, 500);
                 bullet.boxCollider.setWidth(60);
                 bullet.boxCollider.setHeight(30);
 //                charging.HP = 15;
