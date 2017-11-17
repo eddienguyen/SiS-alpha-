@@ -6,7 +6,7 @@ import smithitsmiths.Platform;
 
 public class MapSpawner extends GameObject {
     public static float eachMapSpeed;
-    public static final float SPEED_MULTIPLIER = 1.25f;
+    public static final float SPEED_MULTIPLIER = 1.05f;
 
     static Map currentMap;
     static Map nextMap;
@@ -15,7 +15,7 @@ public class MapSpawner extends GameObject {
     public MapSpawner() {
         super();
 
-        eachMapSpeed = 1;
+        eachMapSpeed = 3;
 
     }
 
