@@ -19,7 +19,7 @@ public class Bullet extends GameObject implements PhysicsBody{
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/Bullet.png");
         velocity = new Vector2D();
-        boxCollider = new BoxCollider(60,30);
+        boxCollider = new BoxCollider();
         this.children.add(boxCollider);
     }
 

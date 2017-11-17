@@ -29,7 +29,7 @@ public class EnemyJumping extends GameObject implements PhysicsBody {
 
         velocity = new Vector2D();
 
-        boxCollider = new BoxCollider(50, 50);
+        boxCollider = new BoxCollider();
         this.children.add(boxCollider);
 
         enemyHP = new EnemyHP();

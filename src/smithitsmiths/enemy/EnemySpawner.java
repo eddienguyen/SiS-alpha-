@@ -20,6 +20,7 @@ public class EnemySpawner extends GameObject {
     int waitTime = 800;
     int waitTimeJump = 2600;
     int waitTimeBullet = 3200;
+    int waitTimeAborigines = 4400;
 
 
     Random random = new Random();
@@ -28,6 +29,7 @@ public class EnemySpawner extends GameObject {
         Action wait = new ActionWait(waitTime);
         Action waitJump = new ActionWait(waitTimeJump);
         Action waitBullet = new ActionWait(waitTimeBullet);
+        Action waitAbo = new ActionWait(waitTimeAborigines);
         Action spawnAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
@@ -87,6 +89,25 @@ public class EnemySpawner extends GameObject {
         };
         Action spawnBulletSequence = new ActionRepeatForever(new ActionSequence(waitBullet, spawnBulletAction));
         this.addAction(spawnBulletSequence);
+        Action spawnAboAction = new Action() {
+            @Override
+            public boolean run(GameObject owner) {
+                EnemyAborigines aborigines = GameObject.recycle(EnemyAborigines.class);
+                aborigines.position.set(1024, 500);
+                aborigines.boxCollider.setWidth(30);
+                aborigines.boxCollider.setHeight(30);
+                aborigines.setMoveSpeed(MapSpawner.getCurrentSpeed());
+                aborigines.HP = 15;
+                return true;
+            }
+
+            @Override
+            public void reset() {
+
+            }
+        };
+        Action spawnAboSequence = new ActionRepeatForever(new ActionSequence(waitAbo, spawnAboAction));
+        this.addAction(spawnAboSequence);
 
     }
 
@@ -98,6 +119,7 @@ public class EnemySpawner extends GameObject {
             waitTime -= 50;
             waitTimeJump -= 130;
             waitTimeBullet -= 180;
+            waitTimeAborigines -= 220;
             Lv++;
         }
 

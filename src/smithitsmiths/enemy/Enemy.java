@@ -25,8 +25,10 @@ public class Enemy extends GameObject implements PhysicsBody {
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/enemyWalking.png");
         velocity = new Vector2D();
+
         boxCollider = new BoxCollider();
         this.children.add(boxCollider);
+
         enemyHP = new EnemyHP();
         this.children.add(enemyHP);
 
@@ -135,7 +137,8 @@ public class Enemy extends GameObject implements PhysicsBody {
         System.out.println(String.format("enemy get hit, left %s HP", HP));
     }
 
-    public float getMoveSpeed() {
+    public float getMoveSpeed()
+    {
         return moveSpeed;
     }
 
