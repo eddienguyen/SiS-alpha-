@@ -15,7 +15,7 @@ public class MapSpawner extends GameObject {
     public MapSpawner() {
         super();
 
-        eachMapSpeed = 1;
+        eachMapSpeed = 2;
 
     }
 
