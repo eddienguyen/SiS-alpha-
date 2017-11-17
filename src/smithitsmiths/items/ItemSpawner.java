@@ -15,10 +15,10 @@ public class ItemSpawner extends GameObject {
     public ItemSpawner(){
         Action wait = new ActionWait(2000);
         Action spawnAction = new Action() {
-            int randomMaterialChance = r.nextInt(101);
 
             @Override
             public boolean run(GameObject owner) {
+                int randomMaterialChance = r.nextInt(101);
                 if (randomMaterialChance < 40) {
                     HammerPickUp hammerPickUp = new HammerPickUp(0);
                     hammerPickUp.position.set(924,200);
