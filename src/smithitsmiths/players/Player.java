@@ -68,11 +68,11 @@ public class Player extends GameObject implements PhysicsBody {
         animator.run(this);
 
         //reposition if needed:
-        if (position.x < 100 ){
+        if (position.x < 100) {
             BoxCollider nextBoxCollider = this.boxCollider.shift(1, 0);
             Platform pf = Physics.collideWith(nextBoxCollider, Platform.class);
 
-            if (pf != null){
+            if (pf != null) {
                 velocity.x = 0;
             } else {
                 this.position.x += 0.5f;
@@ -100,7 +100,7 @@ public class Player extends GameObject implements PhysicsBody {
                 charging.start();
                 return currentForce = force;
             }
-            if (force >= maxForce){
+            if (force >= maxForce) {
                 loop += 1;
                 keepCharging.loop(loop);
             }
@@ -108,14 +108,17 @@ public class Player extends GameObject implements PhysicsBody {
 
         if (InputManager.instance.spaceReleased && !onAir) {
             //when player is at platform(not in the air), enable jump, vice versa
-            velocity.y = - Damage;
+            velocity.y = -Damage;
             System.out.println("Damage caused: " + Damage);
             force = 0;
             gaugeBar.reset();
 
             //smash Hammer
             playerHammerDown.run(this);
-            animator.changeAnimation(PlayerAnimator.smashAnimation);
+
+            //change animation based on currentHammerDamage:
+            changeAnimationForSmash();
+
             InputManager.spaceReleased = false;
             loop = 0;
             charging.stop();
@@ -136,6 +139,27 @@ public class Player extends GameObject implements PhysicsBody {
         checkIfOutOfScreen();
 
         return 0;
+    }
+
+    private void changeAnimationForSmash() {
+        int currentHammerDamage = (int) hammer.getCurrentHammerDamage();
+        switch (currentHammerDamage) {
+            case Hammer.WOODDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashWoodAnimation);
+                break;
+            case Hammer.ROCKDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashRockAnimation);
+                break;
+            case Hammer.IRONDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashIronAnimation);
+                break;
+            case Hammer.GOLDDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashGoldAnimation);
+                break;
+            case Hammer.DIAMONDDAMAGE:
+                animator.changeAnimation(PlayerAnimator.smashDiamondAnimation);
+                break;
+        }
     }
 
     private void moveVertical() {
@@ -174,14 +198,16 @@ public class Player extends GameObject implements PhysicsBody {
         return this.boxCollider;
     }
 
-    public float getDamage(){ return this.Damage; }
+    public float getDamage() {
+        return this.Damage;
+    }
 
     public void getHit() {
         SceneManager.changeScene(new GameOverScene());
     }
 
-    public void checkIfOutOfScreen(){
-        if (this.position.x <= -15 || this.position.y >= 768){
+    public void checkIfOutOfScreen() {
+        if (this.position.x <= -15 || this.position.y >= 768) {
             SceneManager.changeScene(new GameOverScene());
         }
     }
@@ -190,7 +216,7 @@ public class Player extends GameObject implements PhysicsBody {
         //unused
     }
 
-    void play(Clip clip){
+    void play(Clip clip) {
         clip.setFramePosition(0); // reset con trỏ về đầu đoạn sound
         clip.start();
     }

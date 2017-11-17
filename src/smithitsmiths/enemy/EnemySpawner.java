@@ -12,13 +12,11 @@ import smithitsmiths.maps.MapSpawner;
 import java.util.Random;
 
 public class EnemySpawner extends GameObject {
-    public final int NORMAL_ENEMIES_EACH_MAP = 5;
-    int spawnCount;
-    int level;
+
     FrameCounter frameCounter = new FrameCounter(7200);
     int Lv = 1;
-    int waitTime = 800;
-    int waitTimeJump = 600;
+    int waitTime = 1800;
+    int waitTimeJump = 1600;
     int waitTimeBullet = 4200;
 
 
