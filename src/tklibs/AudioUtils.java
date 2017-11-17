@@ -2,6 +2,7 @@ package tklibs;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -46,5 +47,27 @@ public class AudioUtils {
         MediaPlayer mediaPlayer = new MediaPlayer(new Media(uriString));
         mediaPlayer.play();
         return mediaPlayer;
+    }
+
+    public static void mediaLoop(MediaPlayer mediaPlayer){
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+            }
+        });
+    }
+
+    public static void mediaStop(MediaPlayer mediaPlayer){
+        mediaPlayer.stop();
+    }
+
+    public static void play(Clip clip){
+        clip.setFramePosition(0); // reset con trỏ về đầu đoạn sound
+        clip.start();
+    }
+    public static void stop(Clip clip){
+        clip.setFramePosition(0);
+        clip.stop();
     }
 }

@@ -10,6 +10,7 @@ import bases.renderers.Animation;
 import bases.renderers.ImageRenderer;
 import bases.renderers.PlayerAnimator;
 import bases.scenes.SceneManager;
+import javafx.scene.media.MediaPlayer;
 import smithitsmiths.GaugeBar;
 import smithitsmiths.Platform;
 import smithitsmiths.scenes.GameOverScene;
@@ -30,6 +31,7 @@ public class Player extends GameObject implements PhysicsBody {
     Clip charging;
     Clip keepCharging;
     Clip jumping;
+    MediaPlayer background ;
     int loop = 0;
 
     public boolean isDragged;
@@ -47,9 +49,11 @@ public class Player extends GameObject implements PhysicsBody {
         isDragged = false;
         animator = new PlayerAnimator();
         this.renderer = animator;
-        charging = AudioUtils.loadSound("assets/sound effect/charging_01.wav");
-        keepCharging = AudioUtils.loadSound("assets/sound effect/keepcharging_01.wav");
+        AudioUtils.initialize();
+        charging = AudioUtils.loadSound("assets/sound effect/charnging_modified.wav");
+        keepCharging = AudioUtils.loadSound("assets/sound effect/keepcharnging_modified.wav");
         jumping = AudioUtils.loadSound("assets/sound effect/jump_01.wav");
+        background = AudioUtils.playMedia("assets/sound effect/background/background.wav");
 
         velocity = new Vector2D();
         boxCollider = new BoxCollider(30, 40);
@@ -66,7 +70,6 @@ public class Player extends GameObject implements PhysicsBody {
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
         animator.run(this);
-
         //reposition if needed:
         if (position.x < 100 ){
             BoxCollider nextBoxCollider = this.boxCollider.shift(1, 0);
@@ -92,7 +95,6 @@ public class Player extends GameObject implements PhysicsBody {
         //gaugebar update:
         gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
 
-
         if (InputManager.instance.spacePressed && !onAir) {
             if (force <= maxForce) {
                 force += 0.4f;
@@ -103,13 +105,20 @@ public class Player extends GameObject implements PhysicsBody {
 
             }
             if (force >= maxForce){
-                loop += 1;
-                keepCharging.loop(loop);
+                if (charging.getMicrosecondLength() == charging.getMicrosecondPosition()){
+                    charging.stop();
+                    loop += 1;
+                    keepCharging.loop(loop);
+                }
             }
         }
 
         if (InputManager.instance.spaceReleased && !onAir) {
             //when player is at platform(not in the air), enable jump, vice versa
+            loop = 0;
+            AudioUtils.stop(charging);
+            AudioUtils.stop(keepCharging);
+            AudioUtils.play(jumping);
             velocity.y = - Damage;
             System.out.println("Damage caused: " + Damage);
             force = 0;
@@ -119,19 +128,12 @@ public class Player extends GameObject implements PhysicsBody {
             playerHammerDown.run(this);
             animator.changeAnimation(PlayerAnimator.smashAnimation);
             InputManager.spaceReleased = false;
-            loop = 0;
-            charging.stop();
-            keepCharging.stop();
-            keepCharging.setFramePosition(0);
-            charging.setFramePosition(0);
-            jumping.start();
-            jumping.setFramePosition(0);
         }
 
         //Platform physics
         moveVertical();
         //moveHorizontal will be handled by Platformer
-
+        AudioUtils.mediaLoop(background);
         this.position.addUp(velocity);
         this.screenPosition.addUp(velocity);
 
@@ -179,6 +181,8 @@ public class Player extends GameObject implements PhysicsBody {
     public float getDamage(){ return this.Damage; }
 
     public void getHit() {
+        AudioUtils.mediaStop(background);
+        isActive = false;
         SceneManager.changeScene(new GameOverScene());
     }
 
