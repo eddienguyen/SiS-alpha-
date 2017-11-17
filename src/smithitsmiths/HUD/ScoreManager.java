@@ -57,7 +57,7 @@ public class ScoreManager extends GameObject {
     @Override
     public void render(Graphics2D g2d) {
         super.render(g2d);
-        g2d.setColor(Color.GRAY );
+        g2d.setColor(Color.WHITE );
         g2d.drawString(scoreString,100,650);
         g2d.drawString("current Hammer: " + hammer.toString(),100, 700);
     }
