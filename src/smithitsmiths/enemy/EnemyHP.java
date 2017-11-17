@@ -10,24 +10,26 @@ public class EnemyHP extends GameObject {
     public float value;
     public float min, max;
 
-    public EnemyHP(){
-        this(0,100);
+    public EnemyHP() {
+        this(0, 100);
     }
 
-    public EnemyHP(float min, float max){
+    public EnemyHP(float min, float max) {
         this.min = min;
         this.max = max;
     }
 
-    public void setValue(float value){
+    public void setValue(float value) {
         //this.value = value*FILLCONSTANT;    //easier to look
         this.value = value;
     }
 
-    public float getValue(){ return this.value; }
+    public float getValue() {
+        return this.value;
+    }
 
-    public void setPosition(float x, float y){
-        this.position.set(x,y);
+    public void setPosition(float x, float y) {
+        this.position.set(x, y);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class EnemyHP extends GameObject {
     public void render(Graphics2D g2d) {
         super.render(g2d);
         g2d.setColor(Color.RED);
-        g2d.drawLine((int)this.position.x, (int)this.position.y,(int)(this.position.x + value),(int)this.position.y);
+        g2d.drawLine((int) this.position.x, (int) this.position.y, (int) (this.position.x + value), (int) this.position.y);
     }
 
     //TODO : reset value (to 0)

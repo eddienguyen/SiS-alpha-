@@ -15,11 +15,11 @@ public class EnemySpawner extends GameObject {
     public final int NORMAL_ENEMIES_EACH_MAP = 5;
     int spawnCount;
     int level;
-    FrameCounter frameCounter = new FrameCounter(7200);
+    FrameCounter frameCounter = new FrameCounter(4200);
     int Lv = 1;
     int waitTime = 800;
     int waitTimeJump = 2600;
-    int waitTimeBullet = 4200;
+    int waitTimeBullet = 3200;
 
 
     Random random = new Random();
@@ -96,8 +96,8 @@ public class EnemySpawner extends GameObject {
         if (frameCounter.run() && Lv <= 10){
             frameCounter.reset();
             waitTime -= 50;
-            waitTimeJump -= 240;
-            waitTimeBullet -= 360;
+            waitTimeJump -= 130;
+            waitTimeBullet -= 180;
             Lv++;
         }
 
