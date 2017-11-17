@@ -40,8 +40,8 @@ public class Enemy extends GameObject implements PhysicsBody {
         moveVertical();
         spikeChecker();
 
-        gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
-        gaugeBar.setValue(HP);
+        gaugeBar.setPosition(this.position.x - 18, this.position.y - 40);
+        gaugeBar.setValue(HP*3);
         playerHit();
         this.velocity.y += GRAVITY;
         this.velocity.x = -moveSpeed*2;

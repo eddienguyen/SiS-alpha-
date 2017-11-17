@@ -95,8 +95,8 @@ public class EnemySpawner extends GameObject {
         if (frameCounter.run() && Lv <= 10){
             frameCounter.reset();
             waitTime -= 50;
-            waitTimeJump -= 120;
-            waitTimeBullet -= 180;
+            waitTimeJump -= 240;
+            waitTimeBullet -= 360;
             Lv++;
         }
 
