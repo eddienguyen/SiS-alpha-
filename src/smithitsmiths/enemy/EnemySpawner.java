@@ -8,21 +8,28 @@ import bases.actions.ActionRepeatForever;
 import bases.actions.ActionSequence;
 import bases.actions.ActionWait;
 import smithitsmiths.maps.MapSpawner;
+import smithitsmiths.players.Player;
+import tklibs.AudioUtils;
 
+import javax.sound.sampled.Clip;
 import java.util.Random;
 
 public class EnemySpawner extends GameObject {
-
+    Clip rocket;
+    public final int NORMAL_ENEMIES_EACH_MAP = 5;
+    int spawnCount;
+    int level;
     FrameCounter frameCounter = new FrameCounter(7200);
     int Lv = 1;
-    int waitTime = 1800;
-    int waitTimeJump = 1600;
-    int waitTimeBullet = 4200;
+    int waitTime = 800;
+    int waitTimeJump = 600;
+    int waitTimeBullet = 200;
 
 
     Random random = new Random();
 
     public EnemySpawner(){
+        rocket = AudioUtils.loadSound("assets/sound effect/rocket.wav");
         Action wait = new ActionWait(waitTime);
         Action waitJump = new ActionWait(waitTimeJump);
         Action waitBullet = new ActionWait(waitTimeBullet);
@@ -72,6 +79,7 @@ public class EnemySpawner extends GameObject {
             public boolean run(GameObject owner) {
                 Bullet bullet = GameObject.recycle(Bullet.class);
                 bullet.position.set(1024, 500);
+                AudioUtils.play(rocket);
                 bullet.boxCollider.setWidth(60);
                 bullet.boxCollider.setHeight(30);
 //                charging.HP = 15;
@@ -80,7 +88,6 @@ public class EnemySpawner extends GameObject {
 
             @Override
             public void reset() {
-
             }
         };
         Action spawnBulletSequence = new ActionRepeatForever(new ActionSequence(waitBullet, spawnBulletAction));

@@ -12,6 +12,7 @@ import smithitsmiths.enemy.Enemy;
 import smithitsmiths.scenes.GameOverScene;
 import smithitsmiths.scenes.GamePlayScene;
 import smithitsmiths.scenes.GameTutorialScene;
+import tklibs.AudioUtils;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

@@ -44,14 +44,14 @@ public class HammerSmite extends GameObject implements PhysicsBody {
             if (enemy != null) {
                 enemy.HP -= this.damage;
                 enemy.getHit();
-                kill.start();
+                AudioUtils.play(kill);
                 this.isActive = false;
             }
             EnemyJumping jumping = Physics.collideWith(boxCollider, EnemyJumping.class);
             if (jumping != null) {
                 jumping.HP -= this.damage;
                 jumping.getHit();
-                kill.start();
+                AudioUtils.play(kill);
                 this.isActive = false;
             }
             kill.setFramePosition(0);

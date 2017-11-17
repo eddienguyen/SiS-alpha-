@@ -23,6 +23,7 @@ public class GameObject {
     protected ArrayList<Action> newActions;
     protected boolean isActive;
     protected boolean isRenewing;
+    protected boolean gameIsOver;
 
     private static Vector<GameObject> gameObjects = new Vector<>();
     private static Vector<GameObject> newGameObjects = new Vector<>();
@@ -59,6 +60,10 @@ public class GameObject {
             if (child.isActive)
                 child.render(g2d);
         }
+    }
+
+    public boolean gameIsOver(){
+        return gameIsOver;
     }
 
     public boolean isActive() {

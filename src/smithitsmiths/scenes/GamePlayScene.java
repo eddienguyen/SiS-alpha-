@@ -12,14 +12,15 @@ import smithitsmiths.enemy.EnemySpawner;
 import smithitsmiths.items.ItemSpawner;
 import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
+import tklibs.AudioUtils;
 
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class GamePlayScene implements Scene {
 
     Player player = new Player();
-
     Background background = new Background();
     Background background2 = new Background();
     ScoreManager scoreManager = new ScoreManager(player);
@@ -32,7 +33,6 @@ public class GamePlayScene implements Scene {
     @Override
     public void init() {
         //4.Background
-
 
         background.position.x = 512;//still unstable
         background.screenPosition.x = 512;//still unstable
