@@ -17,7 +17,7 @@ public class Spike extends GameObject implements PhysicsBody{
     public Spike() {
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/spike.png");
-        this.boxCollider = new BoxCollider(40, 18);
+        this.boxCollider = new BoxCollider(45, 18);
         velocity = new Vector2D();
         this.children.add(boxCollider);
     }
@@ -27,9 +27,9 @@ public class Spike extends GameObject implements PhysicsBody{
         super.run(parentPosition);
         playerHit();
 
-        moveVertical();
+//        moveVertical();
         this.position.x -= moveSpeed;
-        this.velocity.y += 2;
+//        this.velocity.y += 2;
         return 0;
     }
 
