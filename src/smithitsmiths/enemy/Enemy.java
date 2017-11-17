@@ -18,6 +18,7 @@ public class Enemy extends GameObject implements PhysicsBody {
     public Vector2D velocity;
     private final float GRAVITY = 1f;
     public float HP;
+    public float JUMPSPEED = -4;
     GaugeBar gaugeBar;
 
     public Enemy() {
@@ -37,14 +38,22 @@ public class Enemy extends GameObject implements PhysicsBody {
 
         moveHorizontal();
         moveVertical();
+        spikeChecker();
 
-        gaugeBar.setPosition(this.position.x - 20, this.position.y - 40);
-        gaugeBar.setValue(HP);
+        gaugeBar.setPosition(this.position.x - 18, this.position.y - 40);
+        gaugeBar.setValue(HP*3);
         playerHit();
         this.velocity.y += GRAVITY;
         this.velocity.x = -moveSpeed*2;
 //        this.position.addUp(velocity);
         return 0;
+    }
+
+    private void spikeChecker() {
+        Spike spike = Physics.collideWith(this.boxCollider,Spike.class);
+        if (spike != null){
+            this.velocity.y += JUMPSPEED;
+        }
     }
 
     private void moveVertical() {
