@@ -14,7 +14,7 @@ import smithitsmiths.players.Player;
 public class AboBullet extends GameObject implements PhysicsBody{
     public BoxCollider boxCollider;
     public Vector2D velocity;
-    final private float GRAVITY = 0.1f;
+    final private float GRAVITY = 0.2f;
     private float moveSpeed = -8;
     public AboBullet(){
         super();
