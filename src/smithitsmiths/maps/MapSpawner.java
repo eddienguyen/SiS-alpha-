@@ -38,7 +38,7 @@ public class MapSpawner extends GameObject {
             currentMap.setEachPlatformSpeed(eachMapSpeed);
 
         } else {
-            if (currentMap.getLastPlatform().position.x <= 1035) {
+            if (currentMap.getLastPlatform().position.x <= 1069) {
                 changeMap(new MapLevelN());
                 eachMapSpeed *= SPEED_MULTIPLIER;
                 previousMap = currentMap;
@@ -47,10 +47,11 @@ public class MapSpawner extends GameObject {
                 previousMap.setEachPlatformSpeed(eachMapSpeed);
                 currentMap.setEachPlatformSpeed(eachMapSpeed);
                 System.out.println(eachMapSpeed);
+//                currentMap.getLastPlatform().position.x -= SPEED_MULTIPLIER / 1.15f;
                 nextMap = null;
             }
             if (previousMap != null) {
-                if (previousMap.getLastPlatform().position.x <= 0) {
+                if (previousMap.getLastPlatform().position.x <= -45) {
                     previousMap.deinit();
                     previousMap = null;
                 }

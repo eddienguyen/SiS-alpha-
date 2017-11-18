@@ -36,7 +36,7 @@ public class MapLevelN implements Map {
 
         //each platform is 30pixel wide, so suitablePositions is an array of x where each platform can placed on
         for (int i = 0; i < suitablePositions.length; i++) {
-            suitablePositions[i] = 1080 + (i * 45);
+            suitablePositions[i] = 1024 + (i * 45);
         }
 
 
@@ -83,14 +83,14 @@ public class MapLevelN implements Map {
     }
 
     public void generateBaseLayer() {
-        int firstPosition = 1080;
-        for (int i = 0; i < 25; i++) {
+        int firstPosition = 1069;
+        for (int i = 0; i < 30; i++) {
             Platform platform = GameObject.recycle(Platform.class);
             platform.renderer = ImageRenderer.create("assets/images/platform/groundPlatform-01.png");
             platform.position.set(firstPosition, 600);
             firstPosition += platform.getBoxCollider().getWidth();
             basePlatforms.add(platform);
-            if (i == 24) {
+            if (i == 29) {
                 //last position
                 lastPlatform = platform;
             }
@@ -126,7 +126,7 @@ public class MapLevelN implements Map {
 
                     }
                     //spike:
-                    else if (randomObject >= 90) {
+                    else if (randomObject >= 90 && randomObject < 102) {
 //                        spawnSpike();
                         for (Platform belowPlatform : basePlatforms) {
                             if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
