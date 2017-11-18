@@ -105,17 +105,16 @@ public class Player extends GameObject implements PhysicsBody {
                 if (charging.getMicrosecondLength() == charging.getMicrosecondPosition()) {
                     AudioUtils.stop(charging);
                     keepCharging.loop(Clip.LOOP_CONTINUOUSLY);
-//                }
 
                 }
             }
         }
 
         if (InputManager.instance.spaceReleased && !onAir) {
-            //when player is at platform(not in the air), enable jump, vice versa
             AudioUtils.stop(charging);
             AudioUtils.stop(keepCharging);
             AudioUtils.play(jumping);
+            //when player is at platform(not in the air), enable jump, vice versa
             velocity.y = -Damage;
             System.out.println("Damage caused: " + Damage);
             force = 0;
@@ -222,11 +221,5 @@ public class Player extends GameObject implements PhysicsBody {
     private void moveHorizontal() {
         //unused
     }
-
-    void play(Clip clip) {
-        clip.setFramePosition(0); // reset con trỏ về đầu đoạn sound
-        clip.start();
-    }
-
 
 }

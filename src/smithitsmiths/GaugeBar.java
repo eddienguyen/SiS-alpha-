@@ -7,10 +7,8 @@ import bases.renderers.ImageRenderer;
 import java.awt.*;
 
 public class GaugeBar extends GameObject {
-    public final int FILLCONSTANT = 5;
     public float value;
     public float min, max;
-    ImageRenderer gaugeBar;
 
     public GaugeBar(){
         this(0,100);
@@ -22,7 +20,6 @@ public class GaugeBar extends GameObject {
     }
 
     public void setValue(float value){
-        //this.value = value*FILLCONSTANT;    //easier to look
         this.value = value;
     }
 
@@ -41,14 +38,10 @@ public class GaugeBar extends GameObject {
     @Override
     public void render(Graphics2D g2d) {
         super.render(g2d);
-
-//        g2d.drawLine((int)this.position.x, (int)this.position.y,(int)(this.position.x + value),(int)this.position.y);
         g2d.drawRect((int)this.position.x, (int)this.position.y,50 , 10);
         g2d.setColor(Color.GREEN);
         g2d.fillRect((int)this.position.x+1, (int)this.position.y+1,(int) value, 9);
     }
-
-    //TODO : reset value (to 0)
 
     public void reset(){
         this.value = 0;

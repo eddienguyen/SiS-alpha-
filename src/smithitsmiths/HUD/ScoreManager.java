@@ -3,7 +3,6 @@ package smithitsmiths.HUD;
 import bases.FrameCounter;
 import bases.GameObject;
 import bases.Vector2D;
-import bases.renderers.ImageRenderer;
 import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Hammer;
 import smithitsmiths.players.Player;
@@ -33,7 +32,6 @@ public class ScoreManager extends GameObject {
     BufferedImage diamondHammer;
 
     public ScoreManager(Player player) {
-        //test
         scoreCount = 0;
         pointsPerSecond = 1;
         highScoreCount = 50;
@@ -63,8 +61,6 @@ public class ScoreManager extends GameObject {
         }
         scoreString = "Meters: " + Math.round(scoreCount * MapSpawner.getCurrentSpeed());
         highScoreString = "Highest: " + Math.round(highScoreCount);
-//        System.out.println(scoreString);
-//        System.out.println(highScoreString);
         return 0;
     }
 
