@@ -130,7 +130,6 @@ public class MapLevelN implements Map {
                         for (Platform belowPlatform : basePlatforms) {
                             if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
                                 Spike secondLayerSpike = GameObject.recycle(Spike.class);
-                                secondLayerSpike.renderer = ImageRenderer.create("assets/images/enemies/spike.png");
                                 secondLayerSpike.position.set(suitablePositions[layerElement]-3, 568);
                                 secondLayerObjects.add(secondLayerSpike);
                             }

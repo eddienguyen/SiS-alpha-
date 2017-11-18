@@ -9,7 +9,6 @@ import bases.actions.ActionSequence;
 import bases.actions.ActionWait;
 import smithitsmiths.maps.Map;
 import smithitsmiths.maps.MapSpawner;
-import smithitsmiths.players.Player;
 import tklibs.AudioUtils;
 
 import javax.sound.sampled.Clip;

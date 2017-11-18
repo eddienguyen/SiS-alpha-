@@ -25,7 +25,7 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
 
     public EnemyAborigines(){
         super();
-        this.renderer = ImageRenderer.create("assets/images/enemies/enemyWalking.png");
+        this.renderer = ImageRenderer.create("assets/images/enemies/Aborigines.png");
         this.getPosition().set(1024,0);
 
         velocity = new Vector2D();
