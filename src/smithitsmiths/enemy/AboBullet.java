@@ -18,7 +18,7 @@ public class AboBullet extends GameObject implements PhysicsBody{
     private float moveSpeed = -8;
     public AboBullet(){
         super();
-        this.renderer = ImageRenderer.create("assets/images/hammer/hammer1.jpg");
+        this.renderer = ImageRenderer.create("assets/images/enemies/aboBullet.png");
         boxCollider = new BoxCollider(20,20);
         this.children.add(boxCollider);
 
