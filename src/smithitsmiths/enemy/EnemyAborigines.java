@@ -50,6 +50,7 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
 
         enemyHP.setPosition(this.position.x - 18, this.position.y - 40);
         enemyHP.setValue(HP * 3);
+        this.children.add(enemyHP);
 
         deActiveIfNeeded();
         return super.run(parentPosition);
