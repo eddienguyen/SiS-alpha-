@@ -86,6 +86,7 @@ public class MapLevelN implements Map {
         int firstPosition = 1080;
         for (int i = 0; i < 25; i++) {
             Platform platform = GameObject.recycle(Platform.class);
+            platform.renderer = ImageRenderer.create("assets/images/platform/groundPlatform-01.png");
             platform.position.set(firstPosition, 600);
             firstPosition += platform.getBoxCollider().getWidth();
             basePlatforms.add(platform);
@@ -117,7 +118,7 @@ public class MapLevelN implements Map {
                         for (Platform belowPlatform : basePlatforms) {
                             if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
                                 Platform secondLayerPlatform = GameObject.recycle(Platform.class);
-                                secondLayerPlatform.renderer = ImageRenderer.create("assets/images/platform/dirt_grass.png");
+                                secondLayerPlatform.renderer = ImageRenderer.create("assets/images/platform/grassPlatform-01.png");
                                 secondLayerPlatform.position.set(suitablePositions[layerElement], 555);
                                 secondLayerObjects.add(secondLayerPlatform);
                             }
@@ -157,7 +158,7 @@ public class MapLevelN implements Map {
                         for (GameObject object : secondLayerObjects) {
                             if ((object.getClass().equals(Platform.class)) && (object.position.isMatch(suitablePositions[layerElement], 570))) {
                                 Platform thirdLayerPlatform = GameObject.recycle(Platform.class);
-                                thirdLayerPlatform.renderer = ImageRenderer.create("assets/images/platform/dirt_grass.png");
+                                thirdLayerPlatform.renderer = ImageRenderer.create("assets/images/platform/grassPlatform-01.png");
                                 thirdLayerPlatform.position.set(suitablePositions[layerElement], 510);
                                 thirdLayerObjects.add(thirdLayerPlatform);
                             }

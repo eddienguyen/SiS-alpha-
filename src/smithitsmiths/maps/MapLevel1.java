@@ -1,6 +1,7 @@
 package smithitsmiths.maps;
 
 import bases.GameObject;
+import bases.renderers.ImageRenderer;
 import smithitsmiths.Platform;
 import smithitsmiths.players.Player;
 
@@ -17,6 +18,7 @@ public class MapLevel1 implements Map {
         int firstPosition = 0;
         for (int i = 0; i < 30; i++) {
             Platform platform = GameObject.recycle(Platform.class);
+            platform.renderer = ImageRenderer.create("assets/images/platform/grassPlatform-01.png");
             platform.position.set(firstPosition, 600);
             firstPosition += 45;
             platforms.add(platform);
