@@ -10,6 +10,8 @@ import tklibs.SpriteUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class ScoreManager extends GameObject {
     public String scoreString;
@@ -30,6 +32,7 @@ public class ScoreManager extends GameObject {
     BufferedImage ironHammer;
     BufferedImage goldHammer;
     BufferedImage diamondHammer;
+    Font customFont;
 
     public ScoreManager(Player player) {
         scoreCount = 0;
@@ -42,7 +45,16 @@ public class ScoreManager extends GameObject {
         rockHammer = SpriteUtils.loadImage("assets/images/hammer/GUI_hammer_rock.png");
         ironHammer =  SpriteUtils.loadImage("assets/images/hammer/GUI_hammer_iron.png");;
         goldHammer =  SpriteUtils.loadImage("assets/images/hammer/GUI_hammer_gold.png");;
-        diamondHammer =  SpriteUtils.loadImage("assets/images/hammer/GUI_hammer_diamond.png");;
+        diamondHammer =  SpriteUtils.loadImage("assets/images/hammer/GUI_hammer_diamond.png");
+
+        try {
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("assets/fonts/iCielSoupofJustice.ttf")).deriveFont(20f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/fonts/iCielSoupofJustice.ttf")));
+        } catch (IOException |FontFormatException e) {
+            //Handle exception
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -67,7 +79,8 @@ public class ScoreManager extends GameObject {
     @Override
     public void render(Graphics2D g2d) {
         super.render(g2d);
-        g2d.setColor(Color.WHITE);
+        g2d.setColor(Color.LIGHT_GRAY);
+        g2d.setFont(customFont);
         g2d.drawString(scoreString, 200, 700);
         g2d.fillOval(50, 650, 80, 80);
         int currentHammerDamage = (int) Hammer.getCurrentHammerDamage();
