@@ -31,12 +31,12 @@ public class EnemySpawner extends GameObject {
         Action spawnAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
-//                Enemy enemy = GameObject.recycle(Enemy.class);
-//                enemy.position.set(1100, 0);
-//                enemy.boxCollider.setWidth(30);
-//                enemy.boxCollider.setHeight(30);
-//                enemy.setMoveSpeed(MapSpawner.getCurrentSpeed());
-//                enemy.HP = 10;
+                Enemy enemy = GameObject.recycle(Enemy.class);
+                enemy.position.set(1100, 0);
+                enemy.boxCollider.setWidth(30);
+                enemy.boxCollider.setHeight(30);
+                enemy.setMoveSpeed(MapSpawner.getCurrentSpeed());
+                enemy.HP = 10;
                 return true;
             }
 
@@ -52,12 +52,12 @@ public class EnemySpawner extends GameObject {
         Action spawnJumpAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
-//                EnemyJumping jumping = GameObject.recycle(EnemyJumping.class);
-//                jumping.position.set(1024, 0);
-//                jumping.boxCollider.setWidth(50);
-//                jumping.boxCollider.setHeight(50);
-//                jumping.setMoveSpeed(MapSpawner.getCurrentSpeed());
-//                jumping.HP = 15;
+                EnemyJumping jumping = GameObject.recycle(EnemyJumping.class);
+                jumping.position.set(1024, 0);
+                jumping.boxCollider.setWidth(50);
+                jumping.boxCollider.setHeight(50);
+                jumping.setMoveSpeed(MapSpawner.getCurrentSpeed());
+                jumping.HP = 15;
                 return true;
             }
 
@@ -72,10 +72,10 @@ public class EnemySpawner extends GameObject {
         Action spawnBulletAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
-//                Bullet bullet = GameObject.recycle(Bullet.class);
-//                bullet.position.set(1024, 500);
-//                bullet.boxCollider.setWidth(60);
-//                bullet.boxCollider.setHeight(30);
+                Bullet bullet = GameObject.recycle(Bullet.class);
+                bullet.position.set(1024, 500);
+                bullet.boxCollider.setWidth(60);
+                bullet.boxCollider.setHeight(30);
 //                charging.HP = 15;
                 return true;
             }
@@ -93,13 +93,13 @@ public class EnemySpawner extends GameObject {
     @Override
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
-//        if (frameCounter.run() && Lv <= 10){
-//            frameCounter.reset();
-//            waitTime -= 50;
-//            waitTimeJump -= 240;
-//            waitTimeBullet -= 360;
-//            Lv++;
-//        }
+        if (frameCounter.run() && Lv <= 10){
+            frameCounter.reset();
+            waitTime -= 50;
+            waitTimeJump -= 240;
+            waitTimeBullet -= 360;
+            Lv++;
+        }
 
 
         //spawn by framecounter:

@@ -36,7 +36,7 @@ public class HammerPickUp extends GameObject implements PhysicsBody {
         super();
         this.boxCollider = new BoxCollider(32, 32);
         velocity = new Vector2D();
-        pickUp = AudioUtils.loadSound("assets/sound effect/pickup_01.wav");
+        pickUp = AudioUtils.loadSound("assets/sound effect/chipquest.wav");
         switch (material) {
             case WOOD:
                 this.renderer = ImageRenderer.create("assets/images/hammer/hammer_wood.png");

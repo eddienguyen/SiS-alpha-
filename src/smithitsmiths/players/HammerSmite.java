@@ -6,6 +6,7 @@ import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import smithitsmiths.enemy.Enemy;
+import smithitsmiths.enemy.EnemyAborigines;
 import smithitsmiths.enemy.EnemyJumping;
 import tklibs.AudioUtils;
 
@@ -44,13 +45,20 @@ public class HammerSmite extends GameObject implements PhysicsBody {
             if (enemy != null) {
                 enemy.HP -= this.damage;
                 enemy.getHit();
-                kill.start();
+                AudioUtils.play(kill);
                 this.isActive = false;
             }
             EnemyJumping jumping = Physics.collideWith(boxCollider, EnemyJumping.class);
             if (jumping != null) {
                 jumping.HP -= this.damage;
                 jumping.getHit();
+                AudioUtils.play(kill);
+                this.isActive = false;
+            }
+            EnemyAborigines aborigines = Physics.collideWith(boxCollider, EnemyAborigines.class);
+            if (aborigines != null) {
+                aborigines.HP -= this.damage;
+                aborigines.getHit();
                 kill.start();
                 this.isActive = false;
             }
