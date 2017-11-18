@@ -113,11 +113,12 @@ public class GameWindow extends Frame {
         GameObject.runAllActions();
 
         //test
-        if (InputManager.spaceReleased){
-            if (SceneManager.getCurrentScene().getClass().equals(GameTutorialScene.class)){
+        if (InputManager.spaceReleased) {
+            if (SceneManager.getCurrentScene().getClass().equals(GameTutorialScene.class)) {
                 SceneManager.changeScene(new GamePlayScene());
             }
         }
+
 
         //out of for (gameObjects)
         SceneManager.changeSceneIfNeeded();

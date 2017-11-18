@@ -20,10 +20,7 @@ import java.awt.image.BufferedImage;
 
 public class GamePlayScene implements Scene {
 
-    Player player = new Player();
-    Background background = new Background();
-    Background background2 = new Background();
-    ScoreManager scoreManager = new ScoreManager(player);
+    Player player;
 
     @Override
     public void deinit() {
@@ -32,6 +29,10 @@ public class GamePlayScene implements Scene {
 
     @Override
     public void init() {
+        player = new Player();
+        Background background = new Background();
+        Background background2 = new Background();
+        ScoreManager scoreManager = new ScoreManager(player);
         //4.Background
 
         background.position.x = 512;//still unstable
@@ -44,8 +45,9 @@ public class GamePlayScene implements Scene {
         background2.position.y = 768/2;
         background2.screenPosition.y = 768/2;
 
-        MapSpawner mapSpawner = new MapSpawner();
+
         player.position.set(100, 50);
+        MapSpawner mapSpawner = new MapSpawner();
 
         GameObject.add(background);
         GameObject.add(background2);
