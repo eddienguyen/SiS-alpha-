@@ -18,11 +18,12 @@ public class EnemySpawner extends GameObject {
     public final int NORMAL_ENEMIES_EACH_MAP = 5;
     int spawnCount;
     int level;
-    FrameCounter frameCounter = new FrameCounter(7200);
+    FrameCounter frameCounter = new FrameCounter(4200);
     int Lv = 1;
-    int waitTime = 2800;
+    int waitTime = 800;
     int waitTimeJump = 2600;
-    int waitTimeBullet = 2200;
+    int waitTimeBullet = 3200;
+    int waitTimeAborigines = 4400;
 
 
     Random random = new Random();
@@ -32,6 +33,7 @@ public class EnemySpawner extends GameObject {
         Action wait = new ActionWait(waitTime);
         Action waitJump = new ActionWait(waitTimeJump);
         Action waitBullet = new ActionWait(waitTimeBullet);
+        Action waitAbo = new ActionWait(waitTimeAborigines);
         Action spawnAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
@@ -87,26 +89,84 @@ public class EnemySpawner extends GameObject {
 
             @Override
             public void reset() {
+
             }
         };
         Action spawnBulletSequence = new ActionRepeatForever(new ActionSequence(waitBullet, spawnBulletAction));
         this.addAction(spawnBulletSequence);
+        Action spawnAboAction = new Action() {
+            @Override
+            public boolean run(GameObject owner) {
+                EnemyAborigines aborigines = GameObject.recycle(EnemyAborigines.class);
+                aborigines.position.set(1024, 500);
+                aborigines.boxCollider.setWidth(30);
+                aborigines.boxCollider.setHeight(30);
+                aborigines.setMoveSpeed(MapSpawner.getCurrentSpeed());
+                aborigines.HP = 15;
+                return true;
+            }
+
+            @Override
+            public void reset() {
+
+            }
+        };
+        Action spawnAboSequence = new ActionRepeatForever(new ActionSequence(waitAbo, spawnAboAction));
+        this.addAction(spawnAboSequence);
 
     }
 
     @Override
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
-        if (frameCounter.run() && Lv <= 10) {
+        if (frameCounter.run() && Lv <= 10){
             frameCounter.reset();
             waitTime -= 50;
-            waitTimeJump -= 240;
-            waitTimeBullet -= 360;
+            waitTimeJump -= 130;
+            waitTimeBullet -= 180;
+            waitTimeAborigines -= 220;
             Lv++;
         }
 
 
+        //spawn by framecounter:
+//        if (frameCounter.run()) {
+//
+//            spawnByRow();
+//            spawnCount++;
+//
+//            if (spawnCount >= NORMAL_ENEMIES_EACH_MAP) {
+//                spawnCount = 0;
+//                level++;
+//                //spawnBoss(level);
+//            }
+//
+//            frameCounter.reset();
+//        }
+
         return 0;
     }
 
+//    private void spawnByRow() {
+//        //4 layers's objects
+//        Enemy enemy = GameObject.recycle(Enemy.class);
+//        enemy.boxCollider.setWidth(30);
+//        enemy.boxCollider.setHeight(30);
+//        enemy.HP = 10;
+//        int randomSpawnY = random.nextInt(4) + 2;
+//        switch (randomSpawnY) {
+//            case 2:
+//                enemy.position.set(1054, 570);
+//                break;
+//            case 3:
+//                enemy.position.set(1054, 540);
+//                break;
+//            case 4:
+//                enemy.position.set(1054, 510);
+//                break;
+//            case 5:
+//                enemy.position.set(1054, 480);
+//                break;
+//        }
+//    }
 }
