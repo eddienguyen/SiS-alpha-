@@ -7,6 +7,7 @@ import bases.actions.Action;
 import bases.actions.ActionRepeatForever;
 import bases.actions.ActionSequence;
 import bases.actions.ActionWait;
+import smithitsmiths.maps.Map;
 import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
 import tklibs.AudioUtils;
@@ -23,8 +24,8 @@ public class EnemySpawner extends GameObject {
     int Lv = 1;
     int waitTime = 800;
     int waitTimeJump = 2600;
-    int waitTimeBullet = 3200;
-    int waitTimeAborigines = 4400;
+    int waitTimeBullet = 4200;
+    int waitTimeAborigines = 5200;
 
 
     Random random = new Random();
@@ -39,7 +40,7 @@ public class EnemySpawner extends GameObject {
             @Override
             public boolean run(GameObject owner) {
                 Enemy enemy = GameObject.recycle(Enemy.class);
-                enemy.position.set(1100, 0);
+                enemy.position.set(1024 + 40*MapSpawner.getCurrentSpeed(), 0);
                 enemy.boxCollider.setWidth(30);
                 enemy.boxCollider.setHeight(30);
                 enemy.setMoveSpeed(MapSpawner.getCurrentSpeed());
@@ -60,7 +61,7 @@ public class EnemySpawner extends GameObject {
             @Override
             public boolean run(GameObject owner) {
                 EnemyJumping jumping = GameObject.recycle(EnemyJumping.class);
-                jumping.position.set(1024, 0);
+                jumping.position.set(1024 + 40*MapSpawner.getCurrentSpeed(), 0);
                 jumping.boxCollider.setWidth(50);
                 jumping.boxCollider.setHeight(50);
                 jumping.setMoveSpeed(MapSpawner.getCurrentSpeed());
@@ -99,7 +100,7 @@ public class EnemySpawner extends GameObject {
             @Override
             public boolean run(GameObject owner) {
                 EnemyAborigines aborigines = GameObject.recycle(EnemyAborigines.class);
-                aborigines.position.set(1024, 500);
+                aborigines.position.set(1024 + 40* MapSpawner.getCurrentSpeed(), 500);
                 aborigines.boxCollider.setWidth(30);
                 aborigines.boxCollider.setHeight(30);
                 aborigines.setMoveSpeed(MapSpawner.getCurrentSpeed());
