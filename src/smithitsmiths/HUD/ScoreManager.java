@@ -48,7 +48,7 @@ public class ScoreManager extends GameObject {
         diamondHammer =  SpriteUtils.loadImage("assets/images/hammer/GUI_hammer_diamond.png");
 
         try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("assets/fonts/iCielSoupofJustice.ttf")).deriveFont(20f);
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("assets/fonts/iCielSoupofJustice.ttf")).deriveFont(30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/fonts/iCielSoupofJustice.ttf")));
         } catch (IOException |FontFormatException e) {

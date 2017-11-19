@@ -1,6 +1,5 @@
 import bases.GameObject;
 import bases.inputs.InputManager;
-import bases.maps.Map;
 import bases.scenes.Scene;
 import bases.scenes.SceneManager;
 import bases.settings.Settings;
@@ -47,7 +46,6 @@ public class GameWindow extends Frame {
 
     private void setupWindow() {
         this.setSize(Settings.instance.getWindowWidth(), Settings.instance.getWindowHeight());
-
         this.setTitle("Smith-it Smith");
         this.setVisible(true);
 
@@ -117,6 +115,12 @@ public class GameWindow extends Frame {
         //test
         if (InputManager.spaceReleased) {
             if (SceneManager.getCurrentScene().getClass().equals(GameTutorialScene.class)) {
+                SceneManager.changeScene(new GamePlayScene());
+            }
+        }
+
+        if (InputManager.xPressed){
+            if (SceneManager.getCurrentScene().getClass().equals(GameOverScene.class)){
                 SceneManager.changeScene(new GamePlayScene());
             }
         }

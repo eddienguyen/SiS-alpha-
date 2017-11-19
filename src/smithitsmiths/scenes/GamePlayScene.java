@@ -1,7 +1,6 @@
 package smithitsmiths.scenes;
 
 import bases.GameObject;
-import bases.maps.Map;
 import bases.scenes.Scene;
 import smithitsmiths.HUD.ScoreManager;
 import smithitsmiths.backgrounds.Background;
@@ -47,11 +46,11 @@ public class GamePlayScene implements Scene {
 
 
         player.position.set(100, 50);
-        MapSpawner mapSpawner = new MapSpawner();
+
 
         GameObject.add(background);
         GameObject.add(background2);
-        GameObject.add(mapSpawner);
+        GameObject.add(new MapSpawner());
         GameObject.add(player);
 
         GameObject.add(new EnemySpawner());

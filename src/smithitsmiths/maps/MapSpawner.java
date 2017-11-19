@@ -8,9 +8,9 @@ public class MapSpawner extends GameObject {
     public static float eachMapSpeed;
     public static final float SPEED_MULTIPLIER = 1.05f;
 
-    static Map currentMap;
-    static Map nextMap;
-    static Map previousMap;
+    Map currentMap;
+    Map nextMap;
+    Map previousMap;
 
     public MapSpawner() {
         super();
@@ -28,7 +28,7 @@ public class MapSpawner extends GameObject {
         return 0;
     }
 
-    public static void autoLoadNextMap(Map newMap) {      //changeMap
+    public void autoLoadNextMap(Map newMap) {      //changeMap
         //change speed of currentMap => change speed of previousMap also
 
 
@@ -36,6 +36,7 @@ public class MapSpawner extends GameObject {
             currentMap = newMap;
             currentMap.init();
             currentMap.setEachPlatformSpeed(eachMapSpeed);
+            System.out.println("Curent map == null");
 
         } else {
             if (currentMap.getLastPlatform().position.x <= 1069) {
@@ -59,7 +60,7 @@ public class MapSpawner extends GameObject {
         }
     }
 
-    public static void changeMap(Map newMap) {
+    public void changeMap(Map newMap) {
 
         nextMap = newMap;
 
