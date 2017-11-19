@@ -22,10 +22,7 @@ public class MapLevel1 implements Map {
             platform.position.set(firstPosition, 600);
             firstPosition += 45;
             platforms.add(platform);
-            if (i == 29) {
-                //last position
-                lastPlatform = platform;
-            }
+            lastPlatform = platform;
         }
 
 

@@ -22,6 +22,9 @@ public class MapLevelN implements Map {
     int[] suitablePositions = new int[30];
 
     Platform lastPlatform = new Platform();
+    Platform lastAirPlatform = new Platform();
+    Spike lastSpike = new Spike();
+
     ArrayList<Platform> basePlatforms = new ArrayList<>();
     ArrayList<GameObject> secondLayerObjects = new ArrayList<>();
     ArrayList<GameObject> thirdLayerObjects = new ArrayList<>();
@@ -90,10 +93,7 @@ public class MapLevelN implements Map {
             platform.position.set(firstPosition, 600);
             firstPosition += platform.getBoxCollider().getWidth();
             basePlatforms.add(platform);
-            if (i == 29) {
-                //last position
-                lastPlatform = platform;
-            }
+            lastPlatform = platform;
         }
     }
 
@@ -120,7 +120,9 @@ public class MapLevelN implements Map {
                                 Platform secondLayerPlatform = GameObject.recycle(Platform.class);
                                 secondLayerPlatform.renderer = ImageRenderer.create("assets/images/platform/grassPlatform-01.png");
                                 secondLayerPlatform.position.set(suitablePositions[layerElement], 555);
+//                                suitablePositions[layerElement] += secondLayerPlatform.getBoxCollider().getWidth();
                                 secondLayerObjects.add(secondLayerPlatform);
+                                lastPlatform = secondLayerPlatform;
                             }
                         }
 
@@ -131,8 +133,10 @@ public class MapLevelN implements Map {
                         for (Platform belowPlatform : basePlatforms) {
                             if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
                                 Spike secondLayerSpike = GameObject.recycle(Spike.class);
-                                secondLayerSpike.position.set(suitablePositions[layerElement]-3, 568);
+                                secondLayerSpike.position.set(suitablePositions[layerElement]-5, 568);
                                 secondLayerObjects.add(secondLayerSpike);
+//                                suitablePositions[layerElement] += secondLayerSpike.getBoxCollider().getWidth();
+                                lastSpike = secondLayerSpike;
                             }
                         }
                     }
@@ -184,6 +188,7 @@ public class MapLevelN implements Map {
                     airPlatform.position.set(suitablePositions[airPlatformFirstPos], 375);
                     airPlatformFirstPos++;
                     sixthLayerObjects.add(airPlatform);
+                    lastAirPlatform = airPlatform;
                 }
                 break;
         }
