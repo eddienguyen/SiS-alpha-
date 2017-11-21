@@ -110,7 +110,7 @@ public class EnemySpawner extends GameObject {
                 aborigines.boxCollider.setWidth(30);
                 aborigines.boxCollider.setHeight(30);
                 aborigines.setMoveSpeed(MapSpawner.getCurrentSpeed());
-                aborigines.HP = enemyHP;
+//                aborigines.HP = enemyHP;
                 return true;
             }
 
