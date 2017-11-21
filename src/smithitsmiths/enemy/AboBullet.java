@@ -10,6 +10,9 @@ import smithitsmiths.Platform;
 import smithitsmiths.maps.Map;
 import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
+import tklibs.AudioUtils;
+
+import javax.sound.sampled.Clip;
 
 public class AboBullet extends GameObject implements PhysicsBody{
     public BoxCollider boxCollider;
@@ -20,9 +23,7 @@ public class AboBullet extends GameObject implements PhysicsBody{
         this.renderer = ImageRenderer.create("assets/images/enemies/aboBullet.png");
         boxCollider = new BoxCollider(20,20);
         this.children.add(boxCollider);
-
         velocity = new Vector2D();
-
         velocity.y = -4;
 
     }

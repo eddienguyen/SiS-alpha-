@@ -24,7 +24,7 @@ public class EnemySpawner extends GameObject {
     int waitTime = 800;
     int waitTimeJump = 2600;
     int waitTimeBullet = 4200;
-    int waitTimeAborigines = 5200;
+    int waitTimeAborigines = 200;
 
 
     Random random = new Random();

@@ -9,12 +9,16 @@ import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 import smithitsmiths.Platform;
 import smithitsmiths.players.Player;
+import tklibs.AudioUtils;
+
+import javax.sound.sampled.Clip;
 
 public class EnemyAborigines extends GameObject implements PhysicsBody{
     public Vector2D velocity;
     private final float GRAVITY = 1f;
     public BoxCollider boxCollider;
     private float moveSpeed;
+    Clip shoot;
 
 
     boolean bulletDisabled;
@@ -25,6 +29,7 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/Aborigines.png");
         this.getPosition().set(1024,0);
+        shoot = AudioUtils.loadSound("assets/sound effect/aborigine_shoot.wav");
 
         velocity = new Vector2D();
 
@@ -58,6 +63,7 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
             }
             return;
         }
+        AudioUtils.play(shoot);
         AboBullet bullet = GameObject.recycle(AboBullet.class);
         bullet.position.set(this.position);
         bulletDisabled = true;

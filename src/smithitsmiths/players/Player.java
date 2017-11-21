@@ -105,8 +105,6 @@ public class Player extends GameObject implements PhysicsBody {
                 if (charging.getMicrosecondLength() == charging.getMicrosecondPosition()) {
                     AudioUtils.stop(charging);
                     keepCharging.loop(Clip.LOOP_CONTINUOUSLY);
-//                }
-
                 }
             }
         }
