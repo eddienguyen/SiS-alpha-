@@ -81,11 +81,13 @@ public class ScoreManager extends GameObject {
     @Override
     public void render(Graphics2D g2d) {
         super.render(g2d);
+        g2d.setColor(Color.WHITE);
+        g2d.fillOval(50, 650, 80, 80);
         g2d.setColor(Color.LIGHT_GRAY);
         g2d.setFont(customFont);
-        g2d.drawString(scoreString, 200, 700);
+        g2d.drawString(scoreString, 200, 690);
         g2d.drawString(highScoreString, 200, 720);
-        g2d.fillOval(50, 650, 80, 80);
+
         int currentHammerDamage = (int) Hammer.getCurrentHammerDamage();
         switch (currentHammerDamage) {
             case Hammer.WOODDAMAGE:
