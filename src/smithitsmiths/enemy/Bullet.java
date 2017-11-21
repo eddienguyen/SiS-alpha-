@@ -7,6 +7,7 @@ import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
 import smithitsmiths.Platform;
+import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Player;
 
 import java.awt.*;
@@ -14,7 +15,6 @@ import java.awt.*;
 public class Bullet extends GameObject implements PhysicsBody{
     public BoxCollider boxCollider;
     private Vector2D velocity;
-    private final float SPEED = -10;
     public Bullet(){
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/Bullet.png");
@@ -26,7 +26,7 @@ public class Bullet extends GameObject implements PhysicsBody{
     @Override
     public float run(Vector2D parentPosition) {
         playerHit();
-        this.velocity.x = SPEED;
+        this.velocity.x = -MapSpawner.getCurrentSpeed()*3;
         deActiveIfNeeded();
         return super.run(parentPosition);
 

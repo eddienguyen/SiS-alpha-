@@ -15,7 +15,6 @@ public class AboBullet extends GameObject implements PhysicsBody{
     public BoxCollider boxCollider;
     public Vector2D velocity;
     final private float GRAVITY = 0.2f;
-    private float moveSpeed = -8;
     public AboBullet(){
         super();
         this.renderer = ImageRenderer.create("assets/images/enemies/aboBullet.png");
@@ -52,23 +51,9 @@ public class AboBullet extends GameObject implements PhysicsBody{
 
         Platform platform = Physics.collideWith(nextBoxCollider, Platform.class);
         if (platform == null){
-            this.velocity.x = moveSpeed;
+            this.velocity.x = -MapSpawner.getCurrentSpeed()*4;
         }
         if (platform != null) {
-
-//            //move player continously towards platform
-//            boolean moveContinue = true;
-//            float shiftDistance = Math.signum(velocity.y);
-//            while (moveContinue) {
-//                if (Physics.collideWith(this.boxCollider.shift(0, shiftDistance), Platform.class) != null) {
-//                    moveContinue = false;
-//                } else {
-//                    shiftDistance += Math.signum(velocity.y);
-//                    this.position.addUp(0, Math.signum(velocity.y));
-//                }
-//            }
-
-            //update velocity ()
             this.velocity.x = -MapSpawner.getCurrentSpeed();
             velocity.y = 0;
         }

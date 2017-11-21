@@ -55,13 +55,7 @@ public class HammerSmite extends GameObject implements PhysicsBody {
                 AudioUtils.play(kill);
                 this.isActive = false;
             }
-            EnemyAborigines aborigines = Physics.collideWith(boxCollider, EnemyAborigines.class);
-            if (aborigines != null) {
-                aborigines.HP -= this.damage;
-                aborigines.getHit();
-                kill.start();
-                this.isActive = false;
-            }
+
             kill.setFramePosition(0);
         }
 

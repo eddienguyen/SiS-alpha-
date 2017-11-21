@@ -16,8 +16,6 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
     public BoxCollider boxCollider;
     private float moveSpeed;
 
-    public float HP;
-    EnemyHP enemyHP;
 
     boolean bulletDisabled;
     final int COOL_DOWN_TIME = 200;
@@ -33,7 +31,6 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
         boxCollider = new BoxCollider();
         this.children.add(boxCollider);
 
-        enemyHP = new EnemyHP();
     }
 
     @Override
@@ -44,23 +41,13 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
 
         moveVertical();
 
-        playerHit();
         shoot();
-        getHit();
 
-        enemyHP.setPosition(this.position.x - 18, this.position.y - 40);
-        enemyHP.setValue(HP * 3);
-        this.children.add(enemyHP);
 
         deActiveIfNeeded();
         return super.run(parentPosition);
     }
 
-    public void getHit() {
-        if (this.HP <= 0) {
-            this.isActive = false;
-        }
-    }
 
     private void shoot() {
         if (bulletDisabled) {
@@ -82,12 +69,7 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
         }
     }
 
-    private void playerHit() {
-        Player playerHit = Physics.collideWith(this.boxCollider,Player.class);
-        if (playerHit != null){
-            playerHit.getHit();
-        }
-    }
+
     private void moveVertical() {
 
         //calculate future position(box collider) & predict collision
