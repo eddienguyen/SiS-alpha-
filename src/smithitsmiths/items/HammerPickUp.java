@@ -6,6 +6,7 @@ import bases.physics.BoxCollider;
 import bases.physics.Physics;
 import bases.physics.PhysicsBody;
 import bases.renderers.ImageRenderer;
+import com.sun.javafx.collections.MappingChange;
 import smithitsmiths.Platform;
 import smithitsmiths.maps.MapSpawner;
 import smithitsmiths.players.Hammer;

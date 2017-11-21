@@ -13,7 +13,6 @@ public class PlayerHammerDown {
             hammerSmite.damage = owner.getDamage();
             hammerSmite.duration = 5;
             hammerSmite.position.set(owner.position.x + 16 , owner.position.y);
-
             InputManager.spaceReleased = false;
         }
 

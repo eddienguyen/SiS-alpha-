@@ -21,7 +21,7 @@ public class HammerSmite extends GameObject implements PhysicsBody {
 
     public HammerSmite() {
         kill = AudioUtils.loadSound("assets/sound effect/hammering_01.wav");
-        boxCollider = new BoxCollider(30, 32);
+        boxCollider = new BoxCollider(45, 32);
         this.children.add(boxCollider);
     }
 
@@ -52,6 +52,13 @@ public class HammerSmite extends GameObject implements PhysicsBody {
             if (jumping != null) {
                 jumping.HP -= this.damage;
                 jumping.getHit();
+                AudioUtils.play(kill);
+                this.isActive = false;
+            }
+            EnemyAborigines aborigines = Physics.collideWith(boxCollider, EnemyAborigines.class);
+            if (aborigines != null) {
+                aborigines.HP -= this.damage;
+                aborigines.getHit();
                 AudioUtils.play(kill);
                 this.isActive = false;
             }

@@ -36,7 +36,7 @@ public class Player extends GameObject implements PhysicsBody {
     public Hammer hammer;
     public PlayerHammerDown playerHammerDown;
     protected float force = 0;
-    final static float maxForce = 20f;
+    final static float maxForce = 15f;
     public static float currentForce;
     public float Damage;
 
@@ -110,10 +110,10 @@ public class Player extends GameObject implements PhysicsBody {
         }
 
         if (InputManager.instance.spaceReleased && !onAir) {
-            //when player is at platform(not in the air), enable jump, vice versa
             AudioUtils.stop(charging);
             AudioUtils.stop(keepCharging);
             AudioUtils.play(jumping);
+            //when player is at platform(not in the air), enable jump, vice versa
             velocity.y = -Damage;
             System.out.println("Damage caused: " + Damage);
             force = 0;
@@ -207,6 +207,7 @@ public class Player extends GameObject implements PhysicsBody {
         AudioUtils.stop(keepCharging);
         isActive = false;
         SceneManager.changeScene(new GameOverScene());
+        InputManager.spaceReleased = false;
     }
 
     public void checkIfOutOfScreen() {
@@ -214,17 +215,12 @@ public class Player extends GameObject implements PhysicsBody {
             AudioUtils.mediaStop(background);
             AudioUtils.stop(keepCharging);
             SceneManager.changeScene(new GameOverScene());
+            InputManager.spaceReleased = false;
         }
     }
 
     private void moveHorizontal() {
         //unused
     }
-
-    void play(Clip clip) {
-        clip.setFramePosition(0); // reset con trỏ về đầu đoạn sound
-        clip.start();
-    }
-
 
 }

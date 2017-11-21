@@ -11,7 +11,7 @@ public class InputManager {
     public boolean downPressed;
     public boolean leftPressed;
     public boolean rightPressed;
-    public boolean xPressed;
+    public static boolean xPressed;
 
     public static boolean spacePressed, spaceReleased;
 

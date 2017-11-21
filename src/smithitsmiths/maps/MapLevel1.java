@@ -13,7 +13,6 @@ public class MapLevel1 implements Map {
     ArrayList<Platform> platforms = new ArrayList<>();
     @Override
     public void init() {
-        System.out.println("loading map level1");
         //tang 1:
         int firstPosition = 0;
         for (int i = 0; i < 30; i++) {
@@ -22,7 +21,10 @@ public class MapLevel1 implements Map {
             platform.position.set(firstPosition, 600);
             firstPosition += 45;
             platforms.add(platform);
-            lastPlatform = platform;
+            if (i == 29) {
+                //last position
+                lastPlatform = platform;
+            }
         }
 
 
