@@ -39,7 +39,7 @@ public class MapSpawner extends GameObject {
             System.out.println("Curent map == null");
 
         } else {
-            if (currentMap.getLastPlatform().position.x <= 1069) {
+            if (currentMap.getLastPlatform().position.x <= 1080) {
                 changeMap(new MapLevelN());
                 eachMapSpeed *= SPEED_MULTIPLIER;
                 previousMap = currentMap;

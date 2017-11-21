@@ -7,25 +7,29 @@ import bases.actions.Action;
 import bases.actions.ActionRepeatForever;
 import bases.actions.ActionSequence;
 import bases.actions.ActionWait;
+import smithitsmiths.maps.Map;
 import smithitsmiths.maps.MapSpawner;
+import tklibs.AudioUtils;
 
+import javax.sound.sampled.Clip;
 import java.util.Random;
 
 public class EnemySpawner extends GameObject {
+    Clip rocket;
     public final int NORMAL_ENEMIES_EACH_MAP = 5;
     int spawnCount;
     int level;
     FrameCounter frameCounter = new FrameCounter(7200);
     int Lv = 1;
     int waitTime = 800;
-    int waitTimeJump = 2600;
+    int waitTimeJump = 600;
     int waitTimeBullet = 4200;
     int waitTimeAborigines = 5200;
 
     Random random = new Random();
 
     public EnemySpawner() {
-
+        rocket = AudioUtils.loadSound("assets/sound effect/rocket.wav");
         Action wait = new ActionWait(waitTime);
         Action waitJump = new ActionWait(waitTimeJump);
         Action waitBullet = new ActionWait(waitTimeBullet);
@@ -35,7 +39,7 @@ public class EnemySpawner extends GameObject {
             @Override
             public boolean run(GameObject owner) {
                 Enemy enemy = GameObject.recycle(Enemy.class);
-                enemy.position.set(1024 + 40 * MapSpawner.getCurrentSpeed(), 0);
+                enemy.position.set(1100, 0);
                 enemy.boxCollider.setWidth(30);
                 enemy.boxCollider.setHeight(30);
                 enemy.setMoveSpeed(MapSpawner.getCurrentSpeed());
@@ -77,8 +81,10 @@ public class EnemySpawner extends GameObject {
             public boolean run(GameObject owner) {
                 Bullet bullet = GameObject.recycle(Bullet.class);
                 bullet.position.set(1024, 500);
+                AudioUtils.play(rocket);
                 bullet.boxCollider.setWidth(60);
                 bullet.boxCollider.setHeight(30);
+//                charging.HP = 15;
                 return true;
             }
 
@@ -89,12 +95,11 @@ public class EnemySpawner extends GameObject {
         };
         Action spawnBulletSequence = new ActionRepeatForever(new ActionSequence(waitBullet, spawnBulletAction));
         this.addAction(spawnBulletSequence);
-
         Action spawnAboAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
                 EnemyAborigines aborigines = GameObject.recycle(EnemyAborigines.class);
-                aborigines.position.set(1024 + 40 * MapSpawner.getCurrentSpeed(), 500);
+                aborigines.position.set(1024 + 40* MapSpawner.getCurrentSpeed(), 500);
                 aborigines.boxCollider.setWidth(30);
                 aborigines.boxCollider.setHeight(30);
                 aborigines.setMoveSpeed(MapSpawner.getCurrentSpeed());
@@ -112,15 +117,15 @@ public class EnemySpawner extends GameObject {
 
     }
 
-
     @Override
     public float run(Vector2D parentPosition) {
         super.run(parentPosition);
-        if (frameCounter.run() && Lv <= 10) {
+        if (frameCounter.run() && Lv <= 10){
             frameCounter.reset();
             waitTime -= 50;
-            waitTimeJump -= 240;
-            waitTimeBullet -= 360;
+            waitTimeJump -= 130;
+            waitTimeBullet -= 180;
+            waitTimeAborigines -= 220;
             Lv++;
         }
 
