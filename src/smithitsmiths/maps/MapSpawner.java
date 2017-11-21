@@ -36,7 +36,6 @@ public class MapSpawner extends GameObject {
             currentMap = newMap;
             currentMap.init();
             currentMap.setEachPlatformSpeed(eachMapSpeed);
-            System.out.println("Curent map == null");
 
         } else {
             if (currentMap.getLastPlatform().position.x <= 1080) {
@@ -68,6 +67,13 @@ public class MapSpawner extends GameObject {
 
     public static float getCurrentSpeed(){
         return eachMapSpeed;
+    }
+
+    public void setCurrentSpeed(float speed) {
+        eachMapSpeed = speed;
+        currentMap.setEachPlatformSpeed(speed);
+        currentMap.setEachPlatformSpeed(speed);
+        System.out.println(eachMapSpeed);
     }
 
 

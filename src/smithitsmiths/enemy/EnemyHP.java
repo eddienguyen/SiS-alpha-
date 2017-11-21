@@ -42,8 +42,7 @@ public class EnemyHP extends GameObject {
     public void render(Graphics2D g2d) {
         super.render(g2d);
         g2d.setColor(Color.RED);
-        g2d.drawLine((int) this.position.x, (int) this.position.y, (int) (this.position.x + value), (int) this.position.y);
+        g2d.fillRect((int) this.position.x, (int) this.position.y, (int) value, 5);
     }
 
-    //TODO : reset value (to 0)
 }

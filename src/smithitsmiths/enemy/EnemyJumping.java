@@ -47,7 +47,7 @@ public class EnemyJumping extends GameObject implements PhysicsBody {
         jump();
 
         enemyHP.setPosition(this.position.x - 18, this.position.y - 40);
-        enemyHP.setValue(HP * 2);
+        enemyHP.setValue(HP);
 
         deActiveIfNeeded();
         return super.run(parentPosition);

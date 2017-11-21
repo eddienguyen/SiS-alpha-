@@ -37,7 +37,7 @@ public class MapLevelN implements Map {
     public void init() {
         System.out.println("loading new map");
 
-        //each platform is 30pixel wide, so suitablePositions is an array of x where each platform can placed on
+        //each platform is 45pixel wide, so suitablePositions is an array of x where each platform can placed on
         for (int i = 0; i < suitablePositions.length; i++) {
             suitablePositions[i] = 1035 + (i * 45);
         }
@@ -105,10 +105,10 @@ public class MapLevelN implements Map {
                 /*
                 sinh ngẫu nhiên các object
                 tỉ lệ:
-                30% ra platform: randomObject <30
-                2% ra spike: 30 <= randomObject < 32
+                90% ra platform: randomObject < 90
+                10% ra spike: 90 <= randomObject < 100
                  */
-                //at single place of 50 places in a layer:
+                //at single place of 30 places in a layer:
                 for (int layerElement = 0; layerElement < suitablePositions.length; layerElement++) {
                     int randomObject = r.nextInt(101);
                     //platform:
@@ -152,7 +152,6 @@ public class MapLevelN implements Map {
                 sinh ngẫu nhiên các object
                 tỉ lệ:
                 20% ra platform: randomObject <20
-                20% ra spike: 20 <= randomObject < 40
                  */
                 //at single place of 50 places in a layer:
                 for (int layerElement = 0; layerElement < suitablePositions.length; layerElement++) {

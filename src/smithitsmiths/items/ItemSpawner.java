@@ -13,14 +13,14 @@ public class ItemSpawner extends GameObject {
 
     Random r = new Random();
     public ItemSpawner(){
-        Action wait = new ActionWait(500);
+        Action wait = new ActionWait(1500);
         Action spawnAction = new Action() {
 
             @Override
             public boolean run(GameObject owner) {
                 int randomMaterialChance = r.nextInt(101);
                 if (randomMaterialChance < 40) {
-                    HammerPickUp hammerPickUp = new HammerPickUp(0);
+                    HammerPickUp hammerPickUp = new HammerPickUp(5);
                     hammerPickUp.position.set(924,200);
                     GameObject.add(hammerPickUp);
                 }else if (randomMaterialChance >= 40 && randomMaterialChance < 70){

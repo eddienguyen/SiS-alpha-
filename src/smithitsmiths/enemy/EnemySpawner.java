@@ -22,9 +22,13 @@ public class EnemySpawner extends GameObject {
     FrameCounter frameCounter = new FrameCounter(7200);
     int Lv = 1;
     int waitTime = 800;
-    int waitTimeJump = 600;
+    int waitTimeJump = 2600;
     int waitTimeBullet = 4200;
     int waitTimeAborigines = 5200;
+
+    int enemyHP;
+    int jumpEnemyHP;
+
 
     Random random = new Random();
 
@@ -35,6 +39,9 @@ public class EnemySpawner extends GameObject {
         Action waitBullet = new ActionWait(waitTimeBullet);
         Action waitAbo = new ActionWait(waitTimeAborigines);
 
+        enemyHP = 5;
+        jumpEnemyHP = 10;
+
         Action spawnAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
@@ -43,7 +50,7 @@ public class EnemySpawner extends GameObject {
                 enemy.boxCollider.setWidth(30);
                 enemy.boxCollider.setHeight(30);
                 enemy.setMoveSpeed(MapSpawner.getCurrentSpeed());
-                enemy.HP = 10;
+                enemy.HP = enemyHP;
                 return true;
             }
 
@@ -64,7 +71,7 @@ public class EnemySpawner extends GameObject {
                 jumping.boxCollider.setWidth(50);
                 jumping.boxCollider.setHeight(50);
                 jumping.setMoveSpeed(MapSpawner.getCurrentSpeed());
-                jumping.HP = 15;
+                jumping.HP = jumpEnemyHP;
                 return true;
             }
 
@@ -84,7 +91,6 @@ public class EnemySpawner extends GameObject {
                 AudioUtils.play(rocket);
                 bullet.boxCollider.setWidth(60);
                 bullet.boxCollider.setHeight(30);
-//                charging.HP = 15;
                 return true;
             }
 
@@ -95,6 +101,7 @@ public class EnemySpawner extends GameObject {
         };
         Action spawnBulletSequence = new ActionRepeatForever(new ActionSequence(waitBullet, spawnBulletAction));
         this.addAction(spawnBulletSequence);
+
         Action spawnAboAction = new Action() {
             @Override
             public boolean run(GameObject owner) {
@@ -103,7 +110,7 @@ public class EnemySpawner extends GameObject {
                 aborigines.boxCollider.setWidth(30);
                 aborigines.boxCollider.setHeight(30);
                 aborigines.setMoveSpeed(MapSpawner.getCurrentSpeed());
-                aborigines.HP = 15;
+                aborigines.HP = enemyHP;
                 return true;
             }
 
@@ -122,6 +129,8 @@ public class EnemySpawner extends GameObject {
         super.run(parentPosition);
         if (frameCounter.run() && Lv <= 10){
             frameCounter.reset();
+            enemyHP +=100;
+            jumpEnemyHP +=200;
             waitTime -= 50;
             waitTimeJump -= 130;
             waitTimeBullet -= 180;

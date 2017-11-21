@@ -9,11 +9,11 @@ import java.awt.*;
 
 public class Hammer extends GameObject {
 
-    public static final int WOODDAMAGE = 5;
-    public static final int ROCKDAMAGE = 10;
-    public static final int IRONDAMAGE = 12;
-    public static final int GOLDDAMAGE = 14;
-    public static final int DIAMONDDAMAGE = 20;
+    public static final int WOODDAMAGE = 3;
+    public static final int ROCKDAMAGE = 5;
+    public static final int IRONDAMAGE = 8;
+    public static final int GOLDDAMAGE = 10;
+    public static final int DIAMONDDAMAGE = 15;
 
     public static String material;
 

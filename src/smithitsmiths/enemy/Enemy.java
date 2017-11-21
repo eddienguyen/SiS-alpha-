@@ -43,7 +43,8 @@ public class Enemy extends GameObject implements PhysicsBody {
         spikeChecker();
 
         enemyHP.setPosition(this.position.x - 18, this.position.y - 40);
-        enemyHP.setValue(HP * 3);
+        enemyHP.setValue(HP);
+
         playerHit();
         this.velocity.y += GRAVITY;
         this.velocity.x = -moveSpeed * 3 / 2;

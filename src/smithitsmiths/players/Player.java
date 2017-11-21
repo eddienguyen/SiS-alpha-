@@ -36,7 +36,7 @@ public class Player extends GameObject implements PhysicsBody {
     public Hammer hammer;
     public PlayerHammerDown playerHammerDown;
     protected float force = 0;
-    final static float maxForce = 20f;
+    final static float maxForce = 15f;
     public static float currentForce;
     public float Damage;
 
@@ -208,6 +208,7 @@ public class Player extends GameObject implements PhysicsBody {
         AudioUtils.stop(keepCharging);
         isActive = false;
         SceneManager.changeScene(new GameOverScene());
+        InputManager.spaceReleased = false;
     }
 
     public void checkIfOutOfScreen() {
@@ -215,6 +216,7 @@ public class Player extends GameObject implements PhysicsBody {
             AudioUtils.mediaStop(background);
             AudioUtils.stop(keepCharging);
             SceneManager.changeScene(new GameOverScene());
+            InputManager.spaceReleased = false;
         }
     }
 
