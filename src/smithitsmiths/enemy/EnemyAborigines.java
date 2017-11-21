@@ -15,6 +15,7 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
     private final float GRAVITY = 1f;
     public BoxCollider boxCollider;
     private float moveSpeed;
+    public float HP;
 
 
     boolean bulletDisabled;
@@ -107,5 +108,12 @@ public class EnemyAborigines extends GameObject implements PhysicsBody{
 
     public void setMoveSpeed(float moveSpeed) {
         this.moveSpeed = moveSpeed;
+    }
+
+    public void getHit() {
+        if (this.HP <= 0) {
+            this.isActive = false;
+        }
+        System.out.println(String.format("enemy get hit, left %s HP", HP));
     }
 }
