@@ -131,9 +131,7 @@ public class MapLevelN implements Map {
 
                     }
                     //spike:
-                    else
-//                        if (randomObject >= 90)
-                        {
+                    else{
 //                        spawnSpike();
                         for (Platform belowPlatform : basePlatforms) {
                             if (belowPlatform.position.isMatch(suitablePositions[layerElement], 600)) {
