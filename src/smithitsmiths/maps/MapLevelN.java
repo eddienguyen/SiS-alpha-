@@ -93,7 +93,10 @@ public class MapLevelN implements Map {
             platform.position.set(firstPosition, 600);
             firstPosition += platform.getBoxCollider().getWidth();
             basePlatforms.add(platform);
-            lastPlatform = platform;
+            if (i == 29) {
+                //last position
+                lastPlatform = platform;
+            }
         }
     }
 
